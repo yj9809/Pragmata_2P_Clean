@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "unreelmcp": {
+      "command": "node",
+      "args": ["D:/UnrealPlugins/UnreelMCP/UnreelMCP/Resources/mcp-bridge/index.js"],
+      "env": {
+        "UNREEL_MCP_URL": "http://localhost:55570"
+      }
+    }
+  }
+}

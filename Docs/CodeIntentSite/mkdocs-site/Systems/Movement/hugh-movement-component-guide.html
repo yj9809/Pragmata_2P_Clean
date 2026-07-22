@@ -1,0 +1,3797 @@
+﻿
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+        <link rel="prev" href="../Hacking/map-hacking-integration.html">
+
+
+        <link rel="next" href="../Server/server.html">
+
+
+
+
+
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+
+
+
+        <title>Hugh 이동 - Pragmata_2P Code Intent</title>
+
+
+
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+
+
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+
+
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+
+
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+
+
+        <a href="#hugh-movement-component-guide" class="md-skip">
+          콘텐츠로 이동
+        </a>
+
+    </div>
+    <div data-md-component="announce">
+
+    </div>
+
+
+
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../index.html" title="Pragmata_2P Code Intent" class="md-header__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pragmata_2P Code Intent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+
+              Hugh 이동
+
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+        <label class="md-header__button md-icon" for="__search">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </nav>
+
+</header>
+
+    <div class="md-container" data-md-component="container">
+
+
+
+
+
+
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+
+
+
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Pragmata_2P Code Intent" class="md-nav__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pragmata_2P Code Intent
+  </label>
+
+  <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    홈
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Plans/PLAN-code-intent-visualization.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    실행 계획
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../code-intent-style.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 작성 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+
+
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    의도 카드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+
+
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    피해
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/DealDamageToActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    DealDamageToActor 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/FPragmataDamageSpec.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    FPragmataDamageSpec 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/WeaponBase-DealDamageToHitActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WeaponBase 피해 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/PragmataHealthComponent-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HealthComponent 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/HughCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/PlayableCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    PlayableCharacter 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+
+
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    해킹
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    해킹
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-RequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-RequestHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 방향 입력 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-ServerRequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 적 해킹 방향
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 상호작용 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 방향 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+
+
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HUD
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    HUD
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 퍼즐 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    gameplay HUD 보장
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+
+
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    이동
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    이동
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Movement/WaistArmComponent-SetArmState.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 상태 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 부착
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+
+
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    게임 흐름
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    게임 흐름
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/GameFlow/PragmataGameFlowConfig.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GameFlow 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+
+
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    시스템
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Damage/damage-flow.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해 흐름
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Hacking/enemy-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Hacking/map-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="hugh-movement-component-guide.html" class="md-nav__link md-nav__link--active">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+      </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        한 줄 결론
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        왜 필요한가
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#intent-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Intent와 State 관계
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Intent와 State 관계">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        규칙
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#intent-state_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Intent가 State로 바뀌는 지점
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#intent-state_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        왜 intent와 state를 분리하는가
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        파일 역할
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        전체 흐름
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#custom-flag-map" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Custom Flag Map
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        함수별 읽는 순서
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="함수별 읽는 순서">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#1-upragmatahughmovementcomponentupragmatahughmovementcomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        1. UPragmataHughMovementComponent::UPragmataHughMovementComponent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#2-setwantstoaim-setwantstorun-setwantstohover-setjumpinputheld" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        2. SetWantsToAim, SetWantsToRun, SetWantsToHover, SetJumpInputHeld
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#3-getpredictiondata_client" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        3. GetPredictionData_Client
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#4-fhughnetworkpredictiondata_clientallocatenewmove" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4. FHughNetworkPredictionData_Client::AllocateNewMove
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#5-fhughsavedmovesetinitialposition" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5. FHughSavedMove::SetInitialPosition
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#6-fhughsavedmovegetcompressedflags" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6. FHughSavedMove::GetCompressedFlags
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#7-upragmatahughmovementcomponentupdatefromcompressedflags" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7. UPragmataHughMovementComponent::UpdateFromCompressedFlags
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#8-fhughsavedmoveprepmovefor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        8. FHughSavedMove::PrepMoveFor
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#9-fhughsavedmovecancombinewith" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        9. FHughSavedMove::CanCombineWith
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#ahughcharacter" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        AHughCharacter와의 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        이 파일에 넣으면 안 되는 것
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        새 입력 intent 추가 절차
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        흔한 실수
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        검증 체크리스트
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        관련 문서
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Server/server.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Server/server-puzzle.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버 퍼즐
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+
+
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    구조
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/architecture.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 문서
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/structural-ambiguity-rationale.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/replication-role-animation-fix.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+
+
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    운영
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/blueprint-tasks.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Blueprint 작업
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/packaging-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Packaging
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unreal-build-warnings.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Build 경고
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/history-rewrite-team-runbook.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    History rewrite 절차
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unstaged-assets.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Git 제외 asset
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unreelmcp-anomalies.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    UnreelMCP 이상 기록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/docs-inventory.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Docs 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+
+
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    가이드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/code-intent-usage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 사용법
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/unreal-coding-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Unreal coding 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/commit-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Commit 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/branching-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Branch 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+
+
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    변경 기록
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    변경 기록
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-161329-receive-damage-only-hitreact-refactor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage refactor
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-181632-hugh-anim-state-cleanup.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh animation 정리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-190759-gripgun-authority-boundary.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GripGun authority 경계
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+
+
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    다이어그램
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Diagrams/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../KNOW_HOW.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        한 줄 결론
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        왜 필요한가
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#intent-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Intent와 State 관계
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Intent와 State 관계">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        규칙
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#intent-state_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Intent가 State로 바뀌는 지점
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#intent-state_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        왜 intent와 state를 분리하는가
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        파일 역할
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        전체 흐름
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#custom-flag-map" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Custom Flag Map
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        함수별 읽는 순서
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="함수별 읽는 순서">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#1-upragmatahughmovementcomponentupragmatahughmovementcomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        1. UPragmataHughMovementComponent::UPragmataHughMovementComponent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#2-setwantstoaim-setwantstorun-setwantstohover-setjumpinputheld" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        2. SetWantsToAim, SetWantsToRun, SetWantsToHover, SetJumpInputHeld
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#3-getpredictiondata_client" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        3. GetPredictionData_Client
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#4-fhughnetworkpredictiondata_clientallocatenewmove" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4. FHughNetworkPredictionData_Client::AllocateNewMove
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#5-fhughsavedmovesetinitialposition" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5. FHughSavedMove::SetInitialPosition
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#6-fhughsavedmovegetcompressedflags" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6. FHughSavedMove::GetCompressedFlags
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#7-upragmatahughmovementcomponentupdatefromcompressedflags" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7. UPragmataHughMovementComponent::UpdateFromCompressedFlags
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#8-fhughsavedmoveprepmovefor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        8. FHughSavedMove::PrepMoveFor
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#9-fhughsavedmovecancombinewith" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        9. FHughSavedMove::CanCombineWith
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#ahughcharacter" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        AHughCharacter와의 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        이 파일에 넣으면 안 되는 것
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        새 입력 intent 추가 절차
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        흔한 실수
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        검증 체크리스트
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        관련 문서
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="md-content" data-md-component="content">
+
+              <article class="md-content__inner md-typeset">
+
+
+
+
+
+<h1 id="hugh-movement-component-guide">Hugh Movement Component Guide<a class="headerlink" href="#hugh-movement-component-guide" title="Permanent link">&para;</a></h1>
+<p>대상 파일:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.cpp</code></li>
+</ul>
+<h2 id="_1">한 줄 결론<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><code>UPragmataHughMovementComponent</code>는 Hugh의 실제 이동 로직 전체가 아니라, <code>aim/run/hover/jump hold</code> 입력 intent를 Unreal CharacterMovement prediction 경로에 싣는 전용 component다.</p>
+<h2 id="_2">왜 필요한가<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>Hugh의 <code>aim</code>, <code>run</code>, <code>hover</code>, <code>jump hold</code>는 단순 animation bool이 아니다.</p>
+<ul>
+<li><code>aim</code>: 회전 방식, weapon attach, waist arm, combat pose 변경</li>
+<li><code>run</code>: <code>MaxWalkSpeed</code>, run animation, stamina와 연결</li>
+<li><code>hover</code>: <code>MOVE_Flying</code>, Z velocity, hover animation과 연결</li>
+<li><code>jump hold</code>: hover 진입 판정과 공유</li>
+</ul>
+<p>이 값들은 client 입력 직후 반응해야 하고, server movement update에서도 같은 frame의 intent로 재현되어야 한다. 그래서 일반 replicated bool만 쓰지 않고 <code>FSavedMove_Character</code>의 compressed flag 경로를 사용한다.</p>
+<h2 id="intent-state">Intent와 State 관계<a class="headerlink" href="#intent-state" title="Permanent link">&para;</a></h2>
+<p>핵심 구분:</p>
+<ul>
+<li><code>intent</code>: 플레이어가 지금 하려고 한 입력 의도</li>
+<li><code>state</code>: 게임이 그 intent를 받아들인 뒤 확정한 현재 상태</li>
+</ul>
+<p><code>UPragmataHughMovementComponent</code>는 <code>intent</code>만 운반한다. <code>state</code>를 최종 결정하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>예시 변수</th>
+<th>소유 위치</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>입력 intent</td>
+<td><code>bWantsToAim</code>, <code>bWantsToRun</code>, <code>bWantsToHover</code>, <code>bJumpInputHeld</code></td>
+<td><code>UPragmataHughMovementComponent</code></td>
+<td>client가 보낸 요청</td>
+</tr>
+<tr>
+<td>saved intent</td>
+<td><code>bSavedWantsToAim</code>, <code>bSavedWantsToRun</code>, <code>bSavedWantsToHover</code>, <code>bSavedJumpInputHeld</code></td>
+<td><code>FHughSavedMove</code></td>
+<td>특정 movement sample의 요청 snapshot</td>
+</tr>
+<tr>
+<td>gameplay state</td>
+<td><code>IsAiming</code>, <code>IsRunning</code>, <code>IsHovering</code>, <code>IsJumpInput</code></td>
+<td><code>AHughCharacter</code></td>
+<td>실제 gameplay 판단에 쓰는 현재 상태</td>
+</tr>
+<tr>
+<td>replicated display state</td>
+<td><code>FHughReplicatedAnimState</code></td>
+<td><code>AHughCharacter</code></td>
+<td>remote proxy와 AnimBP 표시용 상태</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_3">규칙<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>intent는 “요청”이다.</li>
+<li>state는 “승인된 결과”다.</li>
+<li>intent는 movement prediction을 타고 server로 간다.</li>
+<li>state는 <code>AHughCharacter</code>에서 gameplay 조건을 검사한 뒤 바뀐다.</li>
+<li>remote proxy는 intent를 직접 믿지 않고 replicated display state를 읽는다.</li>
+</ul>
+<p>예시:</p>
+<pre><code class="language-text">Run key down
+-&gt; bWantsToRun = true
+-&gt; movement compressed flag 전송
+-&gt; server UpdateFromCompressedFlags
+-&gt; SyncMovementIntentFromMovementComponent
+-&gt; SetRunningState(true)
+-&gt; 조준 중이면 IsRunning=false 유지
+-&gt; RefreshReplicatedAnimState
+</code></pre>
+<p>이 예시에서 <code>bWantsToRun=true</code>는 요청일 뿐이다. <code>SetRunningState</code>가 <code>!bIsAiming</code> 조건을 통과해야 <code>IsRunning=true</code> state가 된다.</p>
+<h3 id="intent-state_1">Intent가 State로 바뀌는 지점<a class="headerlink" href="#intent-state_1" title="Permanent link">&para;</a></h3>
+<pre><code class="language-mermaid">flowchart LR
+    Intent[&quot;Movement intent&lt;br/&gt;bWantsTo*&quot;] --&gt; Sync[&quot;AHughCharacter::SyncMovementIntentFromMovementComponent&quot;]
+    Sync --&gt; Gate[&quot;gameplay 조건 검사&quot;]
+    Gate --&gt; State[&quot;gameplay state&lt;br/&gt;IsAiming / IsRunning / IsHovering&quot;]
+    State --&gt; Display[&quot;FHughReplicatedAnimState&quot;]
+    Display --&gt; Proxy[&quot;remote proxy / AnimBP 표시&quot;]
+</code></pre>
+<p>중요 위치:</p>
+<ul>
+<li><code>UPragmataHughMovementComponent::UpdateFromCompressedFlags</code></li>
+<li>server movement update에서 intent 복원</li>
+<li><code>AHughCharacter::SyncMovementIntentFromMovementComponent</code></li>
+<li>복원된 intent를 읽고 state setter 호출</li>
+<li><code>AHughCharacter::SetAimingState</code></li>
+<li>aim state 확정, run intent 정리 가능</li>
+<li><code>AHughCharacter::SetRunningState</code></li>
+<li>aim 중이면 run state 거부</li>
+<li><code>AHughCharacter::SetHoveringState</code></li>
+<li>movement mode와 hover state 확정</li>
+<li><code>AHughCharacter::RefreshReplicatedAnimState</code></li>
+<li>state를 remote display용 snapshot으로 복제</li>
+</ul>
+<h3 id="intent-state_2">왜 intent와 state를 분리하는가<a class="headerlink" href="#intent-state_2" title="Permanent link">&para;</a></h3>
+<p>분리하지 않으면 다음 문제가 생긴다.</p>
+<table>
+<thead>
+<tr>
+<th>문제</th>
+<th>원인</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>client는 run을 눌렀지만 server 화면은 jog 표시</td>
+<td>intent가 server movement update에 실리지 않음</td>
+</tr>
+<tr>
+<td>correction 후 aim/run pose가 튐</td>
+<td>saved move replay에 당시 intent가 복원되지 않음</td>
+</tr>
+<tr>
+<td>조준 중 run이 켜짐</td>
+<td>요청과 승인 state를 구분하지 않음</td>
+</tr>
+<tr>
+<td>remote proxy animation이 owner와 다름</td>
+<td>proxy가 replicated display state 대신 local prediction 값을 읽음</td>
+</tr>
+</tbody>
+</table>
+<p>따라서 이 파일은 intent 운반만 맡고, state 확정은 <code>AHughCharacter</code>로 남긴다.</p>
+<h2 id="_4">파일 역할<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>타입</th>
+<th>위치</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UPragmataHughMovementComponent</code></td>
+<td><code>.h/.cpp</code></td>
+<td>현재 Hugh 입력 intent 보관, compressed flag decode</td>
+</tr>
+<tr>
+<td><code>FHughSavedMove</code></td>
+<td><code>.h/.cpp</code></td>
+<td>movement sample마다 Hugh intent snapshot 저장</td>
+</tr>
+<tr>
+<td><code>FHughNetworkPredictionData_Client</code></td>
+<td><code>.h/.cpp</code></td>
+<td>CharacterMovement가 <code>FHughSavedMove</code>를 만들도록 factory 교체</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">전체 흐름<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<pre><code class="language-mermaid">flowchart TD
+    Input[&quot;AHughCharacter input&quot;] --&gt; Setter[&quot;SetAimingState / SetRunningState / SetJumpInputState / SetHoveringState&quot;]
+    Setter --&gt; LocalState[&quot;local gameplay state&quot;]
+    Setter --&gt; Movement[&quot;UPragmataHughMovementComponent&lt;br/&gt;intent 저장&quot;]
+    Movement --&gt; Saved[&quot;FHughSavedMove::SetInitialPosition&lt;br/&gt;intent snapshot&quot;]
+    Saved --&gt; Flags[&quot;FHughSavedMove::GetCompressedFlags&lt;br/&gt;intent encode&quot;]
+    Flags --&gt; Server[&quot;server movement update&quot;]
+    Server --&gt; Decode[&quot;UpdateFromCompressedFlags&lt;br/&gt;intent decode&quot;]
+    Decode --&gt; Sync[&quot;AHughCharacter::SyncMovementIntentFromMovementComponent&quot;]
+    Sync --&gt; ServerState[&quot;server gameplay state 확정&quot;]
+    ServerState --&gt; RepState[&quot;FHughReplicatedAnimState&quot;]
+</code></pre>
+<h2 id="custom-flag-map">Custom Flag Map<a class="headerlink" href="#custom-flag-map" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>저장 값</th>
+<th>setter</th>
+<th>getter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FLAG_Custom_0</code></td>
+<td>aim intent</td>
+<td><code>SetWantsToAim</code></td>
+<td><code>WantsToAim</code></td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_1</code></td>
+<td>run intent</td>
+<td><code>SetWantsToRun</code></td>
+<td><code>WantsToRun</code></td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_2</code></td>
+<td>hover intent</td>
+<td><code>SetWantsToHover</code></td>
+<td><code>WantsToHover</code></td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_3</code></td>
+<td>jump hold intent</td>
+<td><code>SetJumpInputHeld</code></td>
+<td><code>IsJumpInputHeld</code></td>
+</tr>
+</tbody>
+</table>
+<p>주의:</p>
+<ul>
+<li>Unreal <code>FSavedMove_Character</code>의 custom flag는 수가 제한적</li>
+<li>새 intent를 추가하려면 남은 flag 예산부터 확인</li>
+<li>flag 의미를 바꾸면 client/server prediction 호환이 깨질 수 있음</li>
+</ul>
+<h2 id="_6">함수별 읽는 순서<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1-upragmatahughmovementcomponentupragmatahughmovementcomponent">1. <code>UPragmataHughMovementComponent::UPragmataHughMovementComponent</code><a class="headerlink" href="#1-upragmatahughmovementcomponentupragmatahughmovementcomponent" title="Permanent link">&para;</a></h3>
+<p>초기 intent 값을 모두 <code>false</code>로 시작.</p>
+<pre><code class="language-cpp">bWantsToAim = false;
+bWantsToRun = false;
+bWantsToHover = false;
+bJumpInputHeld = false;
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>첫 saved move가 쓰레기 bit를 갖지 않게 초기화</li>
+<li>default movement state를 명확히 고정</li>
+</ul>
+<h3 id="2-setwantstoaim-setwantstorun-setwantstohover-setjumpinputheld">2. <code>SetWantsToAim</code>, <code>SetWantsToRun</code>, <code>SetWantsToHover</code>, <code>SetJumpInputHeld</code><a class="headerlink" href="#2-setwantstoaim-setwantstorun-setwantstohover-setjumpinputheld" title="Permanent link">&para;</a></h3>
+<p><code>AHughCharacter</code>가 입력 상태를 바꿀 때 호출하는 얇은 setter.</p>
+<pre><code class="language-cpp">void UPragmataHughMovementComponent::SetWantsToRun(bool bNewWantsToRun)
+{
+    bWantsToRun = bNewWantsToRun;
+}
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>여기서 montage 재생, speed 변경, stamina 처리 금지</li>
+<li>이 component는 intent 저장만 담당</li>
+<li>실제 gameplay state 반영은 <code>AHughCharacter</code>가 담당</li>
+<li>setter 이름이 <code>SetWantsTo*</code>인 이유는 state 확정이 아니라 요청 저장이기 때문</li>
+</ul>
+<h3 id="3-getpredictiondata_client">3. <code>GetPredictionData_Client</code><a class="headerlink" href="#3-getpredictiondata_client" title="Permanent link">&para;</a></h3>
+<p>Unreal CharacterMovement prediction이 Hugh 전용 saved move를 쓰게 연결.</p>
+<pre><code class="language-cpp">MutableThis-&gt;ClientPredictionData = new FHughNetworkPredictionData_Client(*this);
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>client prediction buffer 생성 지점 교체</li>
+<li>이 함수가 없으면 <code>FHughSavedMove</code>가 생성되지 않음</li>
+<li>그러면 custom flag encode/decode 경로도 동작하지 않음</li>
+</ul>
+<h3 id="4-fhughnetworkpredictiondata_clientallocatenewmove">4. <code>FHughNetworkPredictionData_Client::AllocateNewMove</code><a class="headerlink" href="#4-fhughnetworkpredictiondata_clientallocatenewmove" title="Permanent link">&para;</a></h3>
+<p>새 movement sample마다 <code>FHughSavedMove</code> 생성.</p>
+<pre><code class="language-cpp">return FSavedMovePtr(new FHughSavedMove());
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>Unreal 기본 <code>FSavedMove_Character</code> 대신 Hugh 전용 snapshot 공간 사용</li>
+</ul>
+<h3 id="5-fhughsavedmovesetinitialposition">5. <code>FHughSavedMove::SetInitialPosition</code><a class="headerlink" href="#5-fhughsavedmovesetinitialposition" title="Permanent link">&para;</a></h3>
+<p>movement sample 시작 시점의 Hugh intent를 saved move에 복사.</p>
+<pre><code class="language-cpp">bSavedWantsToAim = HughMovement-&gt;WantsToAim();
+bSavedWantsToRun = HughMovement-&gt;WantsToRun();
+bSavedWantsToHover = HughMovement-&gt;WantsToHover();
+bSavedJumpInputHeld = HughMovement-&gt;IsJumpInputHeld();
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>client가 입력한 그 frame의 intent 저장</li>
+<li>나중에 server RPC flag 생성과 client replay에 같은 snapshot 사용</li>
+</ul>
+<h3 id="6-fhughsavedmovegetcompressedflags">6. <code>FHughSavedMove::GetCompressedFlags</code><a class="headerlink" href="#6-fhughsavedmovegetcompressedflags" title="Permanent link">&para;</a></h3>
+<p>저장된 intent snapshot을 Unreal movement RPC flag에 압축.</p>
+<pre><code class="language-cpp">if (bSavedWantsToAim)
+{
+    Result |= FLAG_Custom_0;
+}
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>client에서 server로 보낼 intent bit 구성</li>
+<li>여기서 flag map이 바뀌면 <code>UpdateFromCompressedFlags</code>도 같이 바꿔야 함</li>
+</ul>
+<h3 id="7-upragmatahughmovementcomponentupdatefromcompressedflags">7. <code>UPragmataHughMovementComponent::UpdateFromCompressedFlags</code><a class="headerlink" href="#7-upragmatahughmovementcomponentupdatefromcompressedflags" title="Permanent link">&para;</a></h3>
+<p>server movement update에서 flag를 다시 intent bool로 복원.</p>
+<pre><code class="language-cpp">bWantsToAim = (Flags &amp; FSavedMove_Character::FLAG_Custom_0) != 0;
+bWantsToRun = (Flags &amp; FSavedMove_Character::FLAG_Custom_1) != 0;
+bWantsToHover = (Flags &amp; FSavedMove_Character::FLAG_Custom_2) != 0;
+bJumpInputHeld = (Flags &amp; FSavedMove_Character::FLAG_Custom_3) != 0;
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>server가 client와 같은 movement intent를 알게 되는 지점</li>
+<li>이 함수 자체는 Hugh gameplay state를 바꾸지 않음</li>
+<li><code>AHughCharacter::SyncMovementIntentFromMovementComponent</code>가 복원된 intent를 읽어 state를 확정</li>
+<li>decode 직후 값은 아직 승인된 state가 아니라 server가 받은 요청</li>
+</ul>
+<h3 id="8-fhughsavedmoveprepmovefor">8. <code>FHughSavedMove::PrepMoveFor</code><a class="headerlink" href="#8-fhughsavedmoveprepmovefor" title="Permanent link">&para;</a></h3>
+<p>client replay 전에 saved move의 intent를 movement component에 복원.</p>
+<pre><code class="language-cpp">HughMovement-&gt;SetWantsToAim(bSavedWantsToAim);
+HughMovement-&gt;SetWantsToRun(bSavedWantsToRun);
+HughMovement-&gt;SetWantsToHover(bSavedWantsToHover);
+HughMovement-&gt;SetJumpInputHeld(bSavedJumpInputHeld);
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>correction/replay 중에도 입력 전환 frame 보존</li>
+<li>예측 재생 시 현재 입력값이 아니라 당시 saved move 값을 사용</li>
+</ul>
+<h3 id="9-fhughsavedmovecancombinewith">9. <code>FHughSavedMove::CanCombineWith</code><a class="headerlink" href="#9-fhughsavedmovecancombinewith" title="Permanent link">&para;</a></h3>
+<p>서로 다른 intent를 가진 saved move는 합치지 않음.</p>
+<pre><code class="language-cpp">if (bSavedWantsToAim != NewHughMove-&gt;bSavedWantsToAim
+    || bSavedWantsToRun != NewHughMove-&gt;bSavedWantsToRun
+    || bSavedWantsToHover != NewHughMove-&gt;bSavedWantsToHover
+    || bSavedJumpInputHeld != NewHughMove-&gt;bSavedJumpInputHeld)
+{
+    return false;
+}
+</code></pre>
+<p>의미:</p>
+<ul>
+<li>aim/run/hover/jump hold 전환 frame을 보존</li>
+<li>move combine으로 입력 변화가 뭉개지는 문제 방지</li>
+<li>네트워크 비용은 조금 늘 수 있지만 animation/gameplay state 정확도가 우선</li>
+</ul>
+<h2 id="ahughcharacter"><code>AHughCharacter</code>와의 연결<a class="headerlink" href="#ahughcharacter" title="Permanent link">&para;</a></h2>
+<p><code>AHughCharacter</code> 생성자에서 기본 movement component class를 교체한다.</p>
+<pre><code class="language-cpp">AHughCharacter::AHughCharacter(const FObjectInitializer&amp; ObjectInitializer)
+    : Super(ObjectInitializer.SetDefaultSubobjectClass&lt;UPragmataHughMovementComponent&gt;(ACharacter::CharacterMovementComponentName))
+{
+}
+</code></pre>
+<p>입력 state 변경 함수는 movement component setter를 호출한다.</p>
+<table>
+<thead>
+<tr>
+<th><code>AHughCharacter</code> 함수</th>
+<th>state 처리</th>
+<th>movement component intent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SetAimingState</code></td>
+<td><code>IsAiming</code>, rotation, arm/weapon 상태 변경</td>
+<td><code>SetWantsToAim</code></td>
+</tr>
+<tr>
+<td><code>SetRunningState</code></td>
+<td><code>IsRunning</code> 확정. aim 중이면 거부</td>
+<td><code>SetWantsToRun</code></td>
+</tr>
+<tr>
+<td><code>SetJumpInputState</code></td>
+<td><code>IsJumpInput</code> 확정</td>
+<td><code>SetJumpInputHeld</code></td>
+</tr>
+<tr>
+<td><code>SetHoveringState</code></td>
+<td><code>IsHovering</code>, <code>MovementMode</code> 확정</td>
+<td><code>SetWantsToHover</code></td>
+</tr>
+</tbody>
+</table>
+<p>server 또는 local owner는 <code>SyncMovementIntentFromMovementComponent</code>에서 복원된 intent를 읽는다.</p>
+<pre><code class="language-text">UPragmataHughMovementComponent intent
+-&gt; AHughCharacter::SyncMovementIntentFromMovementComponent
+-&gt; SetAimingState / SetRunningState / SetJumpInputState / SetHoveringState
+-&gt; RefreshReplicatedAnimState
+</code></pre>
+<p>읽는 기준:</p>
+<ul>
+<li>local owner는 input handler에서 state와 intent를 거의 동시에 갱신</li>
+<li>server는 movement flag decode 후 intent를 읽고 state를 재구성</li>
+<li>remote proxy는 movement component intent가 아니라 <code>FHughReplicatedAnimState</code>를 표시 source로 사용</li>
+</ul>
+<h2 id="_7">이 파일에 넣으면 안 되는 것<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<ul>
+<li>montage 재생</li>
+<li>stamina 차감</li>
+<li>weapon attach 변경</li>
+<li>waist arm 상태 변경</li>
+<li>AnimBP variable 직접 설정</li>
+<li><code>MaxWalkSpeed</code> 직접 변경</li>
+<li><code>SetMovementMode</code> 직접 호출</li>
+</ul>
+<p>이유:</p>
+<ul>
+<li>이 component는 prediction intent 운반 계층</li>
+<li>gameplay state는 <code>AHughCharacter</code>가 소유</li>
+<li>animation display state는 <code>FHughReplicatedAnimState</code>와 AnimInstance 쪽에서 처리</li>
+</ul>
+<h2 id="intent">새 입력 intent 추가 절차<a class="headerlink" href="#intent" title="Permanent link">&para;</a></h2>
+<ol>
+<li>남은 custom flag 여유 확인.</li>
+<li><code>UPragmataHughMovementComponent</code>에 <code>bWantsToX</code>, setter, getter 추가.</li>
+<li><code>FHughSavedMove</code>에 <code>bSavedWantsToX</code> 추가.</li>
+<li><code>Clear</code>에서 false 초기화.</li>
+<li><code>SetInitialPosition</code>에서 현재 intent 저장.</li>
+<li><code>PrepMoveFor</code>에서 replay용 intent 복원.</li>
+<li><code>GetCompressedFlags</code>에서 custom flag encode.</li>
+<li><code>UpdateFromCompressedFlags</code>에서 같은 flag decode.</li>
+<li><code>CanCombineWith</code>에서 intent 차이 비교.</li>
+<li><code>AHughCharacter::SyncMovementIntentFromMovementComponent</code>에서 gameplay state 반영.</li>
+<li>listen server 2-player PIE로 owner/server/proxy 표시 확인.</li>
+</ol>
+<h2 id="_8">흔한 실수<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>실수</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>setter에서 gameplay side effect 실행</td>
+<td>prediction replay 중 side effect 반복 위험</td>
+</tr>
+<tr>
+<td>intent 값을 곧바로 state로 취급</td>
+<td>조준 중 run 같은 거부 조건이 무시됨</td>
+</tr>
+<tr>
+<td><code>GetCompressedFlags</code>만 수정하고 <code>UpdateFromCompressedFlags</code> 누락</td>
+<td>server가 새 intent를 모름</td>
+</tr>
+<tr>
+<td><code>CanCombineWith</code>에 새 intent 비교 누락</td>
+<td>입력 전환 frame이 합쳐져 animation/state 지연 가능</td>
+</tr>
+<tr>
+<td><code>PrepMoveFor</code> 복원 누락</td>
+<td>client correction 후 replay 상태가 현재 입력값에 오염</td>
+</tr>
+<tr>
+<td>flag 번호 재사용</td>
+<td>기존 aim/run/hover/jump hold 의미 충돌</td>
+</tr>
+<tr>
+<td>remote proxy에서 이 component 값을 animation source로 직접 사용</td>
+<td>proxy는 owner 입력 prediction을 직접 갖지 않아 표시 불일치</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_9">검증 체크리스트<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Host Hugh / Client Diana PIE</li>
+<li>Hugh aim 시작/종료가 host와 client 화면에서 같은 pose 전환</li>
+<li>run 시작/종료가 listen server 화면에서도 run 표시와 속도 일치</li>
+<li>jump hold 후 hover 진입/해제 표시 일치</li>
+<li>Client Hugh / Host Diana PIE</li>
+<li>client Hugh 입력이 server movement update에서 반영</li>
+<li>host 화면의 Hugh proxy가 aim/run/hover 표시 유지</li>
+<li>네트워크 보정 상황</li>
+<li>correction 후 aim/run/hover 입력 전환이 튀지 않음</li>
+<li>빠른 run tap, aim tap, jump hold/release가 누락되지 않음</li>
+</ul>
+<h2 id="_10">관련 문서<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>Docs/Architecture/replication-role-animation-fix.md</code></li>
+<li>Hugh movement prediction과 replicated animation display state의 전체 설계</li>
+<li><code>Docs/Systems/Server/server.md</code></li>
+<li>listen server 관점의 Hugh/Diana 역할, local prediction, server state 설명</li>
+<li><code>Docs/Architecture/architecture.md</code></li>
+<li>Hugh movement prediction과 Diana avatar 구조의 큰 그림</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </article>
+            </div>
+
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+
+      </main>
+
+        <footer class="md-footer">
+
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+
+
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+
+</div>
+
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+
+
+
+
+
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+
+
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+  </body>
+</html>

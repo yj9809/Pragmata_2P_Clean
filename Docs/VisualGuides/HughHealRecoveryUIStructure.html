@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hugh Heal Recovery UI 구조</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #162033;
+      --muted: #5f6f86;
+      --line: #cad5e5;
+      --blue: #1f6feb;
+      --green: #238636;
+      --orange: #b45309;
+      --red: #c2410c;
+      --code-bg: #edf2fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+    }
+
+    main {
+      width: min(1040px, calc(100% - 32px));
+      margin: 28px auto 40px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 32px; line-height: 1.15; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 15px; margin-bottom: 6px; }
+    p { color: var(--muted); }
+    code, pre { font-family: "Cascadia Code", Consolas, monospace; color: #0f172a; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .stack { display: grid; gap: 16px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .big-code {
+      display: block;
+      padding: 18px 20px;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: #0f172a;
+      font: 700 21px/1.35 "Cascadia Code", Consolas, monospace;
+      overflow-x: auto;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+    }
+
+    .yes { border-left: 5px solid var(--green); }
+    .warn { border-left: 5px solid var(--orange); }
+    .no { border-left: 5px solid var(--red); }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .step {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ring-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .ring-demo {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+
+    .ring {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) var(--fill), #e5ebf5 0);
+      display: grid;
+      place-items: center;
+    }
+
+    .ring::after {
+      content: "";
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid var(--line);
+    }
+
+    .fill-0 { --fill: 0%; }
+    .fill-50 { --fill: 50%; }
+    .fill-100 { --fill: 100%; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--code-bg); font-size: 13px; }
+    tr:last-child td { border-bottom: 0; }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .box {
+      fill: #ffffff;
+      stroke: var(--line);
+      stroke-width: 2;
+      rx: 8;
+    }
+
+    .box-blue { stroke: var(--blue); }
+    .box-green { stroke: var(--green); }
+    .box-orange { stroke: var(--orange); }
+    .box-red { stroke: var(--red); }
+
+    .label {
+      fill: var(--ink);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .small {
+      fill: var(--muted);
+      font-size: 13px;
+    }
+
+    .svg-arrow {
+      fill: none;
+      stroke: #617089;
+      stroke-width: 2.5;
+      marker-end: url(#arrow);
+    }
+
+    @media (max-width: 820px) {
+      main { width: min(100% - 20px, 1040px); margin-top: 16px; }
+      .grid, .mini-grid, .ring-row { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+      .big-code { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<main class="stack">
+  <section class="card stack">
+    <div>
+      <h1>Hugh Heal Recovery UI 구조</h1>
+      <p>UI는 heal을 직접 실행하지 않는다. Hugh gameplay state가 ViewModel recovery field를 갱신하고, WBP는 그 값만 바인딩한다.</p>
+    </div>
+
+    <code class="big-code">AHughCharacter -> UPragmataHUDViewModel -> Recovery UI</code>
+
+    <div class="mini-grid">
+      <div class="fact yes">
+        <h3>수량</h3>
+        <p><code>RecoveryItemCount</code><br>남은 heal cartridge 표시</p>
+      </div>
+      <div class="fact warn">
+        <h3>Hold ring</h3>
+        <p><code>RecoveryHoldProgress</code><br><code>0.0 -> 1.0</code> circular fill</p>
+      </div>
+      <div class="fact no">
+        <h3>금지 상태</h3>
+        <p><code>bCanUseHeal=false</code><br><code>bRecoveryProhibited=true</code></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>데이터 흐름</h2>
+      <svg viewBox="0 0 820 324" role="img" aria-label="Hugh heal recovery UI 데이터 흐름">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#617089"></path>
+          </marker>
+        </defs>
+
+        <rect class="box box-blue" x="24" y="42" width="170" height="82"></rect>
+        <text class="label" x="44" y="74">IA_Heal</text>
+        <text class="small" x="44" y="98">Q / face button right</text>
+
+        <rect class="box box-orange" x="236" y="42" width="170" height="82"></rect>
+        <text class="label" x="256" y="74">Local hold</text>
+        <text class="small" x="256" y="98">1초 progress 예측</text>
+
+        <rect class="box box-green" x="448" y="42" width="170" height="82"></rect>
+        <text class="label" x="468" y="74">Server heal</text>
+        <text class="small" x="468" y="98">cartridge/HP 검증</text>
+
+        <rect class="box box-red" x="638" y="42" width="160" height="82"></rect>
+        <text class="label" x="658" y="74">ViewModel</text>
+        <text class="small" x="658" y="98">FieldNotify 전달</text>
+
+        <path class="svg-arrow" d="M194 83 H231"></path>
+        <path class="svg-arrow" d="M406 83 H443"></path>
+        <path class="svg-arrow" d="M618 83 H633"></path>
+
+        <rect class="box" x="24" y="178" width="374" height="84"></rect>
+        <text class="label" x="44" y="210">복제되는 값</text>
+        <text class="small" x="44" y="234">cartridge count, bCanUseHeal</text>
+
+        <rect class="box" x="424" y="178" width="374" height="84"></rect>
+        <text class="label" x="444" y="210">local 값</text>
+        <text class="small" x="444" y="234">RecoveryHoldProgress, bRecoveryHolding</text>
+
+        <path class="svg-arrow" d="M533 124 V173"></path>
+        <path class="svg-arrow" d="M321 124 V173"></path>
+      </svg>
+    </article>
+
+    <aside class="card stack">
+      <div>
+        <h2>Hold ring 방향</h2>
+        <p><code>GetHealHoldProgress()</code>는 현재 hold 시간 / 1초 threshold. 버튼을 떼거나 blocker가 생기면 0으로 reset.</p>
+      </div>
+
+      <div class="ring-row">
+        <div class="ring-demo">
+          <div class="ring fill-0"></div>
+          <h3>0.0</h3>
+          <p>입력 시작 전</p>
+        </div>
+        <div class="ring-demo">
+          <div class="ring fill-50"></div>
+          <h3>0.5</h3>
+          <p>0.5초 hold</p>
+        </div>
+        <div class="ring-demo">
+          <div class="ring fill-100"></div>
+          <h3>1.0</h3>
+          <p>heal 요청 발생</p>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2>UI 디자이너 계약</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ViewModel 항목</th>
+          <th>타입</th>
+          <th>UI 사용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>RecoveryItemCount</code><br><code>GetRecoveryItemCount()</code></td>
+          <td>int</td>
+          <td>남은 heal cartridge count. Hugh/Diana HUD 모두 같은 수량 표시</td>
+        </tr>
+        <tr>
+          <td><code>RecoveryHoldProgress</code><br><code>GetRecoveryHoldProgress()</code></td>
+          <td>float 0..1</td>
+          <td>heal button circular progress fill. local Hugh가 hold 중일 때만 증가</td>
+        </tr>
+        <tr>
+          <td><code>bRecoveryHolding</code><br><code>IsRecoveryHolding()</code></td>
+          <td>bool</td>
+          <td>hold ring 표시/숨김, pulse animation 시작 조건</td>
+        </tr>
+        <tr>
+          <td><code>bCanUseHeal</code><br><code>CanUseHeal()</code></td>
+          <td>bool</td>
+          <td>heal button enabled 상태. 양쪽 HUD가 같은 blocker 상태 표시</td>
+        </tr>
+        <tr>
+          <td><code>bRecoveryProhibited</code><br><code>IsRecoveryProhibited()</code></td>
+          <td>bool</td>
+          <td>금지 표시 alias. 현재 <code>!bCanUseHeal</code>로 동기화</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>실행 흐름</h2>
+      <div class="flow">
+        <div class="step"><code>IA_Heal Started</code><br>local Hugh hold 시작, progress 0부터 증가</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>RecoveryHoldProgress == 1.0</code><br>1초 도달 시 <code>Server_RequestHeal()</code> 요청</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>CalculateHealAvailability()</code><br>서버가 cartridge, HP, death, reload, dash/run, falling/hovering 재검증</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>ConsumeRepairCartridge()</code><br>실제 HP 회복 성공 시 cartridge 1개 차감</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>OnHealAvailabilityChanged</code><br>ViewModel recovery count/prohibited/can-use 갱신</div>
+      </div>
+    </article>
+
+    <aside class="card">
+      <h2>표시 규칙</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>사용 가능</td>
+            <td><code>bCanUseHeal=true</code>, count 1 이상, button active</td>
+          </tr>
+          <tr>
+            <td>hold 중</td>
+            <td><code>bRecoveryHolding=true</code>, ring이 <code>RecoveryHoldProgress</code>만큼 fill</td>
+          </tr>
+          <tr>
+            <td>반복 회복</td>
+            <td>hold 유지 시 1초마다 server heal 재요청. ring은 계속 full 상태 유지 가능</td>
+          </tr>
+          <tr>
+            <td>금지</td>
+            <td>full HP, cartridge 0, death, reload, dash/run, falling/hovering 중 disabled 표시</td>
+          </tr>
+          <tr>
+            <td>reset</td>
+            <td>입력 해제, cartridge 0, blocker 발생 시 ring progress 0</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2>검증 체크</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>상황</th>
+          <th>기대 결과</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Hugh damaged, cartridge 1 이상</td>
+          <td><code>CanUseHeal=true</code>, recovery button active</td>
+        </tr>
+        <tr>
+          <td><code>Q</code> 또는 <code>Gamepad_FaceButton_Right</code> 1초 hold</td>
+          <td>ring 0에서 1까지 fill, heal 1회 실행, count 1 감소</td>
+        </tr>
+        <tr>
+          <td>hold 유지</td>
+          <td>cartridge가 남아 있고 blocker가 없으면 1초마다 추가 heal</td>
+        </tr>
+        <tr>
+          <td>full HP 또는 airborne/dash/run/reload</td>
+          <td><code>CanUseHeal=false</code>, <code>RecoveryProhibited=true</code>, ring reset</td>
+        </tr>
+        <tr>
+          <td>Diana HUD</td>
+          <td>replicated count와 can-use 상태 표시. Hugh local hold progress는 표시하지 않음</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>
+</html>

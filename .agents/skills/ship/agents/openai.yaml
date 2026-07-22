@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship"
+  short_description: "no-coauthor 규칙으로 변경사항 커밋"
+  default_prompt: "$ship commit the current changes"

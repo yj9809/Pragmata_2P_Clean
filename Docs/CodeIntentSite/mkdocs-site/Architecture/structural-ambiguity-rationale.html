@@ -1,0 +1,6564 @@
+﻿
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+        <link rel="prev" href="architecture.html">
+
+
+        <link rel="next" href="replication-role-animation-fix.html">
+
+
+
+
+
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+
+
+
+        <title>구조 모호성 근거 - Pragmata_2P Code Intent</title>
+
+
+
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+
+
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+
+
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+
+
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+
+
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+
+    </div>
+    <div data-md-component="announce">
+
+    </div>
+
+
+
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../index.html" title="Pragmata_2P Code Intent" class="md-header__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pragmata_2P Code Intent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+
+              구조 모호성 근거
+
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+        <label class="md-header__button md-icon" for="__search">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </nav>
+
+</header>
+
+    <div class="md-container" data-md-component="container">
+
+
+
+
+
+
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+
+
+
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Pragmata_2P Code Intent" class="md-nav__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pragmata_2P Code Intent
+  </label>
+
+  <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    홈
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Plans/PLAN-code-intent-visualization.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    실행 계획
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../code-intent-style.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 작성 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+
+
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    의도 카드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+
+
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    피해
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/DealDamageToActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    DealDamageToActor 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/FPragmataDamageSpec.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    FPragmataDamageSpec 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/WeaponBase-DealDamageToHitActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WeaponBase 피해 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/PragmataHealthComponent-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HealthComponent 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/HughCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/PlayableCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    PlayableCharacter 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+
+
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    해킹
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    해킹
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-RequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-RequestHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 방향 입력 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-ServerRequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 적 해킹 방향
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 상호작용 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 방향 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+
+
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HUD
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    HUD
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 퍼즐 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    gameplay HUD 보장
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+
+
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    이동
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    이동
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Movement/WaistArmComponent-SetArmState.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 상태 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 부착
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+
+
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    게임 흐름
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    게임 흐름
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/GameFlow/PragmataGameFlowConfig.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GameFlow 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+
+
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    시스템
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Damage/damage-flow.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해 흐름
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Hacking/enemy-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Hacking/map-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Movement/hugh-movement-component-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Server/server.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Server/server-puzzle.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버 퍼즐
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+
+
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    구조
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="architecture.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 문서
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="structural-ambiguity-rationale.html" class="md-nav__link md-nav__link--active">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+      </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        목적
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#b3b43099-fix-gripgun" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        b3b43099 fix: GripGun 발사 권한 경계 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="b3b43099 fix: GripGun 발사 권한 경계 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#4aada14a-docs-gripgun" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4aada14a docs: GripGun 권한 경계 변경 문서 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="4aada14a docs: GripGun 권한 경계 변경 문서 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#78e73502-fix-monster-ai-blackboard" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        78e73502 fix: Monster AI Blackboard 소유 경계 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="78e73502 fix: Monster AI Blackboard 소유 경계 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#a931e9ce-fix-monster-bt-target" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        a931e9ce fix: Monster BT target 타입 계약 정렬
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="a931e9ce fix: Monster BT target 타입 계약 정렬">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#111fffa1-fix-damage-library-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        111fffa1 fix: damage library 서버 권한 gate 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="111fffa1 fix: damage library 서버 권한 gate 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#6b6977d8-fix-damage-faction-source-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6b6977d8 fix: damage faction source fallback 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="6b6977d8 fix: damage faction source fallback 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#98ffefe3-fix-weaponbase-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        98ffefe3 fix: WeaponBase 발사 gate 서버 계약 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="98ffefe3 fix: WeaponBase 발사 gate 서버 계약 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#199eed0c-refactor-weapon-ammo-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        199eed0c refactor: Weapon ammo 직접 변경 API 범위 축소
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="199eed0c refactor: Weapon ammo 직접 변경 API 범위 축소">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#d3d10084-fix-hugh-animinstance" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        d3d10084 fix: Hugh AnimInstance 표시 속도 원본 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="d3d10084 fix: Hugh AnimInstance 표시 속도 원본 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#e204a5c1-refactor-diana-animinstance-operator-pawn" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        e204a5c1 refactor: Diana AnimInstance operator pawn 조회 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="e204a5c1 refactor: Diana AnimInstance operator pawn 조회 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#20525e7d-delete-hughcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        20525e7d delete: 미사용 HughController 제거
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="20525e7d delete: 미사용 HughController 제거">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#e6fd9475-refactor-hugh-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        e6fd9475 refactor: Hugh 입력 mapping 소유 경계 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="e6fd9475 refactor: Hugh 입력 mapping 소유 경계 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7306cb33-fix-diana-node-interaction-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7306cb33 fix: Diana node interaction 권한 gate 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7306cb33 fix: Diana node interaction 권한 gate 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#360d1eaf-fix-diana-scan-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        360d1eaf fix: Diana scan role 검증 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="360d1eaf fix: Diana scan role 검증 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5ffd97c9-refactor-diana-node-interaction-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5ffd97c9 refactor: Diana node interaction gate 일원화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5ffd97c9 refactor: Diana node interaction gate 일원화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#78547e94-fix-diana-action-lock-local-hack-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        78547e94 fix: Diana action lock 중 local hack intent 차단
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="78547e94 fix: Diana action lock 중 local hack intent 차단">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7d06d2a0-fix-weapondataasset" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7d06d2a0 fix: WeaponDataAsset 기본 탄약 범위 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7d06d2a0 fix: WeaponDataAsset 기본 탄약 범위 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#0c70abf8-refactor-pairedanimationset" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0c70abf8 refactor: PairedAnimationSet 매칭 정책 명시
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="0c70abf8 refactor: PairedAnimationSet 매칭 정책 명시">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#467160f2-fix-monster-hack-damage" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        467160f2 fix: Monster hack 상태와 damage 보정 경계 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="467160f2 fix: Monster hack 상태와 damage 보정 경계 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#67b98e7d-fix-enemy-damage-text" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        67b98e7d fix: Enemy damage text 표시 경로 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="67b98e7d fix: Enemy damage text 표시 경로 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#f1a9e356-refactor-session-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        f1a9e356 refactor: session 광고 제어 Blueprint 경계 축소
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="f1a9e356 refactor: session 광고 제어 Blueprint 경계 축소">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#63f8cc1d-fix-gameplay-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        63f8cc1d fix: gameplay role 할당 실패 경계 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="63f8cc1d fix: gameplay role 할당 실패 경계 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_68" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#eb1d8054-refactor-ipragmatahackable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        eb1d8054 refactor: IPragmataHackable 계약 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="eb1d8054 refactor: IPragmataHackable 계약 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_69" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_70" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_71" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#26216854-refactor-ipragmatascannable-result" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        26216854 refactor: IPragmataScannable result 책임 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="26216854 refactor: IPragmataScannable result 책임 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_72" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_73" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#c15cccef-fix-lobby-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        c15cccef fix: Lobby preview 표시 조건 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="c15cccef fix: Lobby preview 표시 조건 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#04f8709d-refactor-previewrole" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        04f8709d refactor: PreviewRole 갱신 경로 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="04f8709d refactor: PreviewRole 갱신 경로 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_78" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_79" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_80" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#0cbe1237-fix-puzzle" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0cbe1237 fix: puzzle 완료 처리 서버 권한 가드 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="0cbe1237 fix: puzzle 완료 처리 서버 권한 가드 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_81" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_82" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_83" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#a6b1199b-fix-puzzle-locked-door" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        a6b1199b fix: puzzle locked door 진행 상태 복제
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="a6b1199b fix: puzzle locked door 진행 상태 복제">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_84" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_85" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_86" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#53882224-fix-map-hack-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        53882224 fix: Map hack depth 범위 고정
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="53882224 fix: Map hack depth 범위 고정">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_87" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_88" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_89" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5c40324a-refactor-hack-puzzle" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5c40324a refactor: Hack puzzle 시작 결과 명시
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5c40324a refactor: Hack puzzle 시작 결과 명시">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_90" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_91" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_92" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5dac5fc8-refactor-viewmodel-gameplay-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5dac5fc8 refactor: 해킹 ViewModel gameplay 변경 API 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5dac5fc8 refactor: 해킹 ViewModel gameplay 변경 API 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_93" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_94" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_95" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#bc1e58e5-refactor-host-join-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        bc1e58e5 refactor: 로비 host join API 이름 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="bc1e58e5 refactor: 로비 host join API 이름 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_96" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_97" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_98" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_99" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        요약
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="replication-role-animation-fix.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+
+
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    운영
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/blueprint-tasks.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Blueprint 작업
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/packaging-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Packaging
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unreal-build-warnings.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Build 경고
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/history-rewrite-team-runbook.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    History rewrite 절차
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unstaged-assets.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Git 제외 asset
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unreelmcp-anomalies.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    UnreelMCP 이상 기록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/docs-inventory.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Docs 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+
+
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    가이드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/code-intent-usage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 사용법
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/unreal-coding-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Unreal coding 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/commit-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Commit 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/branching-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Branch 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+
+
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    변경 기록
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    변경 기록
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-161329-receive-damage-only-hitreact-refactor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage refactor
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-181632-hugh-anim-state-cleanup.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh animation 정리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-190759-gripgun-authority-boundary.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GripGun authority 경계
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+
+
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    다이어그램
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Diagrams/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../KNOW_HOW.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        목적
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#b3b43099-fix-gripgun" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        b3b43099 fix: GripGun 발사 권한 경계 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="b3b43099 fix: GripGun 발사 권한 경계 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#4aada14a-docs-gripgun" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4aada14a docs: GripGun 권한 경계 변경 문서 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="4aada14a docs: GripGun 권한 경계 변경 문서 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#78e73502-fix-monster-ai-blackboard" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        78e73502 fix: Monster AI Blackboard 소유 경계 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="78e73502 fix: Monster AI Blackboard 소유 경계 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#a931e9ce-fix-monster-bt-target" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        a931e9ce fix: Monster BT target 타입 계약 정렬
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="a931e9ce fix: Monster BT target 타입 계약 정렬">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#111fffa1-fix-damage-library-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        111fffa1 fix: damage library 서버 권한 gate 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="111fffa1 fix: damage library 서버 권한 gate 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#6b6977d8-fix-damage-faction-source-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6b6977d8 fix: damage faction source fallback 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="6b6977d8 fix: damage faction source fallback 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#98ffefe3-fix-weaponbase-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        98ffefe3 fix: WeaponBase 발사 gate 서버 계약 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="98ffefe3 fix: WeaponBase 발사 gate 서버 계약 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#199eed0c-refactor-weapon-ammo-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        199eed0c refactor: Weapon ammo 직접 변경 API 범위 축소
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="199eed0c refactor: Weapon ammo 직접 변경 API 범위 축소">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#d3d10084-fix-hugh-animinstance" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        d3d10084 fix: Hugh AnimInstance 표시 속도 원본 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="d3d10084 fix: Hugh AnimInstance 표시 속도 원본 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#e204a5c1-refactor-diana-animinstance-operator-pawn" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        e204a5c1 refactor: Diana AnimInstance operator pawn 조회 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="e204a5c1 refactor: Diana AnimInstance operator pawn 조회 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#20525e7d-delete-hughcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        20525e7d delete: 미사용 HughController 제거
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="20525e7d delete: 미사용 HughController 제거">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_34" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_35" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#e6fd9475-refactor-hugh-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        e6fd9475 refactor: Hugh 입력 mapping 소유 경계 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="e6fd9475 refactor: Hugh 입력 mapping 소유 경계 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_36" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_37" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_38" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7306cb33-fix-diana-node-interaction-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7306cb33 fix: Diana node interaction 권한 gate 보강
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7306cb33 fix: Diana node interaction 권한 gate 보강">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_39" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_40" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_41" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#360d1eaf-fix-diana-scan-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        360d1eaf fix: Diana scan role 검증 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="360d1eaf fix: Diana scan role 검증 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_42" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_43" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_44" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5ffd97c9-refactor-diana-node-interaction-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5ffd97c9 refactor: Diana node interaction gate 일원화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5ffd97c9 refactor: Diana node interaction gate 일원화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_45" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_46" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_47" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#78547e94-fix-diana-action-lock-local-hack-intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        78547e94 fix: Diana action lock 중 local hack intent 차단
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="78547e94 fix: Diana action lock 중 local hack intent 차단">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_48" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_49" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_50" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7d06d2a0-fix-weapondataasset" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7d06d2a0 fix: WeaponDataAsset 기본 탄약 범위 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7d06d2a0 fix: WeaponDataAsset 기본 탄약 범위 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_51" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_52" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_53" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#0c70abf8-refactor-pairedanimationset" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0c70abf8 refactor: PairedAnimationSet 매칭 정책 명시
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="0c70abf8 refactor: PairedAnimationSet 매칭 정책 명시">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_54" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_55" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_56" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#467160f2-fix-monster-hack-damage" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        467160f2 fix: Monster hack 상태와 damage 보정 경계 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="467160f2 fix: Monster hack 상태와 damage 보정 경계 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_57" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_58" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_59" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#67b98e7d-fix-enemy-damage-text" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        67b98e7d fix: Enemy damage text 표시 경로 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="67b98e7d fix: Enemy damage text 표시 경로 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_60" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_61" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_62" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#f1a9e356-refactor-session-blueprint" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        f1a9e356 refactor: session 광고 제어 Blueprint 경계 축소
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="f1a9e356 refactor: session 광고 제어 Blueprint 경계 축소">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_63" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_64" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_65" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#63f8cc1d-fix-gameplay-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        63f8cc1d fix: gameplay role 할당 실패 경계 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="63f8cc1d fix: gameplay role 할당 실패 경계 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_66" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_67" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_68" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#eb1d8054-refactor-ipragmatahackable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        eb1d8054 refactor: IPragmataHackable 계약 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="eb1d8054 refactor: IPragmataHackable 계약 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_69" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_70" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_71" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#26216854-refactor-ipragmatascannable-result" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        26216854 refactor: IPragmataScannable result 책임 명확화
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="26216854 refactor: IPragmataScannable result 책임 명확화">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_72" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_73" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_74" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#c15cccef-fix-lobby-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        c15cccef fix: Lobby preview 표시 조건 분리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="c15cccef fix: Lobby preview 표시 조건 분리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_75" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_76" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_77" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#04f8709d-refactor-previewrole" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        04f8709d refactor: PreviewRole 갱신 경로 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="04f8709d refactor: PreviewRole 갱신 경로 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_78" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_79" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_80" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#0cbe1237-fix-puzzle" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0cbe1237 fix: puzzle 완료 처리 서버 권한 가드 추가
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="0cbe1237 fix: puzzle 완료 처리 서버 권한 가드 추가">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_81" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_82" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_83" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#a6b1199b-fix-puzzle-locked-door" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        a6b1199b fix: puzzle locked door 진행 상태 복제
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="a6b1199b fix: puzzle locked door 진행 상태 복제">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_84" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_85" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_86" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#53882224-fix-map-hack-depth" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        53882224 fix: Map hack depth 범위 고정
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="53882224 fix: Map hack depth 범위 고정">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_87" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_88" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_89" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5c40324a-refactor-hack-puzzle" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5c40324a refactor: Hack puzzle 시작 결과 명시
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5c40324a refactor: Hack puzzle 시작 결과 명시">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_90" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_91" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_92" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5dac5fc8-refactor-viewmodel-gameplay-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5dac5fc8 refactor: 해킹 ViewModel gameplay 변경 API 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="5dac5fc8 refactor: 해킹 ViewModel gameplay 변경 API 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_93" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_94" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_95" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#bc1e58e5-refactor-host-join-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        bc1e58e5 refactor: 로비 host join API 이름 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="bc1e58e5 refactor: 로비 host join API 이름 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#_96" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        변경 이유
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_97" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남겨두면 생기는 문제
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#_98" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        선택한 경계
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_99" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        요약
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="md-content" data-md-component="content">
+
+              <article class="md-content__inner md-typeset">
+
+
+
+
+
+<h1 id="_1">구조 모호성 변경 이유<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">목적<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>대상: <code>b3b43099</code> P1 GripGun 권한 경계 fix부터 <code>bc1e58e5</code>까지 구조 모호성 정리 커밋</li>
+<li>성격: <code>Docs/KNOW_HOW.md</code>의 현재 동작 레시피가 아니라, 각 커밋이 왜 필요했는지 남기는 rationale 문서</li>
+<li>기준: 소유 주체, 서버 권한, Blueprint 노출 경계, listen server/remote client 표시 차이, UI와 gameplay 책임 분리</li>
+</ul>
+<h2 id="b3b43099-fix-gripgun"><code>b3b43099</code> fix: GripGun 발사 권한 경계 보강<a class="headerlink" href="#b3b43099-fix-gripgun" title="Permanent link">&para;</a></h2>
+<h3 id="_3">변경 이유<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GripGun 발사는 ammo 차감, hit 판정, impact VFX, reload 상태가 함께 움직이는 gameplay mutation이므로 서버에서만 확정되어야 함.</li>
+<li>기존 구조는 Hugh 입력, <code>WeaponBase</code> trigger gate, <code>GripGun</code> fire path, reload 완료 API가 서로 다른 수준에서 발사 가능 여부를 판단해 “최종 권한 위치”가 흐렸음.</li>
+<li>P1로 분류한 이유는 client/host 간 발사 결과가 갈라질 수 있는 권한 경계 문제였기 때문.</li>
+</ul>
+<h3 id="_4">남겨두면 생기는 문제<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>client에서 local 발사처럼 보이지만 서버 ammo나 hit 결과가 일치하지 않는 split-brain이 생길 수 있음.</li>
+<li>reload montage callback과 ammo replenish가 여러 public helper를 통해 우회되면, 장전 완료 타이밍이 weapon별 서버 규칙을 벗어날 수 있음.</li>
+<li>impact VFX가 gameplay 확정과 분리되지 않으면 cosmetic multicast와 실제 hit 결과의 원인을 추적하기 어려움.</li>
+</ul>
+<h3 id="_5">선택한 경계<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>발사 확정은 <code>GripGun::CommitServerShot</code>의 서버 경로로 모음.</li>
+<li>reload 완료는 단일 <code>OnCompleteReload</code> API로 정리.</li>
+<li>ammo 보충과 timer helper는 weapon 내부의 서버 helper로 축소.</li>
+</ul>
+<h2 id="4aada14a-docs-gripgun"><code>4aada14a</code> docs: GripGun 권한 경계 변경 문서 추가<a class="headerlink" href="#4aada14a-docs-gripgun" title="Permanent link">&para;</a></h2>
+<h3 id="_6">변경 이유<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>P1 fix는 여러 파일의 권한 경계를 바꿨기 때문에 commit diff만으로는 “왜 이 경계가 맞는가”를 나중에 복원하기 어려움.</li>
+<li><code>KNOW_HOW.md</code>와 <code>architecture.md</code>는 현재 규칙을 남기기에 적합하지만, 변경 전후와 검증 결과까지 담는 changelist 성격에는 별도 문서가 더 적합함.</li>
+<li>사용자가 P1 fix를 먼저 해결하고 문서화한 뒤 ship하라고 요청했으므로, 코드 변경과 review용 변경 설명을 분리해 남길 필요가 있었음.</li>
+</ul>
+<h3 id="_7">남겨두면 생기는 문제<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GripGun 권한 변경을 다시 검토할 때 어떤 public API를 왜 닫았는지 commit history를 직접 파야 함.</li>
+<li>P1 fix가 이후 P2 weapon 정리의 기준점이었다는 맥락이 사라짐.</li>
+</ul>
+<h3 id="_8">선택한 경계<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Docs/Create/20260703-190759-gripgun-authority-boundary.md</code>에 변경 전후, 대상 파일, 검증을 기록.</li>
+<li>장기 규칙은 <code>KNOW_HOW.md</code>/<code>architecture.md</code>, 변경 설명은 <code>Docs/Create/</code> 문서로 분리.</li>
+</ul>
+<h2 id="78e73502-fix-monster-ai-blackboard"><code>78e73502</code> fix: Monster AI Blackboard 소유 경계 정리<a class="headerlink" href="#78e73502-fix-monster-ai-blackboard" title="Permanent link">&para;</a></h2>
+<h3 id="_9">변경 이유<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Behavior Tree가 사용하는 Blackboard schema는 BT asset의 계약인데, controller가 별도 hard-load하면 schema 소유자가 둘처럼 보임.</li>
+<li>AIController가 어떤 Blackboard를 쓸지 직접 알고 있으면 BT asset 교체나 테스트 BT 적용 시 controller 코드가 불필요하게 따라 바뀜.</li>
+<li>project 구조상 AI 의사결정 data contract는 BT/Blackboard asset 쪽에 두고 controller는 실행자 역할을 맡는 편이 명확함.</li>
+</ul>
+<h3 id="_10">남겨두면 생기는 문제<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>controller hard-load Blackboard와 BT 선언 Blackboard가 달라질 경우 key lookup이 실패하거나 잘못된 schema를 기준으로 동작할 수 있음.</li>
+<li>asset 경로 변경이 C++ controller 수정 요구로 번짐.</li>
+</ul>
+<h3 id="_11">선택한 경계<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>controller의 Blackboard hard-load 제거.</li>
+<li>BT가 선언한 Blackboard를 실행 시 schema 원천으로 사용.</li>
+</ul>
+<h2 id="a931e9ce-fix-monster-bt-target"><code>a931e9ce</code> fix: Monster BT target 타입 계약 정렬<a class="headerlink" href="#a931e9ce-fix-monster-bt-target" title="Permanent link">&para;</a></h2>
+<h3 id="_12">변경 이유<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Monster BT key의 target은 attack range decorator와 attack position service가 함께 읽는 shared contract임.</li>
+<li>한쪽에서 pawn/character처럼 좁게 해석하고 다른 쪽에서 actor처럼 해석하면 blackboard schema 의미가 흐려짐.</li>
+<li>공격 대상은 플레이어 pawn뿐 아니라 향후 다른 actor target으로 확장될 수 있으므로 <code>AActor</code> 계약이 더 안전함.</li>
+</ul>
+<h3 id="_13">남겨두면 생기는 문제<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>key 값은 들어 있는데 특정 node에서 cast 실패로 공격 거리나 위치 갱신이 멈출 수 있음.</li>
+<li>BT asset의 key type과 C++ node의 기대 type이 어긋나 디버깅이 어려워짐.</li>
+</ul>
+<h3 id="_14">선택한 경계<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>BT decorator/service 모두 Blackboard target을 <code>AActor</code> 계약으로 조회.</li>
+<li>target 세부 타입 판단은 필요한 behavior node 내부에서만 제한적으로 수행.</li>
+</ul>
+<h2 id="111fffa1-fix-damage-library-gate"><code>111fffa1</code> fix: damage library 서버 권한 gate 보강<a class="headerlink" href="#111fffa1-fix-damage-library-gate" title="Permanent link">&para;</a></h2>
+<h3 id="_15">변경 이유<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>PragmataDamageLibrary</code>는 damage 적용의 공통 진입점이므로 caller가 항상 서버라는 전제에 의존하면 안 됨.</li>
+<li>damage는 health 변경, hit reaction, enemy state 전환 같은 gameplay mutation을 만들기 때문에 최종 방어선이 필요함.</li>
+<li>여러 subsystem이 같은 damage helper를 호출하므로 gate를 caller마다 복제하는 것보다 library 입구에서 막는 편이 명확함.</li>
+</ul>
+<h3 id="_16">남겨두면 생기는 문제<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>client-side 호출이 local damage state를 만들거나 서버 결과와 다른 hit feedback을 만들 수 있음.</li>
+<li>새 caller가 추가될 때마다 authority check 누락 위험이 반복됨.</li>
+</ul>
+<h3 id="_17">선택한 경계<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li>공통 damage 진입점이 target authority를 확인.</li>
+<li>damage 적용은 서버 actor authority가 있을 때만 진행.</li>
+</ul>
+<h2 id="6b6977d8-fix-damage-faction-source-fallback"><code>6b6977d8</code> fix: damage faction source fallback 정리<a class="headerlink" href="#6b6977d8-fix-damage-faction-source-fallback" title="Permanent link">&para;</a></h2>
+<h3 id="_18">변경 이유<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li>faction 판정의 source가 <code>SourceActor</code>인지 <code>DamageCauser</code>인지 불명확하면 friendly fire, enemy damage, trap/projectile damage의 의미가 흔들림.</li>
+<li><code>SourceActor</code>는 의도를 가진 원천이고 <code>DamageCauser</code>는 실제 피해를 전달한 actor일 수 있으므로 우선순위가 필요함.</li>
+<li>source가 비어 있는 일부 damage path에서도 최소한의 fallback 규칙이 있어야 기존 damage flow가 끊기지 않음.</li>
+</ul>
+<h3 id="_19">남겨두면 생기는 문제<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>같은 damage가 caller마다 다른 faction으로 판정되어 아군/적군 필터가 흔들릴 수 있음.</li>
+<li>SourceActor 누락 상황에서 damage가 무조건 실패하거나, 반대로 causer 기준으로 잘못 통과할 수 있음.</li>
+</ul>
+<h3 id="_20">선택한 경계<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>faction source는 <code>SourceActor</code> 우선.</li>
+<li><code>SourceActor</code>가 없을 때만 <code>DamageCauser</code> fallback.</li>
+</ul>
+<h2 id="98ffefe3-fix-weaponbase-gate"><code>98ffefe3</code> fix: WeaponBase 발사 gate 서버 계약 보강<a class="headerlink" href="#98ffefe3-fix-weaponbase-gate" title="Permanent link">&para;</a></h2>
+<h3 id="_21">변경 이유<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>WeaponBase</code>의 공통 발사 gate가 authority를 보지 않으면 derived weapon이 서버 전용 발사 계약을 매번 자체 구현해야 함.</li>
+<li>P1 GripGun fix 이후에도 base gate가 client 발사 가능처럼 보이면 weapon 계층의 권한 모델이 다시 흐려짐.</li>
+<li>base class는 “발사 가능한가”의 공통 전제 조건을 표현해야 하므로 authority 확인이 포함되어야 함.</li>
+</ul>
+<h3 id="_22">남겨두면 생기는 문제<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>GripGun 외 다른 weapon이 base gate만 믿고 client에서 fire mutation을 진행할 수 있음.</li>
+<li>server-only helper를 추가해도 public trigger 경로가 권한을 우회하는 모양으로 남음.</li>
+</ul>
+<h3 id="_23">선택한 경계<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>WeaponBase::PullTrigger</code> 계열 공통 gate에 authority 확인 포함.</li>
+<li>weapon별 특수 발사 처리는 서버 gate를 통과한 뒤에만 진행.</li>
+</ul>
+<h2 id="199eed0c-refactor-weapon-ammo-api"><code>199eed0c</code> refactor: Weapon ammo 직접 변경 API 범위 축소<a class="headerlink" href="#199eed0c-refactor-weapon-ammo-api" title="Permanent link">&para;</a></h2>
+<h3 id="_24">변경 이유<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>public <code>RefillAmmo</code> 같은 직접 ammo 변경 API는 weapon별 reload 규칙을 우회할 수 있음.</li>
+<li>GripGun은 reload montage, timer, server helper를 통해 ammo를 보충해야 하므로 외부에서 임의 보충하는 API가 남아 있으면 경계가 깨짐.</li>
+<li>미사용 public API는 현재 사용되지 않아도 Blueprint나 새 C++ caller가 잘못된 우회로로 채택하기 쉬움.</li>
+</ul>
+<h3 id="_25">남겨두면 생기는 문제<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li>reload animation이 끝나기 전에 ammo가 채워지거나, 서버 guard 없이 ammo가 바뀌는 경로가 생길 수 있음.</li>
+<li>weapon별 reload 정책을 이해하지 못한 caller가 base API를 직접 호출할 수 있음.</li>
+</ul>
+<h3 id="_26">선택한 경계<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li>미사용 public <code>RefillAmmo</code> 경로 제거.</li>
+<li>ammo replenish는 weapon별 서버 reload helper가 소유.</li>
+</ul>
+<h2 id="d3d10084-fix-hugh-animinstance"><code>d3d10084</code> fix: Hugh AnimInstance 표시 속도 원본 정리<a class="headerlink" href="#d3d10084-fix-hugh-animinstance" title="Permanent link">&para;</a></h2>
+<h3 id="_27">변경 이유<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>HughAnimInstance</code>가 원시 <code>MovementComponent</code> 속도와 가속도를 직접 읽으면 owner와 remote client가 서로 다른 애니메이션 입력값을 사용할 수 있음.</li>
+<li>프로젝트는 <code>HughAnimState</code>를 통해 애니메이션 표시용 이동 상태를 별도 관리하므로, AnimInstance도 같은 snapshot을 읽어야 함.</li>
+<li>listen server에서는 서버 물리 상태, owner 예측 상태, remote 복제 상태가 한 화면 안에 섞이므로 “어느 값을 animation truth로 볼지”가 명확해야 함.</li>
+</ul>
+<h3 id="_28">남겨두면 생기는 문제<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hugh 본인은 자연스럽게 보이지만 다른 플레이어 화면에서는 blendspace 입력이 다르게 보여 locomotion이 어긋날 수 있음.</li>
+<li>나중에 <code>HughAnimState</code>를 보강해도 AnimInstance가 원시 값을 계속 읽으면 수정 효과가 일부 경로에만 적용됨.</li>
+</ul>
+<h3 id="_29">선택한 경계<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>HughAnimState</code>가 표시용 이동 상태의 단일 원천.</li>
+<li>정정: 이 선택은 stop/braking feel을 깨뜨려 폐기.</li>
+<li>현재 경계: AnimInstance의 locomotion <code>MovementSpeed</code>/<code>Acceleration</code>은 실제 <code>CharacterMovement</code> velocity/acceleration 사용.</li>
+<li><code>HughAnimState</code>는 aim/run/jump/hover 같은 상태 복제 원천으로만 사용.</li>
+</ul>
+<h2 id="e204a5c1-refactor-diana-animinstance-operator-pawn"><code>e204a5c1</code> refactor: Diana AnimInstance operator pawn 조회 정리<a class="headerlink" href="#e204a5c1-refactor-diana-animinstance-operator-pawn" title="Permanent link">&para;</a></h2>
+<h3 id="_30">변경 이유<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Diana AnimInstance가 Diana operator pawn을 찾는 경로가 여러 곳에 흩어져 있으면 GameState, owner pawn, cached pawn 중 무엇이 우선인지 불명확해짐.</li>
+<li>Diana는 Hugh에 mount된 표현체와 별도 <code>ADianaOperatorPawn</code>이 함께 존재하므로, AnimInstance가 “보이는 Diana”와 “입력/상태를 가진 Diana”를 혼동하기 쉬운 구조.</li>
+<li>GameState가 role pawn 관계를 알고 있으므로 정상 플레이에서는 GameState-first 조회가 가장 명확함.</li>
+</ul>
+<h3 id="_31">남겨두면 생기는 문제<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<ul>
+<li>BeginPlay, possession, replication 순서에 따라 stale pawn을 계속 참조할 수 있음.</li>
+<li>Anim layer나 combat state가 서로 다른 Diana pawn을 기준으로 갱신될 수 있음.</li>
+</ul>
+<h3 id="_32">선택한 경계<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ResolveDianaOperatorPawn()</code> / <code>FindDianaOperatorPawn()</code>로 조회 정책을 한곳에 모음.</li>
+<li>GameState 조회를 우선하고, 초기 PIE/복제 타이밍용 fallback만 제한적으로 허용.</li>
+</ul>
+<h2 id="20525e7d-delete-hughcontroller"><code>20525e7d</code> delete: 미사용 HughController 제거<a class="headerlink" href="#20525e7d-delete-hughcontroller" title="Permanent link">&para;</a></h2>
+<h3 id="_33">변경 이유<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h3>
+<ul>
+<li>실제 플레이어 controller는 <code>APragmataPlayerController</code>인데, 남아 있던 <code>HughController</code>가 “Hugh 전용 controller가 아직 소유권을 가진다”는 잘못된 신호를 줌.</li>
+<li>이 프로젝트의 역할 구조는 Hugh와 Diana가 controller class를 나누는 방식이 아니라, PlayerState role과 pawn possession으로 분기됨.</li>
+<li>사용하지 않는 native controller가 남아 있으면 HUD, input, role handoff 코드를 어디에 넣어야 하는지 계속 모호해짐.</li>
+</ul>
+<h3 id="_34">남겨두면 생기는 문제<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Blueprint나 config가 오래된 <code>HughController</code>를 다시 참조하면서 새 controller 경계를 우회할 수 있음.</li>
+<li>이후 작업자가 Hugh-only 기능을 legacy controller에 추가해 실제 runtime 경로와 문서가 어긋날 수 있음.</li>
+</ul>
+<h3 id="_35">선택한 경계<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h3>
+<ul>
+<li>player controller 책임은 <code>APragmataPlayerController</code> 계열로 일원화.</li>
+<li>Hugh pawn은 pawn 동작과 입력 action binding만 담당.</li>
+</ul>
+<h2 id="e6fd9475-refactor-hugh-mapping"><code>e6fd9475</code> refactor: Hugh 입력 mapping 소유 경계 정리<a class="headerlink" href="#e6fd9475-refactor-hugh-mapping" title="Permanent link">&para;</a></h2>
+<h3 id="_36">변경 이유<a class="headerlink" href="#_36" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>HughCharacter</code>에 mapping context 관련 흔적이 남아 있으면 pawn이 Enhanced Input mapping을 소유하는 것처럼 보임.</li>
+<li>실제 mapping context 추가/전환은 controller와 role input flow가 맡아야 하며, pawn은 자신에게 전달된 input action을 바인딩하는 쪽이 자연스러움.</li>
+<li>commented legacy mapping code는 “필요하면 되살려도 되는 코드”처럼 보이지만 현재 구조와 맞지 않음.</li>
+</ul>
+<h3 id="_37">남겨두면 생기는 문제<a class="headerlink" href="#_37" title="Permanent link">&para;</a></h3>
+<ul>
+<li>같은 IMC가 controller와 pawn 양쪽에서 추가되어 중복 binding, 우선순위 충돌, packaged 입력 차이를 만들 수 있음.</li>
+<li>Hugh 입력 버그를 고칠 때 pawn-local mapping 복구라는 잘못된 방향으로 회귀할 위험.</li>
+</ul>
+<h3 id="_38">선택한 경계<a class="headerlink" href="#_38" title="Permanent link">&para;</a></h3>
+<ul>
+<li>mapping context 소유는 controller/role input flow.</li>
+<li>Hugh pawn은 <code>UInputAction</code> 참조와 실제 action handler만 유지.</li>
+</ul>
+<h2 id="7306cb33-fix-diana-node-interaction-gate"><code>7306cb33</code> fix: Diana node interaction 권한 gate 보강<a class="headerlink" href="#7306cb33-fix-diana-node-interaction-gate" title="Permanent link">&para;</a></h2>
+<h3 id="_39">변경 이유<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Diana node interaction은 Diana 전용 행동인데, 공통 gate가 role, action lock, combat 상태를 모두 확인하지 않으면 서버 재검증 전까지 잘못된 intent가 진입할 수 있음.</li>
+<li>node interaction은 map/hack 흐름과 연결되므로 단순 거리/조준 조건만으로 허용하면 gameplay role 경계가 흐려짐.</li>
+<li>forced paired action 중에는 Diana 입력 의도가 잠겨야 하므로 interaction gate도 같은 정책을 따라야 함.</li>
+</ul>
+<h3 id="_40">남겨두면 생기는 문제<a class="headerlink" href="#_40" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Hugh 또는 잘못된 role 상태에서 node interaction RPC를 시도할 수 있음.</li>
+<li>enemy combat, roaming, aim 상태와 관계없이 상호작용 가능 여부가 경로마다 다르게 판단됨.</li>
+</ul>
+<h3 id="_41">선택한 경계<a class="headerlink" href="#_41" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>CanOwnerUseNodeInteraction()</code>가 action lock, enemy combat, Diana role, roaming, aim 조건을 함께 검사.</li>
+<li>interaction 시작 전 로컬/서버 공통 조건을 같은 component gate로 묶음.</li>
+</ul>
+<h2 id="360d1eaf-fix-diana-scan-role"><code>360d1eaf</code> fix: Diana scan role 검증 추가<a class="headerlink" href="#360d1eaf-fix-diana-scan-role" title="Permanent link">&para;</a></h2>
+<h3 id="_42">변경 이유<a class="headerlink" href="#_42" title="Permanent link">&para;</a></h3>
+<ul>
+<li>scan은 Diana 전용 능력인데 <code>ResolveScanTrace()</code>가 거리, cone, action lock 중심으로만 검증하면 role identity가 빠짐.</li>
+<li>component가 올바른 owner에 붙어 있다는 가정은 runtime 보안 경계로 충분하지 않음.</li>
+<li>server trace는 최종 판정 지점이므로 role 확인도 이 지점에 있어야 함.</li>
+</ul>
+<h3 id="_43">남겨두면 생기는 문제<a class="headerlink" href="#_43" title="Permanent link">&para;</a></h3>
+<ul>
+<li>component 참조나 possession 흐름이 꼬였을 때 Diana가 아닌 player가 scan 판정을 받을 수 있음.</li>
+<li>scan/hack 계열 코드가 “Diana-only”라는 gameplay 계약을 코드상으로 보장하지 못함.</li>
+</ul>
+<h3 id="_44">선택한 경계<a class="headerlink" href="#_44" title="Permanent link">&para;</a></h3>
+<ul>
+<li>controller <code>PlayerState</code>의 assigned role이 Diana인지 trace resolution에서 확인.</li>
+<li>scan component는 owner 상태뿐 아니라 gameplay role까지 검증.</li>
+</ul>
+<h2 id="5ffd97c9-refactor-diana-node-interaction-gate"><code>5ffd97c9</code> refactor: Diana node interaction gate 일원화<a class="headerlink" href="#5ffd97c9-refactor-diana-node-interaction-gate" title="Permanent link">&para;</a></h2>
+<h3 id="_45">변경 이유<a class="headerlink" href="#_45" title="Permanent link">&para;</a></h3>
+<ul>
+<li>pawn의 <code>RequestNodeInteraction()</code>와 component gate가 각각 조건을 들고 있으면 어느 쪽이 진짜 정책인지 불명확함.</li>
+<li>이전에는 pawn 쪽 <code>Roaming &amp;&amp; Aim</code>과 component/server 쪽 조건이 따로 움직일 수 있었음.</li>
+<li>node interaction은 component가 실질 동작을 수행하므로, gate도 component가 소유하는 편이 추적 가능함.</li>
+</ul>
+<h3 id="_46">남겨두면 생기는 문제<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h3>
+<ul>
+<li>새 조건을 component에 추가해도 pawn 쪽 중복 조건이 낡은 상태로 남아 false reject 또는 false allow를 만들 수 있음.</li>
+<li>caller가 pawn gate만 보고 “이 조건이면 충분하다”고 오해할 수 있음.</li>
+</ul>
+<h3 id="_47">선택한 경계<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ADianaOperatorPawn::RequestNodeInteraction()</code>는 component에 위임.</li>
+<li>node interaction 가능 여부의 단일 정책 위치는 <code>UDianaNodeInteractionComponent</code>.</li>
+</ul>
+<h2 id="78547e94-fix-diana-action-lock-local-hack-intent"><code>78547e94</code> fix: Diana action lock 중 local hack intent 차단<a class="headerlink" href="#78547e94-fix-diana-action-lock-local-hack-intent" title="Permanent link">&para;</a></h2>
+<h3 id="_48">변경 이유<a class="headerlink" href="#_48" title="Permanent link">&para;</a></h3>
+<ul>
+<li>server가 action lock 중 scan/hack을 거부하더라도 local intent가 먼저 reticle, timer, RPC 시도, 방향 입력을 움직이면 플레이어 피드백이 거짓이 됨.</li>
+<li>forced paired action 중 Diana는 조작이 잠긴 상태이므로 UI와 로컬 preview도 같은 잠금 정책을 따라야 함.</li>
+<li>server-authoritative reject만으로는 UX와 네트워크 노이즈 문제를 해결하지 못함.</li>
+</ul>
+<h3 id="_49">남겨두면 생기는 문제<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
+<ul>
+<li>플레이어는 hack이 시작된 것처럼 보지만 서버는 거부하는 상태가 생김.</li>
+<li>locked 상태에서 불필요한 RPC가 반복되어 실제 실패 원인을 로그에서 찾기 어려워짐.</li>
+</ul>
+<h3 id="_50">선택한 경계<a class="headerlink" href="#_50" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>CanUseDianaActionIntent()</code>가 로컬 scan/hack/reticle/direction intent의 공통 입구.</li>
+<li>action lock 상태에서는 gameplay 요청뿐 아니라 로컬 표시 의도도 막음.</li>
+</ul>
+<h2 id="7d06d2a0-fix-weapondataasset"><code>7d06d2a0</code> fix: WeaponDataAsset 기본 탄약 범위 명확화<a class="headerlink" href="#7d06d2a0-fix-weapondataasset" title="Permanent link">&para;</a></h2>
+<h3 id="_51">변경 이유<a class="headerlink" href="#_51" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>WeaponDataAsset</code>의 기본 탄약 값은 무기 획득 직후 HUD와 gameplay 상태의 기준값임.</li>
+<li>DataAsset 값이 <code>MaxAmmo</code>보다 크면 소비자마다 clamp 여부가 달라질 수 있어 “기본 탄약이 얼마인가”가 모호해짐.</li>
+<li>asset 입력 실수는 가능한 한 데이터 제공자 경계에서 정리하는 편이 downstream 코드를 단순하게 만듦.</li>
+</ul>
+<h3 id="_52">남겨두면 생기는 문제<a class="headerlink" href="#_52" title="Permanent link">&para;</a></h3>
+<ul>
+<li>획득 UI, 실제 ammo component, reload flow가 서로 다른 ammo 값을 표시할 수 있음.</li>
+<li>소비자마다 방어 clamp를 추가해야 하며 일부 경로 누락 가능성이 커짐.</li>
+</ul>
+<h3 id="_53">선택한 경계<a class="headerlink" href="#_53" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>GetDefaultCurrentAmmo()</code>가 기본 탄약을 <code>0..MaxAmmo</code> 범위로 정규화.</li>
+<li>DataAsset accessor가 gameplay-safe 기본값을 제공.</li>
+</ul>
+<h2 id="0c70abf8-refactor-pairedanimationset"><code>0c70abf8</code> refactor: PairedAnimationSet 매칭 정책 명시<a class="headerlink" href="#0c70abf8-refactor-pairedanimationset" title="Permanent link">&para;</a></h2>
+<h3 id="_54">변경 이유<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h3>
+<ul>
+<li>paired animation lookup은 cue, strength, direction 중 어느 필드가 필수인지 읽기만으로 알기 어려웠음.</li>
+<li>direction/strength가 빠진 row에서도 fallback으로 montage를 찾을 수 있는데, 이 정책이 암묵적이면 데이터 오류와 의도적 fallback을 구분하기 힘듦.</li>
+<li>designer가 DataAsset을 수정할 때 매칭 우선순서를 알아야 안전하게 row를 추가할 수 있음.</li>
+</ul>
+<h3 id="_55">남겨두면 생기는 문제<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h3>
+<ul>
+<li>잘못된 montage가 재생되어도 “왜 이 row가 선택됐는지” 추적이 어려움.</li>
+<li>fallback 정책을 모른 채 direction row를 삭제하거나 strength row를 추가해 regression을 만들 수 있음.</li>
+</ul>
+<h3 id="_56">선택한 경계<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h3>
+<ul>
+<li>cue+strength+direction, cue+strength, cue-only 순서의 named helper로 정책을 드러냄.</li>
+<li>DataAsset lookup 코드는 fallback 규칙을 숨기지 않고 이름으로 설명.</li>
+</ul>
+<h2 id="467160f2-fix-monster-hack-damage"><code>467160f2</code> fix: Monster hack 상태와 damage 보정 경계 분리<a class="headerlink" href="#467160f2-fix-monster-hack-damage" title="Permanent link">&para;</a></h2>
+<h3 id="_57">변경 이유<a class="headerlink" href="#_57" title="Permanent link">&para;</a></h3>
+<ul>
+<li>monster가 hack되기 전에는 일반 damage가 0.1배로 줄어드는 규칙과, hack 성공으로 <code>bHacked</code>가 true가 되는 상태 전환이 섞여 있었음.</li>
+<li>hack damage가 full로 들어가야 하는 이유가 <code>bHacked</code> 선설정의 부작용이면 규칙이 코드 순서에 의존함.</li>
+<li>상태 전환과 damage 보정은 서로 다른 책임이므로 분리해야 나중에 hack 종류나 damage kind가 늘어도 안전함.</li>
+</ul>
+<h3 id="_58">남겨두면 생기는 문제<a class="headerlink" href="#_58" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>bHacked</code>를 언제 세팅하는지에 따라 같은 hack damage가 0.1배 또는 full damage로 달라질 수 있음.</li>
+<li>hack 성공 실패, damage 처리, 상태 복제가 한 함수 순서에 과도하게 묶임.</li>
+</ul>
+<h3 id="_59">선택한 경계<a class="headerlink" href="#_59" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>DamageKind::Hack</code>은 pre-hack attenuation에서 명시적으로 제외.</li>
+<li><code>ApplySuccessfulHack()</code>은 authority에서 damage 적용 후 상태를 전환.</li>
+</ul>
+<h2 id="67b98e7d-fix-enemy-damage-text"><code>67b98e7d</code> fix: Enemy damage text 표시 경로 명확화<a class="headerlink" href="#67b98e7d-fix-enemy-damage-text" title="Permanent link">&para;</a></h2>
+<h3 id="_60">변경 이유<a class="headerlink" href="#_60" title="Permanent link">&para;</a></h3>
+<ul>
+<li>damage 계산과 적용은 서버가 authoritative해야 하지만, floating damage text는 각 peer의 local visual feedback임.</li>
+<li>서버에서만 text를 만들면 listen server 화면과 client 화면의 피드백이 달라짐.</li>
+<li>damage text는 gameplay state가 아니라 cosmetic 표시이므로 서버 계산 결과를 multicast해 각 client가 로컬로 생성하는 구조가 맞음.</li>
+</ul>
+<h3 id="_61">남겨두면 생기는 문제<a class="headerlink" href="#_61" title="Permanent link">&para;</a></h3>
+<ul>
+<li>host만 damage number를 보고 client는 못 보거나, 반대로 특정 경로에서 중복 표시가 생길 수 있음.</li>
+<li>visual feedback 부재가 실제 damage 미적용 버그처럼 보임.</li>
+</ul>
+<h3 id="_62">선택한 경계<a class="headerlink" href="#_62" title="Permanent link">&para;</a></h3>
+<ul>
+<li>서버가 실제 damage와 표시 위치를 계산.</li>
+<li><code>MulticastSpawnDamageText</code>로 각 peer가 local-only text를 생성하고 dedicated server는 skip.</li>
+</ul>
+<h2 id="f1a9e356-refactor-session-blueprint"><code>f1a9e356</code> refactor: session 광고 제어 Blueprint 경계 축소<a class="headerlink" href="#f1a9e356-refactor-session-blueprint" title="Permanent link">&para;</a></h2>
+<h3 id="_63">변경 이유<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h3>
+<ul>
+<li>session advertising toggle은 lobby/session backend 상태 제어이며, UI Blueprint가 임의 호출할 성격의 API가 아님.</li>
+<li>BlueprintCallable로 열려 있으면 화면 전환이나 버튼 graph에서 network session 가시성을 직접 바꿀 수 있음.</li>
+<li>이 프로젝트는 session flow를 subsystem/GameMode 쪽에서 통제하므로 Blueprint 노출은 최소화해야 함.</li>
+</ul>
+<h3 id="_64">남겨두면 생기는 문제<a class="headerlink" href="#_64" title="Permanent link">&para;</a></h3>
+<ul>
+<li>UI 작업 중 실수로 advertising이 꺼져 join 목록에서 방이 사라질 수 있음.</li>
+<li>session lifecycle 원인을 C++과 Blueprint 양쪽에서 추적해야 함.</li>
+</ul>
+<h3 id="_65">선택한 경계<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>SetSessionAdvertisingEnabled()</code>는 내부 C++ 제어 API.</li>
+<li>Blueprint는 session backend toggle을 직접 호출하지 않음.</li>
+</ul>
+<h2 id="63f8cc1d-fix-gameplay-role"><code>63f8cc1d</code> fix: gameplay role 할당 실패 경계 분리<a class="headerlink" href="#63f8cc1d-fix-gameplay-role" title="Permanent link">&para;</a></h2>
+<h3 id="_66">변경 이유<a class="headerlink" href="#_66" title="Permanent link">&para;</a></h3>
+<ul>
+<li>room code가 있으면 모든 role assignment 실패를 defer하면 안 됨.</li>
+<li>defer가 필요한 것은 join 직후 role query timing 때문에 생기는 <code>pragmata_invalid_role</code> 같은 특정 초기화 지연뿐임.</li>
+<li>missing pawn class, invalid room, role unavailable 같은 terminal error는 즉시 실패해야 원인 파악이 가능함.</li>
+</ul>
+<h3 id="_67">남겨두면 생기는 문제<a class="headerlink" href="#_67" title="Permanent link">&para;</a></h3>
+<ul>
+<li>치명적인 설정 오류가 spawn 이후까지 숨겨져 디버깅 지점이 멀어짐.</li>
+<li>join flow가 “나중에 해결될 수도 있는 오류”와 “즉시 중단해야 하는 오류”를 구분하지 못함.</li>
+</ul>
+<h3 id="_68">선택한 경계<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ShouldDeferRoleAssignmentFailure()</code>가 defer 가능한 실패만 명시.</li>
+<li>terminal role assignment failure는 <code>InitNewPlayer</code> 단계에서 즉시 반환.</li>
+</ul>
+<h2 id="eb1d8054-refactor-ipragmatahackable"><code>eb1d8054</code> refactor: IPragmataHackable 계약 명확화<a class="headerlink" href="#eb1d8054-refactor-ipragmatahackable" title="Permanent link">&para;</a></h2>
+<h3 id="_69">변경 이유<a class="headerlink" href="#_69" title="Permanent link">&para;</a></h3>
+<ul>
+<li>interface 구현자는 hack target인데, parameter 이름이 <code>Hacker</code>이면 target actor와 요청 source의 관계가 흐려짐.</li>
+<li>hack 요청자는 controller, pawn, component 등 여러 계층일 수 있으므로 “누가 요청했는가”를 정확히 표현해야 함.</li>
+<li>interface 계약은 구현체가 읽는 첫 번째 문서이므로 이름 자체가 ownership을 설명해야 함.</li>
+</ul>
+<h3 id="_70">남겨두면 생기는 문제<a class="headerlink" href="#_70" title="Permanent link">&para;</a></h3>
+<ul>
+<li>target 내부에서 <code>Hacker</code>를 target actor처럼 해석하거나, authority/instigator 처리 위치를 잘못 잡을 수 있음.</li>
+<li>새 hackable actor 구현 시 parameter 의미를 다시 추론해야 함.</li>
+</ul>
+<h3 id="_71">선택한 경계<a class="headerlink" href="#_71" title="Permanent link">&para;</a></h3>
+<ul>
+<li>parameter 이름을 <code>HackInstigator</code>로 정리.</li>
+<li>interface 주석은 target과 request source의 책임 차이를 설명.</li>
+</ul>
+<h2 id="26216854-refactor-ipragmatascannable-result"><code>26216854</code> refactor: IPragmataScannable result 책임 명확화<a class="headerlink" href="#26216854-refactor-ipragmatascannable-result" title="Permanent link">&para;</a></h2>
+<h3 id="_72">변경 이유<a class="headerlink" href="#_72" title="Permanent link">&para;</a></h3>
+<ul>
+<li>scannable target은 scan 결과 metadata를 제공하는 대상이지, scan 성공 판정의 주체가 아님.</li>
+<li>최종 trace, 거리, cone, role, action lock 검증은 scan component가 이미 담당함.</li>
+<li><code>Scanner</code>라는 이름은 target이 validation requester를 직접 다루는 것처럼 읽혀 책임이 섞임.</li>
+</ul>
+<h3 id="_73">남겨두면 생기는 문제<a class="headerlink" href="#_73" title="Permanent link">&para;</a></h3>
+<ul>
+<li>scannable 구현체가 거리 판정이나 visibility 판정을 임의로 다시 수행할 수 있음.</li>
+<li>scan result와 scan validation의 소유자가 분산되어 결과 불일치가 생김.</li>
+</ul>
+<h3 id="_74">선택한 경계<a class="headerlink" href="#_74" title="Permanent link">&para;</a></h3>
+<ul>
+<li>parameter 이름을 <code>ScanRequester</code>로 정리.</li>
+<li>scannable은 metadata 제공, scan component는 validation/final distance 소유.</li>
+</ul>
+<h2 id="c15cccef-fix-lobby-preview"><code>c15cccef</code> fix: Lobby preview 표시 조건 분리<a class="headerlink" href="#c15cccef-fix-lobby-preview" title="Permanent link">&para;</a></h2>
+<h3 id="_75">변경 이유<a class="headerlink" href="#_75" title="Permanent link">&para;</a></h3>
+<ul>
+<li>selection marker visibility와 preview actor visibility는 서로 다른 개념임.</li>
+<li><code>UpdateSelectionMarkers()</code>에서 actor 전체 hidden state를 바꾸면 “선택 가능 표시”가 “캐릭터 preview 표시”를 지배하게 됨.</li>
+<li>lobby phase나 role selection 상태가 바뀔 때 preview mesh는 계속 보여야 하고, marker만 켜고 꺼져야 함.</li>
+</ul>
+<h3 id="_76">남겨두면 생기는 문제<a class="headerlink" href="#_76" title="Permanent link">&para;</a></h3>
+<ul>
+<li>선택 marker를 숨기는 순간 preview mesh까지 사라져 role lobby가 빈 화면처럼 보일 수 있음.</li>
+<li>phase별 표시 버그를 marker 문제로 추적하기 어려움.</li>
+</ul>
+<h3 id="_77">선택한 경계<a class="headerlink" href="#_77" title="Permanent link">&para;</a></h3>
+<ul>
+<li>selection ring/marker visibility는 marker component만 제어.</li>
+<li>preview actor/mesh visibility는 별도 preview state가 담당.</li>
+</ul>
+<h2 id="04f8709d-refactor-previewrole"><code>04f8709d</code> refactor: PreviewRole 갱신 경로 정리<a class="headerlink" href="#04f8709d-refactor-previewrole" title="Permanent link">&para;</a></h2>
+<h3 id="_78">변경 이유<a class="headerlink" href="#_78" title="Permanent link">&para;</a></h3>
+<ul>
+<li>BeginPlay, <code>ConfigureForRole()</code>, <code>OnRep_PreviewRole</code>가 각자 preview mesh, anim, marker를 갱신하면 replication 순서에 따라 결과가 달라짐.</li>
+<li>preview role은 lobby 표시의 핵심 상태이므로 적용 경로가 하나여야 함.</li>
+<li>server 설정과 client 복제 반영이 같은 함수를 통과해야 host/client 표시 차이를 줄일 수 있음.</li>
+</ul>
+<h3 id="_79">남겨두면 생기는 문제<a class="headerlink" href="#_79" title="Permanent link">&para;</a></h3>
+<ul>
+<li>서버에서는 올바른 role mesh가 보이지만 client에서는 marker나 anim class만 이전 상태로 남을 수 있음.</li>
+<li>새 preview 속성을 추가할 때 세 경로 중 하나를 빠뜨릴 가능성이 큼.</li>
+</ul>
+<h3 id="_80">선택한 경계<a class="headerlink" href="#_80" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>RefreshPreviewForRole()</code>가 preview role 적용의 단일 함수.</li>
+<li>BeginPlay, configure, OnRep 모두 같은 refresh 경로 사용.</li>
+</ul>
+<h2 id="0cbe1237-fix-puzzle"><code>0cbe1237</code> fix: puzzle 완료 처리 서버 권한 가드 추가<a class="headerlink" href="#0cbe1237-fix-puzzle" title="Permanent link">&para;</a></h2>
+<h3 id="_81">변경 이유<a class="headerlink" href="#_81" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Interact_Implementation</code>에 server guard가 있어도 <code>CompletePuzzle()</code> 자체가 열려 있으면 completion side effect의 최종 방어선이 없음.</li>
+<li>puzzle completion은 state 변경, delegate broadcast, power supply unlock 같은 authoritative side effect를 포함함.</li>
+<li>Unreal에서는 함수가 나중에 Blueprint, timer, callback에서 직접 호출될 수 있으므로 state mutation 함수 자체가 authority를 확인해야 함.</li>
+</ul>
+<h3 id="_82">남겨두면 생기는 문제<a class="headerlink" href="#_82" title="Permanent link">&para;</a></h3>
+<ul>
+<li>client-side call이 puzzle solved state나 power 상태를 로컬에서만 바꾸는 split-brain을 만들 수 있음.</li>
+<li>completion 호출 경로가 늘어날 때마다 caller guard를 다시 믿어야 함.</li>
+</ul>
+<h3 id="_83">선택한 경계<a class="headerlink" href="#_83" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>APuzzleInteractable::CompletePuzzle()</code>와 <code>AInteractionPowerSupply::CompletePuzzle()</code> 내부에 <code>HasAuthority()</code> guard.</li>
+<li>puzzle 완료 state mutation은 서버 전용.</li>
+</ul>
+<h2 id="a6b1199b-fix-puzzle-locked-door"><code>a6b1199b</code> fix: puzzle locked door 진행 상태 복제<a class="headerlink" href="#a6b1199b-fix-puzzle-locked-door" title="Permanent link">&para;</a></h2>
+<h3 id="_84">변경 이유<a class="headerlink" href="#_84" title="Permanent link">&para;</a></h3>
+<ul>
+<li>locked door의 solved count와 lock mirror가 서버에서만 갱신되면 client UI/door 표시가 현재 puzzle 상태를 알 수 없음.</li>
+<li>문이 실제로 열리는 권한은 서버에 있지만, client도 progress와 open/locked 표시를 받아야 함.</li>
+<li>puzzle progression은 gameplay state이므로 cosmetic-only 처리로 둘 수 없음.</li>
+</ul>
+<h3 id="_85">남겨두면 생기는 문제<a class="headerlink" href="#_85" title="Permanent link">&para;</a></h3>
+<ul>
+<li>client는 퍼즐을 풀어도 문이 잠긴 것처럼 보거나 progress UI가 갱신되지 않을 수 있음.</li>
+<li>interaction 가능 여부와 visual state가 서버/client에서 다르게 보임.</li>
+</ul>
+<h3 id="_86">선택한 경계<a class="headerlink" href="#_86" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>CurrentSolvedCount</code>와 lock mirror state를 replicate.</li>
+<li><code>OnRep</code>에서 Blueprint progress와 door state 표시를 갱신하고, mutation은 서버 guard 유지.</li>
+</ul>
+<h2 id="53882224-fix-map-hack-depth"><code>53882224</code> fix: Map hack depth 범위 고정<a class="headerlink" href="#53882224-fix-map-hack-depth" title="Permanent link">&para;</a></h2>
+<h3 id="_87">변경 이유<a class="headerlink" href="#_87" title="Permanent link">&para;</a></h3>
+<ul>
+<li>map hack UI/viewmodel은 3-slot depth를 전제로 구성되어 있음.</li>
+<li>metadata나 runtime sequence가 3을 넘으면 gameplay는 더 긴 sequence를 요구하지만 UI가 이를 표시하지 못함.</li>
+<li>DataAsset과 runtime generator 양쪽에서 같은 범위를 보장해야 designer 입력과 procedural 생성이 같은 계약을 따름.</li>
+</ul>
+<h3 id="_88">남겨두면 생기는 문제<a class="headerlink" href="#_88" title="Permanent link">&para;</a></h3>
+<ul>
+<li>보이지 않는 4번째 이상의 hack step 때문에 플레이어가 puzzle을 해결할 수 없는 상태가 생김.</li>
+<li>UI 쪽에서 임시 clamp를 넣어도 gameplay sequence와 표시 sequence가 달라질 수 있음.</li>
+</ul>
+<h3 id="_89">선택한 경계<a class="headerlink" href="#_89" title="Permanent link">&para;</a></h3>
+<ul>
+<li>map hack depth는 <code>1..3</code>.</li>
+<li>metadata와 <code>GenerateSequence()</code> 모두 같은 범위로 clamp.</li>
+</ul>
+<h2 id="5c40324a-refactor-hack-puzzle"><code>5c40324a</code> refactor: Hack puzzle 시작 결과 명시<a class="headerlink" href="#5c40324a-refactor-hack-puzzle" title="Permanent link">&para;</a></h2>
+<h3 id="_90">변경 이유<a class="headerlink" href="#_90" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>StartHack()</code> 성공 여부를 상태 변화 후 추론하면 bind/start 실패의 원인을 caller가 알기 어렵음.</li>
+<li>enemy hack과 map hack 모두 “시작 요청이 받아들여졌는지”를 bool로 돌려주면 caller가 후속 bind/UI 처리 여부를 명확히 결정할 수 있음.</li>
+<li>replicated state는 관찰 결과이지 즉시 함수 호출의 성공 반환값을 대신하기 어려움.</li>
+</ul>
+<h3 id="_91">남겨두면 생기는 문제<a class="headerlink" href="#_91" title="Permanent link">&para;</a></h3>
+<ul>
+<li>실패한 start 이후에도 UI나 delegate bind가 진행될 수 있음.</li>
+<li>StartHack 내부 조건이 바뀌면 caller의 상태 추론 로직이 같이 깨질 수 있음.</li>
+</ul>
+<h3 id="_92">선택한 경계<a class="headerlink" href="#_92" title="Permanent link">&para;</a></h3>
+<ul>
+<li>enemy/map <code>StartHack()</code>는 성공 여부를 <code>bool</code>로 반환.</li>
+<li>caller는 반환값을 기준으로 후속 bind/start flow를 진행.</li>
+</ul>
+<h2 id="5dac5fc8-refactor-viewmodel-gameplay-api"><code>5dac5fc8</code> refactor: 해킹 ViewModel gameplay 변경 API 정리<a class="headerlink" href="#5dac5fc8-refactor-viewmodel-gameplay-api" title="Permanent link">&para;</a></h2>
+<h3 id="_93">변경 이유<a class="headerlink" href="#_93" title="Permanent link">&para;</a></h3>
+<ul>
+<li>ViewModel은 UI 표현과 binding 상태를 담당해야 하며, gameplay start/cancel을 직접 소유하면 presentation과 server gameplay가 섞임.</li>
+<li>hack 시작/취소는 Diana component와 server RPC 경계에 있어야 권한과 실패 처리가 명확함.</li>
+<li>failure animation 완료 callback이 gameplay cancel을 부르면, UI 애니메이션 종료가 gameplay state를 바꾸는 역방향 의존이 생김.</li>
+</ul>
+<h3 id="_94">남겨두면 생기는 문제<a class="headerlink" href="#_94" title="Permanent link">&para;</a></h3>
+<ul>
+<li>UI 상태 전환만 의도했는데 실제 hack gameplay가 취소될 수 있음.</li>
+<li>server authoritative hack flow를 ViewModel call path까지 추적해야 해 유지보수가 어려움.</li>
+</ul>
+<h3 id="_95">선택한 경계<a class="headerlink" href="#_95" title="Permanent link">&para;</a></h3>
+<ul>
+<li>legacy ViewModel Start/Stop은 deprecated wrapper로 축소.</li>
+<li>정정: 기존 Blueprint asset이 legacy Start/Stop wrapper를 아직 참조하므로 wrapper의 start/cancel 동작은 호환용으로 유지.</li>
+<li>새 HUD 경로는 ViewModel <code>BindToComponent()</code>/<code>UnbindFromComponent()</code>를 직접 쓰고, gameplay 시작/취소는 Diana component/server RPC 경로를 우선.</li>
+</ul>
+<h2 id="bc1e58e5-refactor-host-join-api"><code>bc1e58e5</code> refactor: 로비 host join API 이름 정리<a class="headerlink" href="#bc1e58e5-refactor-host-join-api" title="Permanent link">&para;</a></h2>
+<h3 id="_96">변경 이유<a class="headerlink" href="#_96" title="Permanent link">&para;</a></h3>
+<ul>
+<li>기존 <code>HostAsHugh</code>, <code>JoinAsDiana</code> 이름은 host가 Hugh, joiner가 Diana라는 오래된 가정을 API에 박아 둠.</li>
+<li>현재 role은 lobby preselect와 PlayerState role flow가 결정하므로 host/join 동작과 role 선택은 분리되어야 함.</li>
+<li>이름이 틀리면 caller가 실제 동작보다 과거 정책을 믿고 UI나 network flow를 잘못 연결할 수 있음.</li>
+</ul>
+<h3 id="_97">남겨두면 생기는 문제<a class="headerlink" href="#_97" title="Permanent link">&para;</a></h3>
+<ul>
+<li>host가 Diana를 고르거나 joiner가 Hugh를 고르는 흐름을 추가할 때 API 이름과 동작이 정면으로 충돌함.</li>
+<li>role selection bug를 session host/join 코드에서 찾는 잘못된 디버깅 경로를 만들 수 있음.</li>
+</ul>
+<h3 id="_98">선택한 경계<a class="headerlink" href="#_98" title="Permanent link">&para;</a></h3>
+<ul>
+<li>handler는 <code>HostLobbySession</code>, <code>JoinLobbySession</code>을 호출.</li>
+<li><code>HostAsHugh</code>, <code>JoinAsDiana</code>는 obsolete role assumption을 담은 deprecated wrapper로만 유지.</li>
+</ul>
+<h2 id="_99">요약<a class="headerlink" href="#_99" title="Permanent link">&para;</a></h2>
+<ul>
+<li>구조 모호성 변경의 공통 목적: “어느 계층이 이 상태를 소유하는가”를 코드 이름, gate 위치, replication 경로, Blueprint 노출 범위로 명확화.</li>
+<li>gameplay 권한: 서버 mutation 함수 내부에서 최종 방어.</li>
+<li>표시 경로: local cosmetic은 multicast 결과로 각 peer가 생성, replicated gameplay state는 <code>OnRep</code>로 표시 갱신.</li>
+<li>UI/ViewModel 경계: presentation은 bind/display, gameplay start/cancel은 component/server RPC.</li>
+<li>role/input/session 경계: role은 PlayerState/lobby role flow, mapping은 controller input flow, pawn은 action handler.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </article>
+            </div>
+
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+
+      </main>
+
+        <footer class="md-footer">
+
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+
+
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+
+</div>
+
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+
+
+
+
+
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+
+
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+  </body>
+</html>

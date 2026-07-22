@@ -1,0 +1,16 @@
+* text=auto eol=lf
+
+*.uasset binary
+*.umap binary
+*.ubulk binary
+*.uexp binary
+*.locres binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.exr binary
+*.wav binary
+*.mp3 binary
+*.fbx binary
+*.blend binary

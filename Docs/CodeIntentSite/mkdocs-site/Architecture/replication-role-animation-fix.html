@@ -1,0 +1,4243 @@
+﻿
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+        <link rel="prev" href="structural-ambiguity-rationale.html">
+
+
+        <link rel="next" href="../Operations/index.html">
+
+
+
+
+
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+
+
+
+        <title>Replication 역할 애니메이션 - Pragmata_2P Code Intent</title>
+
+
+
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+
+
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+
+
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+
+
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+
+
+        <a href="#replication-role-animation-fix" class="md-skip">
+          콘텐츠로 이동
+        </a>
+
+    </div>
+    <div data-md-component="announce">
+
+    </div>
+
+
+
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../index.html" title="Pragmata_2P Code Intent" class="md-header__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pragmata_2P Code Intent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+
+              Replication 역할 애니메이션
+
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+        <label class="md-header__button md-icon" for="__search">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </nav>
+
+</header>
+
+    <div class="md-container" data-md-component="container">
+
+
+
+
+
+
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+
+
+
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Pragmata_2P Code Intent" class="md-nav__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pragmata_2P Code Intent
+  </label>
+
+  <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    홈
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Plans/PLAN-code-intent-visualization.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    실행 계획
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../code-intent-style.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 작성 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+
+
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    의도 카드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+
+
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    피해
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/DealDamageToActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    DealDamageToActor 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/FPragmataDamageSpec.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    FPragmataDamageSpec 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/WeaponBase-DealDamageToHitActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WeaponBase 피해 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/PragmataHealthComponent-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HealthComponent 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/HughCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Damage/PlayableCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    PlayableCharacter 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+
+
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    해킹
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    해킹
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-RequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-RequestHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 방향 입력 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-ServerRequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 적 해킹 방향
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 상호작용 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 방향 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+
+
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HUD
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    HUD
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 퍼즐 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    gameplay HUD 보장
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+
+
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    이동
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    이동
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Movement/WaistArmComponent-SetArmState.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 상태 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 부착
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+
+
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    게임 흐름
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    게임 흐름
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Intent/GameFlow/PragmataGameFlowConfig.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GameFlow 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+
+
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    시스템
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Damage/damage-flow.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해 흐름
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Hacking/enemy-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Hacking/map-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Movement/hugh-movement-component-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Server/server.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Systems/Server/server-puzzle.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버 퍼즐
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+
+
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    구조
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="architecture.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 문서
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="structural-ambiguity-rationale.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="replication-role-animation-fix.html" class="md-nav__link md-nav__link--active">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+      </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        목적
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        최종 결정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        재현 증상
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="재현 증상">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#host-diana-client-hugh" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Diana / Client Hugh
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#host-hugh-client-diana" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Hugh / Client Diana
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#match-lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Match Lobby
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#host-hugh-client-diana-host-diana-client-hugh-half-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Hugh / Client Diana 정상, Host Diana / Client Hugh half-speed
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        원인 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="원인 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#role-spawn" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role spawn
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh replication 계약
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Hugh replication 계약">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        입력 intent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#animation-display-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Animation display state
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#half-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Half-speed 원인과 수정
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#aim-hover-weapon" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Aim / Hover / Weapon
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Aim / Hover / Weapon">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#aim" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Aim
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#hover" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hover
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#weapon-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Weapon attach
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#fire" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Fire
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lobby-selection-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby selection prediction
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Lobby selection prediction">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#role-preselect" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role preselect
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#activecontrolrole" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        ActiveControlRole
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-handoff-test" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role handoff test
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        데이터 흐름
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        적용 파일
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="적용 파일">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#gameplay-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Gameplay role
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#hugh-movement-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh movement / animation
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#weapon-waist-arm" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Weapon / waist-arm
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#lobby-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby prediction
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        검증 결과
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        재발 방지 규칙
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남은 주의점
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        빠른 디버그 포인트
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="빠른 디버그 포인트">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#host-diana-playerstart" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Diana가 PlayerStart에 고정
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#client-hugh-aim-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Client 화면에서 Hugh aim pose 누락
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#client-hugh-hover-running-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Client 화면에서 Hugh hover가 running pose
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby 선택 지연
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+    </ul>
+
+</nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+
+
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    운영
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/blueprint-tasks.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Blueprint 작업
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/packaging-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Packaging
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unreal-build-warnings.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Build 경고
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/history-rewrite-team-runbook.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    History rewrite 절차
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unstaged-assets.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Git 제외 asset
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/unreelmcp-anomalies.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    UnreelMCP 이상 기록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Operations/docs-inventory.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Docs 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+
+
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    가이드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/code-intent-usage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 사용법
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/unreal-coding-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Unreal coding 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/commit-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Commit 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Guides/branching-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Branch 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+
+
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    변경 기록
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    변경 기록
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-161329-receive-damage-only-hitreact-refactor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage refactor
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-181632-hugh-anim-state-cleanup.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh animation 정리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Create/20260703-190759-gripgun-authority-boundary.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GripGun authority 경계
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+
+
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    다이어그램
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Diagrams/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../KNOW_HOW.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        목적
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        최종 결정
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        재현 증상
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="재현 증상">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#host-diana-client-hugh" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Diana / Client Hugh
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#host-hugh-client-diana" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Hugh / Client Diana
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#match-lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Match Lobby
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#host-hugh-client-diana-host-diana-client-hugh-half-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Hugh / Client Diana 정상, Host Diana / Client Hugh half-speed
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        원인 정리
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="원인 정리">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#role-spawn" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role spawn
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh replication 계약
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Hugh replication 계약">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#intent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        입력 intent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#animation-display-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Animation display state
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#half-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Half-speed 원인과 수정
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#aim-hover-weapon" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Aim / Hover / Weapon
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Aim / Hover / Weapon">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#aim" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Aim
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#hover" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hover
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#weapon-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Weapon attach
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#fire" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Fire
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lobby-selection-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby selection prediction
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="Lobby selection prediction">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#role-preselect" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role preselect
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#activecontrolrole" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        ActiveControlRole
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-handoff-test" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role handoff test
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        데이터 흐름
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        적용 파일
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="적용 파일">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#gameplay-role" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Gameplay role
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#hugh-movement-animation" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh movement / animation
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#weapon-waist-arm" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Weapon / waist-arm
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#lobby-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby prediction
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        검증 결과
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        재발 방지 규칙
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        남은 주의점
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        빠른 디버그 포인트
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="빠른 디버그 포인트">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#host-diana-playerstart" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Host Diana가 PlayerStart에 고정
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#client-hugh-aim-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Client 화면에서 Hugh aim pose 누락
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#client-hugh-hover-running-pose" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Client 화면에서 Hugh hover가 running pose
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#lobby" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby 선택 지연
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+    </ul>
+
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="md-content" data-md-component="content">
+
+              <article class="md-content__inner md-typeset">
+
+
+
+
+
+<h1 id="replication-role-animation-fix">Replication Role Animation Fix<a class="headerlink" href="#replication-role-animation-fix" title="Permanent link">&para;</a></h1>
+<h2 id="_1">목적<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>listen server 1명 + client 1명 PIE에서 Hugh/Diana 역할 선택 순서에 따라 spawn, possession, animation, lobby 선택 표시가 달라지던 문제 정리.</p>
+<p>이 문서는 이번 branch에서 적용한 replication 수정의 기준 문서다.
+코드 위치, 증상, 원인, 수정 계약, 검증 방법을 한 번에 찾기 위한 기록이다.</p>
+<h2 id="_2">최종 결정<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>gameplay spawn은 최종 <code>AssignedRole</code>만 기준으로 판단</li>
+<li>lobby 선택값, handoff, URL fallback은 <code>APragmataGameMode::EnsureAssignedRoleForController()</code> 내부에서만 소비</li>
+<li>Hugh 입력 intent는 <code>UPragmataHughMovementComponent</code> custom movement prediction으로 서버에 전달</li>
+<li>Hugh animation display state는 <code>FHughReplicatedAnimState</code>로 원격 <code>simulated proxy</code>에 전달</li>
+<li>weapon actor와 attach mode는 서버 확정 상태로 복제</li>
+<li>lobby character selection은 서버 확정값을 유지하되 owning client에만 예측 표시</li>
+<li>Host/Join 전에 local character preselect를 먼저 수행</li>
+<li><code>AssignedRole</code>과 <code>ActiveControlRole</code>을 분리해 향후 일시 조작권 교환 준비</li>
+<li>기존 local-only bool을 AnimBP 표시 기준으로 직접 쓰지 않고 predicted/replicated 상태를 경유</li>
+</ul>
+<h2 id="_3">재현 증상<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="host-diana-client-hugh">Host Diana / Client Hugh<a class="headerlink" href="#host-diana-client-hugh" title="Permanent link">&para;</a></h3>
+<ul>
+<li>host가 Diana 선택 시 host가 PlayerStart 위치에 고정</li>
+<li>host camera 회전과 이동 입력 불가</li>
+<li>joined Hugh 이동 시 walk/run animation이 host 화면에서 깨짐</li>
+</ul>
+<p>관찰 의미:</p>
+<ul>
+<li>Diana role이 gameplay pawn possession까지 안정적으로 이어지지 않음</li>
+<li>Hugh movement intent가 서버 또는 listen-server view에서 animation state로 재구성되지 않음</li>
+</ul>
+<h3 id="host-hugh-client-diana">Host Hugh / Client Diana<a class="headerlink" href="#host-hugh-client-diana" title="Permanent link">&para;</a></h3>
+<ul>
+<li>client Diana 화면에서 host Hugh의 지상 이동 animation은 비교적 정상</li>
+<li>Hugh aim 중이어야 할 때 client 화면에서는 손이 내려감</li>
+<li>Hugh hover 중이어야 할 때 client 화면에서는 공중에서 running pose 재생</li>
+</ul>
+<p>관찰 의미:</p>
+<ul>
+<li>위치 이동 replication은 동작</li>
+<li>aim/hover/run 같은 animation-driving state는 원격 클라이언트에 충분히 복제되지 않음</li>
+<li>weapon attach와 waist-arm pose가 local owner 쪽 상태에 묶임</li>
+</ul>
+<h3 id="match-lobby">Match Lobby<a class="headerlink" href="#match-lobby" title="Permanent link">&para;</a></h3>
+<ul>
+<li>host는 A/D 선택이 즉시 보임</li>
+<li>joined client는 A/D 선택 표시가 약 1초 늦게 보임</li>
+</ul>
+<p>관찰 의미:</p>
+<ul>
+<li>lobby 선택은 서버 확정값만 UI에 표시</li>
+<li>owning client local prediction 표시가 없음</li>
+</ul>
+<h3 id="host-hugh-client-diana-host-diana-client-hugh-half-speed">Host Hugh / Client Diana 정상, Host Diana / Client Hugh half-speed<a class="headerlink" href="#host-hugh-client-diana-host-diana-client-hugh-half-speed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Host Hugh / Client Diana 조합은 양쪽 animation speed 정상</li>
+<li>Host Diana / Client Hugh 조합은 client Hugh 화면 정상</li>
+<li>같은 조합의 listen server Diana 화면에서는 Hugh locomotion animation이 half-speed처럼 보임</li>
+</ul>
+<p>관찰 의미:</p>
+<ul>
+<li>Hugh owner 쪽 prediction은 정상</li>
+<li>listen server가 보는 remote Hugh simulated proxy 표시값이 실제 proxy velocity/acceleration에 묶임</li>
+<li>AnimBP가 network smoothing/authority frame 차이로 낮게 보이는 속도를 읽으면 blend가 느린 pose를 선택</li>
+</ul>
+<h2 id="_4">원인 정리<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="role-spawn">Role spawn<a class="headerlink" href="#role-spawn" title="Permanent link">&para;</a></h3>
+<p>기존 문제:</p>
+<ul>
+<li>gameplay spawn 경로가 <code>AssignedRole</code>, <code>LobbySelectedRole</code>, handoff, URL option을 여러 위치에서 직접 읽을 수 있었음</li>
+<li><code>GetDefaultPawnClassForController()</code>가 최종 role 확정 전 상태를 볼 수 있었음</li>
+<li>role resolution 실패가 Diana pawn possession 실패 또는 Hugh fallback처럼 보일 수 있었음</li>
+<li>lobby에서 host가 Diana를 고르는 역순 조합에서 PlayerId, lobby index, ordered handoff 복구가 모두 필요</li>
+</ul>
+<p>수정 원칙:</p>
+<ul>
+<li>role source 소비는 <code>EnsureAssignedRoleForController()</code>로 집중</li>
+<li>spawn/possess 이후 조회는 <code>AssignedRole</code>만 사용</li>
+<li>spawn 직전 role, pawn class, player id, lobby index를 로그로 확인 가능하게 유지</li>
+<li><code>RegisterSpawnedPawnForRole()</code>에서 pawn pointer와 connected flag를 <code>GameState</code>에 같이 반영</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataGameMode.cpp</code></li>
+<li><code>ResolveGameplayRoleForController()</code></li>
+<li><code>ResolveLobbyHandoffRoleForController()</code></li>
+<li><code>EnsureAssignedRoleForController()</code></li>
+<li><code>GetAssignedRoleForController()</code></li>
+<li><code>GetDefaultPawnClassForController_Implementation()</code></li>
+<li><code>RegisterSpawnedPawnForRole()</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataPlayerState.cpp</code></li>
+<li><code>CopyProperties()</code></li>
+<li><code>OverrideWith()</code></li>
+<li><code>SetAssignedRole()</code></li>
+<li><code>OnRep_LobbyState()</code></li>
+</ul>
+<h2 id="hugh-replication">Hugh replication 계약<a class="headerlink" href="#hugh-replication" title="Permanent link">&para;</a></h2>
+<h3 id="intent">입력 intent<a class="headerlink" href="#intent" title="Permanent link">&para;</a></h3>
+<p>Hugh의 aim/run/hover/jump hold는 단순 animation bool이 아니다.
+movement speed, movement mode, orientation, weapon attach, AnimBP state를 같이 바꾸는 gameplay state다.</p>
+<p>따라서 일반 replicated bool만으로 처리하지 않고 movement prediction 경로를 사용한다.</p>
+<p>새 타입:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.cpp</code></li>
+</ul>
+<p>역할:</p>
+<ul>
+<li><code>SetWantsToAim()</code></li>
+<li><code>SetWantsToRun()</code></li>
+<li><code>SetWantsToHover()</code></li>
+<li><code>SetJumpInputHeld()</code></li>
+<li><code>FHughSavedMove::SetInitialPosition()</code></li>
+<li><code>FHughSavedMove::PrepMoveFor()</code></li>
+<li><code>FHughSavedMove::GetCompressedFlags()</code></li>
+<li><code>FHughSavedMove::CanCombineWith()</code></li>
+<li><code>UPragmataHughMovementComponent::UpdateFromCompressedFlags()</code></li>
+</ul>
+<p>custom flag 의미:</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FLAG_Custom_0</code></td>
+<td>aim intent</td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_1</code></td>
+<td>run intent</td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_2</code></td>
+<td>hover intent</td>
+</tr>
+<tr>
+<td><code>FLAG_Custom_3</code></td>
+<td>jump hold intent</td>
+</tr>
+</tbody>
+</table>
+<p>이 구조의 목적:</p>
+<ul>
+<li>owning client는 입력 즉시 예측 표시</li>
+<li>server는 movement update에서 같은 intent 복원</li>
+<li>replay/prediction 시 aim/run/hover 입력 전환 frame 보존</li>
+<li>서로 다른 intent의 saved move는 합치지 않음</li>
+<li><code>WantsTo*</code>는 입력 intent 전송용이고 animation/display 상태 원본이 아님</li>
+</ul>
+<h3 id="animation-display-state">Animation display state<a class="headerlink" href="#animation-display-state" title="Permanent link">&para;</a></h3>
+<p>새 타입:</p>
+<ul>
+<li><code>FHughReplicatedAnimState</code></li>
+<li>위치: <code>Source/Pragmata_2P/Data/PragmataTypes.h</code></li>
+</ul>
+<p>복제 필드:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>목적</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ActionState</code></td>
+<td>locomotion/combat/death 같은 상체 상태 표시</td>
+</tr>
+<tr>
+<td><code>MovementState</code></td>
+<td>idle/walk/jog/run blend 기준</td>
+</tr>
+<tr>
+<td><code>bIsAiming</code></td>
+<td>aim pose, orientation, weapon hand attach</td>
+</tr>
+<tr>
+<td><code>bIsRunning</code></td>
+<td>sprint animation과 MaxWalkSpeed intent</td>
+</tr>
+<tr>
+<td><code>bIsJumpInput</code></td>
+<td>jump hold와 hover 판정 공유</td>
+</tr>
+<tr>
+<td><code>bIsHovering</code></td>
+<td>공중 running pose 대신 hover loop 표시</td>
+</tr>
+</tbody>
+</table>
+<p>소유 위치:</p>
+<ul>
+<li><code>AHughCharacter::HughAnimState</code></li>
+<li><code>ReplicatedUsing=OnRep_HughAnimState</code></li>
+<li><code>DOREPLIFETIME_CONDITION(..., COND_SkipOwner)</code>로 owner local prediction 보호</li>
+</ul>
+<p>갱신 경로:</p>
+<pre><code class="language-text">local input
+  -&gt; SetAimingState / SetRunningState / SetJumpInputState / SetHoveringState
+  -&gt; HughAnimState.bIs*
+  -&gt; UPragmataHughMovementComponent intent
+  -&gt; RefreshReplicatedAnimState
+  -&gt; server movement update
+  -&gt; replicated HughAnimState
+  -&gt; OnRep_HughAnimState
+  -&gt; ApplyReplicatedAnimState
+</code></pre>
+<p>원칙:</p>
+<ul>
+<li>owner와 server는 입력과 movement를 계산</li>
+<li>owner는 <code>HughAnimState</code>를 local prediction 상태로 직접 갱신하고 서버 snapshot을 받지 않음</li>
+<li>server는 movement compressed flag에서 intent를 복원해 자기 <code>HughAnimState</code>를 확정</li>
+<li>remote simulated proxy는 <code>HughAnimState</code> 복제값을 적용</li>
+<li>AnimBP의 aim/run/hover getter는 local-only bool이 아니라 <code>HughAnimState</code>를 읽음</li>
+<li>AnimBP locomotion <code>MovementSpeed</code>/<code>Acceleration</code>은 실제 <code>CharacterMovement</code> velocity/acceleration을 읽음</li>
+<li><code>AHughCharacter</code>에 raw <code>IsAiming/IsRunning/IsJumpInput/IsHovering</code> 캐시를 두지 않음</li>
+<li>이유: 입력 intent 기반 speed를 쓰면 키를 뗀 순간 AnimBP는 idle인데 capsule은 braking으로 계속 이동해 발 미끄러짐 발생</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Characters/HughCharacter.cpp</code></li>
+<li><code>SyncMovementIntentFromMovementComponent()</code></li>
+<li><code>UpdateMovementState()</code></li>
+<li><code>RefreshReplicatedAnimState()</code></li>
+<li><code>ApplyReplicatedAnimState()</code></li>
+<li><code>OnRep_HughAnimState()</code></li>
+<li><code>Source/Pragmata_2P/Animation/HughAnimInstance.cpp</code></li>
+<li><code>NativeUpdateAnimation()</code></li>
+</ul>
+<h3 id="half-speed">Half-speed 원인과 수정<a class="headerlink" href="#half-speed" title="Permanent link">&para;</a></h3>
+<p>원인:</p>
+<ul>
+<li>Host Diana / Client Hugh에서는 Hugh가 listen server 입장에서 remote client pawn</li>
+<li>AnimBP가 <code>GetVelocity().Size2D()</code>와 <code>GetCurrentAcceleration().Length()</code>를 직접 읽음</li>
+<li>remote proxy의 velocity/acceleration은 owner prediction 값과 frame/tick/smoothing 기준이 다름</li>
+<li>BlendSpace가 낮은 속도 또는 약한 acceleration을 읽으면 jog/run sample 사이를 느리게 선택</li>
+<li>결과적으로 gameplay movement는 맞지만 listen server 화면의 Hugh animation만 half-speed처럼 보임</li>
+</ul>
+<p>수정:</p>
+<ul>
+<li><code>FHughReplicatedAnimState</code>는 aim/run/jump/hover 같은 상태 원본으로 유지</li>
+<li><code>UHughAnimInstance::NativeUpdateAnimation()</code>의 <code>MovementSpeed</code>는 <code>GetMovementSpeed()</code> 사용</li>
+<li><code>Acceleration</code>은 <code>GetCharacterMovement()-&gt;GetCurrentAcceleration().Length()</code> 사용</li>
+<li>display speed 기반 AnimBP 입력은 stop/braking feel을 깨뜨리므로 사용하지 않음</li>
+</ul>
+<p>검증 기대값:</p>
+<ul>
+<li>Host Hugh / Client Diana: 기존처럼 정상 속도</li>
+<li>Host Diana / Client Hugh: remote 표시 속도는 실제 replicated movement 기준으로 확인</li>
+<li>Hugh hover: <code>bIsHovering</code> 우선, 공중 running pose 방지</li>
+<li>Hugh stop: 입력을 놓아도 capsule braking velocity가 남은 동안 AnimBP speed도 자연스럽게 감소</li>
+</ul>
+<h2 id="aim-hover-weapon">Aim / Hover / Weapon<a class="headerlink" href="#aim-hover-weapon" title="Permanent link">&para;</a></h2>
+<h3 id="aim">Aim<a class="headerlink" href="#aim" title="Permanent link">&para;</a></h3>
+<p>문제:</p>
+<ul>
+<li>host Hugh 화면에서는 aim pose가 보임</li>
+<li>client Diana 화면에서는 Hugh가 손을 내린 상태</li>
+</ul>
+<p>수정:</p>
+<ul>
+<li><code>SetAimingState()</code>가 aim 관련 상태를 한 곳에서 변경</li>
+<li>aim 시작 시 run intent 해제</li>
+<li><code>bOrientRotationToMovement</code>를 aim 상태에 맞춰 토글</li>
+<li>waist-arm state와 weapon attach mode를 함께 변경</li>
+<li><code>HughAnimState.bIsAiming</code>으로 원격 proxy도 aim pose 적용</li>
+</ul>
+<p>보존한 기존 의도:</p>
+<ul>
+<li>aim 중에는 이동 방향이 아니라 camera 방향으로 몸을 유지</li>
+<li>A/D 이동 시 몸은 조준 방향을 유지하고 좌우 이동</li>
+<li>aim 종료 시 이동 방향 회전으로 복귀</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>AHughCharacter::SetAimingState()</code></li>
+<li><code>AHughCharacter::ApplyReplicatedAnimState()</code></li>
+</ul>
+<h3 id="hover">Hover<a class="headerlink" href="#hover" title="Permanent link">&para;</a></h3>
+<p>문제:</p>
+<ul>
+<li>host Hugh는 hover처럼 떠 있음</li>
+<li>client Diana 화면에서는 Hugh가 공중에서 running animation</li>
+</ul>
+<p>수정:</p>
+<ul>
+<li><code>SetHoveringState()</code>에서 hover 진입/이탈을 통합</li>
+<li>hover 시작 시 현재 Z를 <code>HoverTargetZ</code>로 저장</li>
+<li>movement mode를 <code>MOVE_Flying</code>으로 변경</li>
+<li>Z velocity를 <code>0</code>으로 초기화</li>
+<li>hover 종료 시 <code>MOVE_Falling</code>으로 복귀</li>
+<li><code>HughAnimState.bIsHovering</code>으로 원격 proxy도 hover loop 선택</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>AHughCharacter::SetHoveringState()</code></li>
+<li><code>AHughCharacter::Landed()</code></li>
+<li><code>FHughReplicatedAnimState::bIsHovering</code></li>
+</ul>
+<h3 id="weapon-attach">Weapon attach<a class="headerlink" href="#weapon-attach" title="Permanent link">&para;</a></h3>
+<p>문제:</p>
+<ul>
+<li>aim 상태에서 Hugh 손에 weapon이 붙어야 함</li>
+<li>non-owner 화면에서 weapon/waist-arm attach가 local 상태와 다를 수 있음</li>
+</ul>
+<p>수정:</p>
+<ul>
+<li><code>CurrentWeapon</code>은 서버에서만 spawn</li>
+<li><code>AWeaponBase</code>는 <code>bReplicates=true</code>, movement replication enabled</li>
+<li><code>EPragmataWeaponAttachMode</code> 추가</li>
+<li><code>WeaponAttachMode</code>는 <code>ReplicatedUsing=OnRep_WeaponAttachMode</code></li>
+<li><code>CurrentWeapon</code>은 <code>ReplicatedUsing=OnRep_CurrentWeapon</code></li>
+<li>attach logic은 <code>AttachWeaponToCurrentMode()</code>로 중앙화</li>
+</ul>
+<p>attach mode:</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Attach target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WaistArm</code></td>
+<td><code>WaistArmComponent-&gt;GetWaistArmMesh()</code>의 <code>WeaponArmSocket</code></td>
+</tr>
+<tr>
+<td><code>Hand</code></td>
+<td>Hugh mesh의 <code>WeaponSocket</code></td>
+</tr>
+</tbody>
+</table>
+<p>핵심 코드:</p>
+<ul>
+<li><code>AHughCharacter::PostInitializeComponents()</code></li>
+<li><code>AHughCharacter::SetWeaponAttachMode()</code></li>
+<li><code>AHughCharacter::AttachWeaponToCurrentMode()</code></li>
+<li><code>AHughCharacter::OnRep_CurrentWeapon()</code></li>
+<li><code>AHughCharacter::OnRep_WeaponAttachMode()</code></li>
+<li><code>Source/Pragmata_2P/Weapon/WeaponBase.cpp</code></li>
+</ul>
+<h3 id="fire">Fire<a class="headerlink" href="#fire" title="Permanent link">&para;</a></h3>
+<p>수정:</p>
+<ul>
+<li>local owner는 montage를 즉시 재생</li>
+<li>server RPC가 combat state와 weapon 존재를 검증</li>
+<li>server가 <code>CurrentWeapon-&gt;PullTrigger()</code> 실행</li>
+<li>multicast가 non-owner에게 fire montage cosmetic 재생</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>AHughCharacter::OnStartAttack()</code></li>
+<li><code>AHughCharacter::Server_RequestFire_Implementation()</code></li>
+<li><code>AHughCharacter::Multicast_PlayFireMontage_Implementation()</code></li>
+</ul>
+<h2 id="lobby-selection-prediction">Lobby selection prediction<a class="headerlink" href="#lobby-selection-prediction" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>joined client가 A/D를 누른 뒤 선택 ring/status text가 서버 round-trip 후에만 변경</li>
+<li>host listen server는 local server라 지연이 거의 없음</li>
+</ul>
+<p>수정:</p>
+<ul>
+<li><code>APragmataLobbyPlayerController</code>가 owning client 전용 예측 선택값 보유</li>
+<li>서버 RPC는 그대로 유지</li>
+<li>UI/preview는 local player 자신의 선택만 예측값 사용</li>
+<li>다른 player 선택은 항상 <code>PlayerState</code> 서버 확정값 사용</li>
+<li><code>APragmataPlayerState::OnLobbyStateChanged</code> delegate가 서버 확정 <code>OnRep</code> 도착 시 예측값 정리</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyPlayerController.h</code></li>
+<li><code>GetDisplayedLobbySelectedRole()</code></li>
+<li><code>bHasPredictedLobbySelection</code></li>
+<li><code>PredictedLobbySelectedRole</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyPlayerController.cpp</code></li>
+<li><code>RequestLobbySelectionStep()</code></li>
+<li><code>BindLobbyPlayerState()</code></li>
+<li><code>HandleLobbyStateChanged()</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataPlayerState.h</code></li>
+<li><code>OnLobbyStateChanged</code></li>
+<li><code>Source/Pragmata_2P/Lobby/LobbyCharacterPreviewActor.cpp</code></li>
+<li><code>UpdateSelectionMarkers()</code></li>
+<li><code>Source/Pragmata_2P/UI/PragmataRoleLobbyWidget.cpp</code></li>
+<li><code>BuildSelectionStatusText()</code></li>
+</ul>
+<h3 id="role-preselect">Role preselect<a class="headerlink" href="#role-preselect" title="Permanent link">&para;</a></h3>
+<p>변경:</p>
+<ul>
+<li>title 이후 local preselect를 먼저 표시</li>
+<li>Host/Join 버튼은 local selected role이 있을 때만 표시</li>
+<li>Host/Join은 network action이며 gameplay role 뜻이 아님</li>
+<li>session travel URL은 <code>PreferredRole</code>을 lobby 초기 선택값으로만 전달</li>
+<li>서버 lobby는 <code>LobbySelectedRole</code>을 확정하고 ready/start에서 충돌 검증</li>
+<li>gameplay map은 <code>AssignedRole</code> handoff만 사용</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataSessionUtils.cpp</code></li>
+<li><code>BuildLobbyListenTravelURL()</code></li>
+<li><code>BuildLobbyJoinTravelURL()</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataMultiplayerSessionSubsystem.cpp</code></li>
+<li><code>HostLobbySessionWithPreferredRole()</code></li>
+<li><code>JoinLobbySessionByCodeWithPreferredRole()</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyGameMode.cpp</code></li>
+<li><code>InitNewPlayer()</code></li>
+<li><code>ParsePreferredRoleOption()</code></li>
+<li><code>AssignLobbyDefaults()</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyPlayerController.cpp</code></li>
+<li><code>IsLocalPreselectInputAllowed()</code></li>
+<li><code>AdvanceLocalDisplayedRole()</code></li>
+<li><code>Source/Pragmata_2P/UI/PragmataRoleLobbyWidget.cpp</code></li>
+<li><code>ResolveLocalPreferredRole()</code></li>
+<li><code>RefreshLobbyView()</code></li>
+</ul>
+<h3 id="activecontrolrole">ActiveControlRole<a class="headerlink" href="#activecontrolrole" title="Permanent link">&para;</a></h3>
+<p>목적:</p>
+<ul>
+<li>추후 Hugh/Diana 일시 조작권 교환을 <code>AssignedRole</code> 변경 없이 처리</li>
+<li>spawn, handoff, team identity는 <code>AssignedRole</code> 고정</li>
+<li>input mapping, camera pitch, control affordance는 <code>ActiveControlRole</code> 기준으로 전환 가능</li>
+</ul>
+<p>현재 구현:</p>
+<ul>
+<li><code>APragmataPlayerState::ActiveControlRole</code> replicated</li>
+<li><code>AssignedRole</code> 확정 시 기본값으로 <code>ActiveControlRole</code>도 같은 role 적용</li>
+<li><code>APragmataPlayerController</code>는 input/camera 적용 시 <code>ActiveControlRole</code> 우선 사용</li>
+<li>실제 pawn possession swap은 아직 하지 않음</li>
+</ul>
+<p>표시 규칙:</p>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>표시값</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>local owning player</td>
+<td>predicted value 우선</td>
+</tr>
+<tr>
+<td>remote player</td>
+<td>replicated <code>PlayerState</code> value</td>
+</tr>
+<tr>
+<td>server confirmation 도착</td>
+<td>prediction clear</td>
+</tr>
+</tbody>
+</table>
+<h2 id="role-handoff-test">Role handoff test<a class="headerlink" href="#role-handoff-test" title="Permanent link">&para;</a></h2>
+<p>추가 검증:</p>
+<ul>
+<li>host Hugh / client Diana 기본 순서</li>
+<li>host Diana / client Hugh 역순</li>
+<li>player id 기반 handoff</li>
+<li>lobby index fallback</li>
+<li>ordered handoff queue</li>
+<li>seamless travel PlayerState copy</li>
+</ul>
+<p>핵심 코드:</p>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataSessionUtilsTests.cpp</code></li>
+<li><code>FPragmataLobbyRoleHandoffTest</code></li>
+<li><code>FPragmataLobbyPlayerStateCopyTest</code></li>
+</ul>
+<h2 id="_5">데이터 흐름<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<pre><code class="language-mermaid">flowchart TD
+  Input[&quot;Hugh local input&quot;]
+  Setter[&quot;SetAiming/Running/Jump/Hover&quot;]
+  Movement[&quot;UPragmataHughMovementComponent&quot;]
+  SavedMove[&quot;FHughSavedMove custom flags&quot;]
+  ServerMove[&quot;Server movement update&quot;]
+  AnimState[&quot;FHughReplicatedAnimState&quot;]
+  OnRep[&quot;OnRep_HughAnimState&quot;]
+  Proxy[&quot;Simulated proxy AnimBP display&quot;]
+  Weapon[&quot;Weapon attach mode OnRep&quot;]
+
+  Input --&gt; Setter --&gt; Movement --&gt; SavedMove --&gt; ServerMove
+  Setter --&gt; AnimState
+  ServerMove --&gt; AnimState --&gt; OnRep --&gt; Proxy
+  Setter --&gt; Weapon
+  Weapon --&gt; Proxy
+</code></pre>
+<pre><code class="language-mermaid">flowchart TD
+  LobbyInput[&quot;Client A/D&quot;]
+  LocalPrediction[&quot;PredictedLobbySelectedRole&quot;]
+  ServerRPC[&quot;ServerRequestSelectionStep&quot;]
+  ServerState[&quot;PlayerState.LobbySelectedRole&quot;]
+  OnRepLobby[&quot;OnRep_LobbyState&quot;]
+  ClearPrediction[&quot;Clear prediction&quot;]
+  Preview[&quot;Preview ring / status text&quot;]
+
+  LobbyInput --&gt; LocalPrediction --&gt; Preview
+  LobbyInput --&gt; ServerRPC --&gt; ServerState --&gt; OnRepLobby --&gt; ClearPrediction --&gt; Preview
+</code></pre>
+<h2 id="_6">적용 파일<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="gameplay-role">Gameplay role<a class="headerlink" href="#gameplay-role" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataGameMode.cpp</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataPlayerState.h</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataPlayerState.cpp</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataSessionUtilsTests.cpp</code></li>
+</ul>
+<h3 id="hugh-movement-animation">Hugh movement / animation<a class="headerlink" href="#hugh-movement-animation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Source/Pragmata_2P/Data/PragmataTypes.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/HughCharacter.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/HughCharacter.cpp</code></li>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/PragmataHughMovementComponent.cpp</code></li>
+<li><code>Source/Pragmata_2P/Characters/PlayableCharacter.h</code></li>
+<li><code>Source/Pragmata_2P/Characters/PlayableCharacter.cpp</code></li>
+</ul>
+<h3 id="weapon-waist-arm">Weapon / waist-arm<a class="headerlink" href="#weapon-waist-arm" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Source/Pragmata_2P/Characters/WaistArmComponent.cpp</code></li>
+<li><code>Source/Pragmata_2P/Weapon/WeaponBase.cpp</code></li>
+</ul>
+<h3 id="lobby-prediction">Lobby prediction<a class="headerlink" href="#lobby-prediction" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyPlayerController.h</code></li>
+<li><code>Source/Pragmata_2P/Game/PragmataLobbyPlayerController.cpp</code></li>
+<li><code>Source/Pragmata_2P/Lobby/LobbyCharacterPreviewActor.cpp</code></li>
+<li><code>Source/Pragmata_2P/UI/PragmataRoleLobbyWidget.cpp</code></li>
+</ul>
+<h2 id="_7">검증 결과<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>자동 검증:</p>
+<ul>
+<li>Editor target build 성공</li>
+<li><code>Pragmata.Session</code> automation 성공</li>
+<li>테스트 수: 4/4</li>
+<li>이후 comment/directive pass에서 <code>git diff --check</code> 성공</li>
+<li>comment/directive pass는 C++ 동작 변경 없음</li>
+</ul>
+<p>수동 PIE 확인 필요:</p>
+<ul>
+<li>listen server 1 + client 1</li>
+<li>host Hugh / client Diana</li>
+<li>client 화면에서 Hugh aim pose 표시</li>
+<li>Hugh weapon hand attach 표시</li>
+<li>Hugh hover loop 표시</li>
+<li>Hugh fire montage remote 표시</li>
+<li>host Diana / client Hugh</li>
+<li>host가 Diana pawn possess</li>
+<li>host camera turn, scan, hack input 동작</li>
+<li>client Hugh movement가 host 화면에서 walk/jog/run과 일치</li>
+<li>lobby</li>
+<li>client A/D 직후 ring과 status text 즉시 변경</li>
+<li>서버 확정값 도착 시 충돌/ready 상태 정정</li>
+</ul>
+<h2 id="_8">재발 방지 규칙<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<ul>
+<li>gameplay spawn code에서 <code>LobbySelectedRole</code>을 직접 fallback으로 읽지 않음</li>
+<li>role 확정은 <code>EnsureAssignedRoleForController()</code>에 집중</li>
+<li>role 없는 gameplay player를 Hugh로 fallback하지 않음</li>
+<li>animation-driving input은 단순 replicated bool보다 movement prediction 경로 우선 검토</li>
+<li>remote animation은 local-only field가 아니라 replicated display state를 기준으로 구성</li>
+<li>weapon attach는 socket attach call을 여러 input handler에 흩뜨리지 않음</li>
+<li>owning client UI prediction은 자기 표시만 바꿈</li>
+<li>remote player UI는 서버 확정 <code>PlayerState</code>만 표시</li>
+</ul>
+<h2 id="_9">남은 주의점<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<ul>
+<li>AnimBP graph 자체 state machine 오류는 C++ replication fix와 별개</li>
+<li><code>FHughReplicatedAnimState</code> 값이 정상이어도 AnimBP transition 조건이 틀리면 pose는 깨질 수 있음</li>
+<li>Diana pawn camera/input 문제는 role spawn 실패와 input mapping 문제를 분리해서 확인 필요</li>
+<li><code>CurrentWeapon</code> actor replication은 spawn class와 Blueprint default가 올바르게 설정돼야 함</li>
+<li>listen server에서는 host 화면이 server+owner라 client-only 문제를 가릴 수 있음</li>
+<li>항상 host Hugh와 host Diana 양방향 PIE 조합을 모두 확인</li>
+</ul>
+<h2 id="_10">빠른 디버그 포인트<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="host-diana-playerstart">Host Diana가 PlayerStart에 고정<a class="headerlink" href="#host-diana-playerstart" title="Permanent link">&para;</a></h3>
+<p>확인 순서:</p>
+<ol>
+<li><code>HandleStartingNewPlayer</code> 로그의 <code>AssignedRole</code></li>
+<li>같은 로그의 <code>PawnClass</code></li>
+<li><code>BP_PragGameMode</code>의 <code>DianaOperatorPawnClass</code></li>
+<li><code>RegisterSpawnedPawnForRole</code> warning 여부</li>
+<li><code>GameState</code> Diana pawn pointer와 connected flag</li>
+</ol>
+<h3 id="client-hugh-aim-pose">Client 화면에서 Hugh aim pose 누락<a class="headerlink" href="#client-hugh-aim-pose" title="Permanent link">&para;</a></h3>
+<p>확인 순서:</p>
+<ol>
+<li><code>HughAnimState.bIsAiming</code> 복제 여부</li>
+<li><code>OnRep_HughAnimState()</code> 호출 여부</li>
+<li><code>ApplyReplicatedAnimState()</code>에서 waist-arm state와 weapon attach 적용 여부</li>
+<li>AnimBP가 <code>GetIsAiming()</code> 또는 <code>ActionState</code>를 올바르게 읽는지 확인</li>
+</ol>
+<h3 id="client-hugh-hover-running-pose">Client 화면에서 Hugh hover가 running pose<a class="headerlink" href="#client-hugh-hover-running-pose" title="Permanent link">&para;</a></h3>
+<p>확인 순서:</p>
+<ol>
+<li><code>SetHoveringState(true)</code> 호출 여부</li>
+<li>movement mode가 <code>MOVE_Flying</code>으로 바뀌는지 확인</li>
+<li><code>HughAnimState.bIsHovering</code> 복제 여부</li>
+<li>Diana/Hugh AnimBP hover transition 조건 확인</li>
+</ol>
+<h3 id="lobby">Lobby 선택 지연<a class="headerlink" href="#lobby" title="Permanent link">&para;</a></h3>
+<p>확인 순서:</p>
+<ol>
+<li>owning <code>APragmataLobbyPlayerController::RequestLobbySelectionStep()</code> 실행 여부</li>
+<li><code>bHasPredictedLobbySelection</code> 값</li>
+<li><code>GetDisplayedLobbySelectedRole()</code> 반환값</li>
+<li>preview actor와 widget이 local player만 predicted value를 쓰는지 확인</li>
+<li><code>OnRep_LobbyState()</code> 후 prediction clear 여부</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </article>
+            </div>
+
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+
+      </main>
+
+        <footer class="md-footer">
+
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+
+
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+
+</div>
+
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+
+
+
+
+
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+
+
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+  </body>
+</html>

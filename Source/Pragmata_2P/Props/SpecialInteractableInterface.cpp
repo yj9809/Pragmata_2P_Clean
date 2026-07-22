@@ -1,0 +1,1 @@
+#include "Props/SpecialInteractableInterface.h"

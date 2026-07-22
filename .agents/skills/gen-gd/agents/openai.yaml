@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate GD Upload"
+  short_description: "unstaged asset 업로드 번들 생성"
+  default_prompt: "Generate the gd-upload folder for all unstaged assets."

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>튜토리얼 단일 함수 사용 가이드</title>
+  <style>
+    :root{color-scheme:dark;--bg:#11151b;--panel:#19212b;--panel2:#202b38;--text:#edf2f7;--muted:#aebdca;--accent:#62d4b5;--warn:#ffc66d;--danger:#ff8c8c;--line:#344354;--code:#0d1117}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.7}main{width:min(1040px,calc(100% - 32px));margin:auto;padding:48px 0 80px}h1,h2{line-height:1.35}h1{margin:0 0 12px;font-size:2rem}h2{margin:40px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}p{margin:8px 0 14px}.summary,.notice{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:18px 20px}.summary{margin-top:24px}.notice{margin:16px 0;border-left:5px solid var(--warn)}.notice.danger{border-left-color:var(--danger)}.muted{color:var(--muted)}.tag{display:inline-block;margin-right:6px;padding:2px 9px;border-radius:999px;background:var(--panel2);color:var(--accent);font-size:.88rem}code{border-radius:4px;background:var(--code);padding:2px 6px;color:#d7f9ef;font-family:Consolas,monospace}pre{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--code);padding:16px;line-height:1.55}ol,ul{padding-left:24px}li+li{margin-top:7px}table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:var(--panel)}th,td{border:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}th{background:var(--panel2)}a{color:var(--accent)}.checklist li{list-style:"□  "}@media print{:root{color-scheme:light}body{background:#fff;color:#111}main{width:100%;padding:0}.summary,.notice,table,th{background:#fff}code,pre{background:#f3f5f7;color:#111}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="tag">C++</span><span class="tag">BlueprintCallable</span><span class="tag">SaveGame</span>
+    <h1>튜토리얼 단일 함수 사용 가이드</h1>
+    <p class="muted">무기 획득·전투·퍼즐 이벤트에서 DataAsset 튜토리얼을 최초 한 번만 표시</p>
+  </header>
+
+  <section class="summary">
+    <strong>호출 함수</strong>
+    <pre>UTutorialBlueprintLibrary::ShowTutorialOnce(
+    WorldContextObject,
+    TutorialId,
+    TutorialStepData
+);</pre>
+    <p>선언: <code>Source/Pragmata_2P/Game/TutorialBlueprintLibrary.h</code></p>
+    <p>구현: <code>Source/Pragmata_2P/Game/TutorialBlueprintLibrary.cpp</code></p>
+  </section>
+
+  <h2>1. 준비</h2>
+  <ol>
+    <li>Content Browser에서 <strong>Miscellaneous → Data Asset</strong> 선택</li>
+    <li>클래스로 <code>TutorialStepData</code> 선택</li>
+    <li>제목, 이미지, 설명, 키 안내, <code>Target Role</code> 입력</li>
+    <li>호출부 클래스에 DataAsset 참조를 <code>UPROPERTY</code>로 노출</li>
+  </ol>
+  <pre>UPROPERTY(EditDefaultsOnly, Category="Pragmata|Tutorial")
+TObjectPtr&lt;UTutorialStepData&gt; WeaponTutorialData;</pre>
+
+  <h2>2. C++ 호출</h2>
+  <pre>#include "Game/TutorialBlueprintLibrary.h"
+
+// 서버가 무기 최초 획득을 확정한 직후 호출
+UTutorialBlueprintLibrary::ShowTutorialOnce(
+    this,
+    TEXT("Weapon.FirstAcquired"),
+    WeaponTutorialData
+);</pre>
+  <table><thead><tr><th>인자</th><th>값</th><th>역할</th></tr></thead><tbody>
+    <tr><td><code>WorldContextObject</code></td><td>보통 <code>this</code></td><td>현재 World와 GameState 탐색</td></tr>
+    <tr><td><code>TutorialId</code></td><td><code>Weapon.FirstAcquired</code></td><td>영구 표시 이력 SaveGame 키</td></tr>
+    <tr><td><code>StepData</code></td><td><code>UTutorialStepData*</code></td><td>이미지·제목·설명·키 안내·대상 역할</td></tr>
+  </tbody></table>
+
+  <h2>3. Blueprint 호출</h2>
+  <pre>Show Tutorial Once
+World Context Object = Self
+Tutorial Id = Weapon.FirstAcquired
+Step Data = DA_Tutorial_WeaponsUse</pre>
+  <p>C++ 함수와 같은 경로를 사용합니다. 별도 popup 생성이나 저장 로직은 추가하지 않습니다.</p>
+
+  <h2>4. 호출 규칙</h2>
+  <ul>
+    <li>무기 획득처럼 gameplay 판정이 필요한 이벤트는 server 확정 후 호출</li>
+    <li>server 호출은 Hugh/Diana peer에 multicast</li>
+    <li>client 호출은 해당 로컬 viewport만 처리</li>
+    <li>DataAsset의 <code>Target Role</code>과 local role이 일치할 때만 표시</li>
+    <li>popup 초기화 성공 후에만 <code>TutorialId</code> 저장</li>
+    <li>역할 불일치 또는 UI 실패 시 저장하지 않아 다음 호출에서 재시도 가능</li>
+  </ul>
+  <div class="notice danger"><strong>TutorialId는 배포 후 변경 금지.</strong> rename하면 새 튜토리얼로 취급되고, 다른 튜토리얼과 공유하면 둘 중 하나가 표시되지 않습니다.</div>
+
+  <h2>5. 최초 무기 획득 예시</h2>
+  <pre>Server confirms weapon acquisition
+  → ShowTutorialOnce(this, "Weapon.FirstAcquired", WeaponTutorialData)
+  → each peer checks Target Role and local SaveGame
+  → popup initialization succeeds
+  → TutorialId saved locally
+  → later calls ignored</pre>
+
+  <h2>6. 테스트</h2>
+  <ul class="checklist">
+    <li>첫 호출에서 DataAsset의 제목·이미지·설명 표시</li>
+    <li>같은 실행의 두 번째 호출에서 미표시</li>
+    <li>게임 재실행 후 같은 ID 호출에서 미표시</li>
+    <li>다른 ID 호출은 정상 표시</li>
+    <li>역할 불일치 호출 뒤 올바른 역할에서는 표시</li>
+    <li>2-player PIE에서 server 호출이 양쪽 peer에 전달</li>
+  </ul>
+
+  <h2>7. 관련 문서</h2>
+  <ul>
+    <li><a href="tutorial-trigger-usage.html">튜토리얼 트리거 작업 가이드</a></li>
+    <li><code>Docs/Intent/Tutorial/TutorialTriggerActor.md</code></li>
+    <li><code>Docs/KNOW_HOW.md</code></li>
+  </ul>
+</main>
+</body>
+</html>

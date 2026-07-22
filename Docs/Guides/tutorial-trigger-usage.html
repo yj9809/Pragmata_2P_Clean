@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>튜토리얼 트리거 작업 가이드</title>
+  <style>
+    :root{color-scheme:dark;--bg:#11151b;--panel:#19212b;--panel2:#202b38;--text:#edf2f7;--muted:#aebdca;--accent:#62d4b5;--warn:#ffc66d;--danger:#ff8c8c;--line:#344354;--code:#0d1117}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.7}
+    main{width:min(1040px,calc(100% - 32px));margin:auto;padding:48px 0 80px}h1,h2,h3{line-height:1.35}h1{margin:0 0 12px;font-size:2rem}h2{margin:44px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--line)}h3{margin:24px 0 10px}p{margin:8px 0 14px}
+    .summary,.card,.notice{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:18px 20px}.summary{margin-top:24px}.card{margin:14px 0}.notice{margin:16px 0;border-left:5px solid var(--warn)}.notice.danger{border-left-color:var(--danger)}.muted{color:var(--muted)}
+    .tag{display:inline-block;margin-right:6px;padding:2px 9px;border-radius:999px;background:var(--panel2);color:var(--accent);font-size:.88rem}code{border-radius:4px;background:var(--code);padding:2px 6px;color:#d7f9ef;font-family:Consolas,monospace}pre{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--code);padding:16px;line-height:1.55}
+    ol,ul{padding-left:24px}li+li{margin-top:7px}table{width:100%;border-collapse:collapse;margin:14px 0 20px;background:var(--panel)}th,td{border:1px solid var(--line);padding:11px 12px;text-align:left;vertical-align:top}th{background:var(--panel2)}.checklist li{list-style:"□  "}
+    @media print{:root{color-scheme:light}body{background:#fff;color:#111}main{width:100%;padding:0}.summary,.card,.notice,table,th{background:#fff}code,pre{background:#f3f5f7;color:#111}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="tag">Unreal Engine 5.8</span><span class="tag">Pragmata_2P</span>
+    <h1>튜토리얼 트리거 작업 가이드</h1>
+    <p class="muted">맵 작업자가 위치별 튜토리얼을 만들고 배치하는 방법</p>
+  </header>
+
+  <section class="summary">
+    <strong>핵심 구조</strong>
+    <pre>DA_Tutorial_이름        제목 · 이미지 · 설명 · 키 안내 · 표시 대상
+        ↓
+BP_TutorialTrigger_이름 발동 역할 · Box 크기 · Tutorial Id · 종료 방식
+        ↓
+Map 배치                위치 · 회전 · 인스턴스 설정</pre>
+    <p>튜토리얼 하나마다 <code>DataAsset 1개</code>와 <code>Trigger Blueprint 1개</code>를 만드는 방식이 기본입니다.</p>
+  </section>
+
+  <h2>1. 준비된 자산</h2>
+  <table><thead><tr><th>자산</th><th>경로</th><th>용도</th></tr></thead><tbody>
+    <tr><td><code>BP_TutorialTriggerBase</code></td><td><code>/Game/Blueprints/Props/Tutorial/</code></td><td>모든 공간 튜토리얼의 부모</td></tr>
+    <tr><td><code>BP_TutorialTrigger_WeaponsUse</code></td><td><code>/Game/Blueprints/Props/Tutorial/</code></td><td>무기 사용 예제</td></tr>
+    <tr><td><code>DA_Tutorial_WeaponsUse</code></td><td><code>/Game/UI/Data/</code></td><td>내용이 입력된 DataAsset 예제</td></tr>
+  </tbody></table>
+  <div class="notice danger"><strong>Level Blueprint에 overlap 또는 popup 로직을 복사하지 마세요.</strong> 공통 동작은 C++ base가 처리합니다.</div>
+
+  <h2>2. DataAsset 만들기</h2>
+  <ol>
+    <li>Content Browser에서 <strong>우클릭 → Miscellaneous → Data Asset</strong>을 선택합니다.</li>
+    <li>클래스로 <code>TutorialStepData</code>를 선택합니다.</li>
+    <li><code>DA_Tutorial_내용</code> 형식으로 이름을 지정합니다.</li>
+    <li>아래 값을 입력하고 저장합니다.</li>
+  </ol>
+  <table><thead><tr><th>항목</th><th>의미</th></tr></thead><tbody>
+    <tr><td><code>Step Title</code></td><td>팝업 제목</td></tr>
+    <tr><td><code>Preview Image</code></td><td>표시 이미지</td></tr>
+    <tr><td><code>Description Text</code></td><td>플레이 설명</td></tr>
+    <tr><td><code>Key Bindings</code></td><td>행동 이름과 RichText 아이콘 row</td></tr>
+    <tr><td><code>Target Role</code></td><td>팝업을 볼 역할. <code>None</code>은 양쪽</td></tr>
+  </tbody></table>
+
+  <h2>3. Trigger Blueprint 만들기</h2>
+  <ol>
+    <li><code>BP_TutorialTriggerBase</code>를 우클릭합니다.</li>
+    <li><strong>Create Child Blueprint Class</strong>를 선택합니다.</li>
+    <li><code>BP_TutorialTrigger_내용</code> 형식으로 이름을 지정합니다.</li>
+    <li>child를 열고 <strong>Class Defaults</strong>를 선택합니다.</li>
+    <li><code>Pragmata | Tutorial Trigger</code> 설정을 입력합니다.</li>
+    <li>Compile 후 Save합니다.</li>
+  </ol>
+  <table><thead><tr><th>설정</th><th>설명</th><th>권장값</th></tr></thead><tbody>
+    <tr><td><code>Tutorial Step</code></td><td>표시할 DataAsset</td><td>방금 만든 <code>DA_Tutorial_*</code></td></tr>
+    <tr><td><code>Tutorial Id</code></td><td>영구 1회 표시 SaveGame 키</td><td><code>Weapon.FirstAcquired</code>처럼 고유한 이름</td></tr>
+    <tr><td><code>Activation Role</code></td><td>누가 Box에 들어와야 발동하는지</td><td>공용 <code>None</code>, 역할 전용은 해당 역할</td></tr>
+    <tr><td><code>Enabled</code></td><td>트리거 활성 여부</td><td><code>true</code></td></tr>
+    <tr><td><code>Dismiss Policy</code></td><td>팝업 종료 방식</td><td>보통 <code>Until Replaced</code></td></tr>
+    <tr><td><code>Display Duration Seconds</code></td><td><code>Timed</code> 표시 시간</td><td>필요한 초</td></tr>
+  </tbody></table>
+
+  <div class="notice"><strong>역할 구분:</strong> <code>Activation Role</code>은 누가 밟는지, DataAsset의 <code>Target Role</code>은 누가 팝업을 보는지 결정합니다.</div>
+  <table><thead><tr><th>목적</th><th>Activation Role</th><th>Target Role</th></tr></thead><tbody>
+    <tr><td>누가 들어가도 양쪽 표시</td><td><code>None</code></td><td><code>None</code></td></tr>
+    <tr><td>Hugh 전용</td><td><code>Hugh</code></td><td><code>Hugh</code></td></tr>
+    <tr><td>Diana 전용</td><td><code>Diana</code></td><td><code>Diana</code></td></tr>
+    <tr><td>누가 들어가도 Diana에게만 표시</td><td><code>None</code></td><td><code>Diana</code></td></tr>
+  </tbody></table>
+
+  <h2>4. Box와 Map 배치</h2>
+  <ol>
+    <li>Components에서 <code>TriggerBox</code>를 선택합니다.</li>
+    <li>Box Extent를 실제 이동 경로보다 약간 넓게 설정합니다. 기본값은 <code>200 × 200 × 100</code>입니다.</li>
+    <li>목적별 child Blueprint를 맵으로 드래그합니다.</li>
+    <li>위치, 회전, Box 범위를 조정합니다.</li>
+    <li>필요하면 배치 인스턴스 Details에서 <code>Tutorial Step</code>을 override합니다.</li>
+    <li>맵을 저장합니다.</li>
+  </ol>
+
+  <h2>5. 종료 방식</h2>
+  <table><thead><tr><th>정책</th><th>동작</th></tr></thead><tbody>
+    <tr><td><code>Until Replaced</code></td><td>다음 튜토리얼 또는 명시 hide까지 유지</td></tr>
+    <tr><td><code>Timed</code></td><td>설정한 시간 뒤 자동 종료</td></tr>
+  </tbody></table>
+  <p>이전 Timed 트리거의 timer는 나중에 표시된 최신 튜토리얼을 닫지 않습니다.</p>
+
+  <h2>6. 공간 Trigger가 아닌 호출</h2>
+  <p>무기 획득, 전투, 퍼즐처럼 C++ 또는 Blueprint 이벤트에서 직접 표시하는 방법은 <a href="tutorial-function-usage.html">튜토리얼 단일 함수 사용 가이드</a>를 참고합니다.</p>
+
+  <h2>7. 테스트 체크리스트</h2>
+  <ul class="checklist">
+    <li>Blueprint Compile에 warning/error가 없다.</li>
+    <li>제목, 이미지, 설명이 정확히 표시된다.</li>
+    <li>올바른 역할이 들어왔을 때만 발동한다.</li>
+    <li>잘못된 역할 진입은 영구 표시 이력을 소비하지 않는다.</li>
+    <li>같은 <code>Tutorial Id</code>는 반복 진입과 게임 재실행 뒤에도 다시 표시되지 않는다.</li>
+    <li><code>Enabled=false</code>에서는 표시되지 않는다.</li>
+    <li><code>Timed</code>는 설정 시간 후 닫힌다.</li>
+    <li>Hugh host와 Diana host 양쪽 구성에서 결과가 같다.</li>
+  </ul>
+
+  <h2>8. Cook 및 패키징</h2>
+  <ul>
+    <li>맵에 배치한 child와 hard DataAsset은 맵 dependency로 cook됩니다.</li>
+    <li>새 <code>Preview Image</code>는 soft reference이므로 <code>/Game/CookLabels/PAL_CoreRuntime</code>의 Explicit Assets에도 추가합니다.</li>
+    <li>맵에 배치하지 않고 동적으로 생성하는 child/DataAsset도 PAL에 추가합니다.</li>
+    <li>넓은 폴더 전체를 Always Cook으로 추가하지 않습니다.</li>
+  </ul>
+
+  <h2>9. 문제 해결</h2>
+  <div class="card"><h3>팝업이 표시되지 않음</h3><ul>
+    <li><code>Enabled</code>와 <code>Tutorial Step</code>을 확인합니다.</li>
+    <li><code>Activation Role</code>과 실제 진입 역할을 비교합니다.</li>
+    <li>DataAsset의 <code>Target Role</code>을 확인합니다.</li>
+    <li>TriggerBox가 Pawn 경로와 실제로 겹치는지 확인합니다.</li>
+  </ul></div>
+  <div class="card"><h3>PIE에서는 보이지만 패키지에서 이미지가 없음</h3><p>Preview texture가 <code>PAL_CoreRuntime</code>에 포함됐는지 확인합니다.</p></div>
+  <div class="notice danger">Cleanse 획득 튜토리얼은 기존 <code>CleanseSkillAcquisitionProp</code> 경로를 유지합니다. 별도 기획 없이 공간 trigger로 교체하지 마세요.</div>
+
+  <h2>10. 작업 완료 전달 항목</h2>
+  <ul class="checklist">
+    <li>생성한 DataAsset과 child Blueprint 목록</li>
+    <li>배치한 Map과 위치</li>
+    <li>각 trigger의 Activation Role / Target Role</li>
+    <li>새 Preview Image의 PAL 등록 여부</li>
+    <li>Standalone 및 2-player PIE 확인 결과</li>
+  </ul>
+  <footer><p class="muted">관련 구현 문서: <code>Docs/Intent/Tutorial/TutorialTriggerActor.md</code></p></footer>
+</main>
+</body>
+</html>

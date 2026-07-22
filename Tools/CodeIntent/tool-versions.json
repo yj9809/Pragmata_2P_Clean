@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "purpose": "Code Intent workflow pinned tool versions for reproducible local setup.",
+  "windows": {
+    "winget": [
+      {
+        "name": "Doxygen",
+        "id": "DimitriVanHeesch.Doxygen",
+        "version": "1.17.0",
+        "command": "winget install -e --id DimitriVanHeesch.Doxygen --version 1.17.0 --silent --accept-source-agreements --accept-package-agreements"
+      },
+      {
+        "name": "Graphviz",
+        "id": "Graphviz.Graphviz",
+        "version": "15.1.0",
+        "command": "winget install -e --id Graphviz.Graphviz --version 15.1.0 --silent --accept-source-agreements --accept-package-agreements"
+      },
+      {
+        "name": "LLVM",
+        "id": "LLVM.LLVM",
+        "version": "20.1.8",
+        "command": "winget install -e --id LLVM.LLVM --version 20.1.8 --force --silent --accept-source-agreements --accept-package-agreements"
+      },
+      {
+        "name": "clang-uml",
+        "id": "bkryza.clang-uml",
+        "version": "0.6.2",
+        "command": "winget install -e --id bkryza.clang-uml --version 0.6.2 --silent --accept-source-agreements --accept-package-agreements"
+      }
+    ],
+    "python": [
+      {
+        "name": "mkdocs-material",
+        "version": "9.7.6",
+        "command": "python -m pip install --user mkdocs-material==9.7.6"
+      }
+    ],
+    "external_required": [
+      {
+        "name": "Python",
+        "verified_version": "3.12.0",
+        "reason": "MkDocs Material installation and PowerShell script support"
+      },
+      {
+        "name": "Node.js",
+        "verified_version": "24.13.0",
+        "reason": "future graph UI tooling and UnreelMCP bridge compatibility"
+      },
+      {
+        "name": "Unreal Engine",
+        "verified_version": "5.8",
+        "reason": "UnrealBuildTool GenerateClangDatabase"
+      }
+    ]
+  },
+  "notes": [
+    "Installers are global/user-level and must not create node_modules, .venv, installers, or caches inside the repository.",
+    "winget --silent reduces prompts but Windows UAC can still require a manual Yes unless the shell already runs elevated.",
+    "LLVM is pinned to 20.1.8 because UnrealBuildTool warns that LLVM 22 is newer than the latest preferred version 20.1.8 and clang-uml 0.6.2 is built against LLVM 19."
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cleanse Language"
+  short_description: "Normalize comment and doc wording safely."
+  default_prompt: "Use $cleanse-language to cleanse comments and docs using the project term rules."

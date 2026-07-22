@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Changelist Doc"
+  short_description: "문서화용 파일별 before/after changelist 생성"
+  default_prompt: "Use $create-changelist-doc to create a Korean Docs/Create changelist for the current task with file-by-file before/after snippets and verification notes."

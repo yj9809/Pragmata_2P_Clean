@@ -1,0 +1,4956 @@
+﻿
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+        <link rel="prev" href="Diagrams/index.html">
+
+
+
+
+
+
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+
+
+
+        <title>노하우 - Pragmata_2P Code Intent</title>
+
+
+
+      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+
+
+        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+
+
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+
+
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+
+
+        <a href="#know-how" class="md-skip">
+          콘텐츠로 이동
+        </a>
+
+    </div>
+    <div data-md-component="announce">
+
+    </div>
+
+
+
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="index.html" title="Pragmata_2P Code Intent" class="md-header__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pragmata_2P Code Intent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+
+              노하우
+
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+        <label class="md-header__button md-icon" for="__search">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </nav>
+
+</header>
+
+    <div class="md-container" data-md-component="container">
+
+
+
+
+
+
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+
+
+
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="Pragmata_2P Code Intent" class="md-nav__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pragmata_2P Code Intent
+  </label>
+
+  <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    홈
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Plans/PLAN-code-intent-visualization.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    실행 계획
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="code-intent-style.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 작성 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+
+
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    의도 카드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+
+
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    피해
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/DealDamageToActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    DealDamageToActor 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/FPragmataDamageSpec.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    FPragmataDamageSpec 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/WeaponBase-DealDamageToHitActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WeaponBase 피해 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/PragmataHealthComponent-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HealthComponent 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/HughCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Damage/PlayableCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    PlayableCharacter 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+
+
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    해킹
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    해킹
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaHackComponent-RequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaHackComponent-RequestHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 방향 입력 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaHackComponent-ServerRequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 적 해킹 방향
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 상호작용 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 방향 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/MapHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+
+
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HUD
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    HUD
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 퍼즐 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    gameplay HUD 보장
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+
+
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    이동
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    이동
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Movement/WaistArmComponent-SetArmState.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 상태 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 부착
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+
+
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    게임 흐름
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    게임 흐름
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Intent/GameFlow/PragmataGameFlowConfig.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GameFlow 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+
+
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    시스템
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Damage/damage-flow.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해 흐름
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Hacking/enemy-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Hacking/map-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Movement/hugh-movement-component-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Server/server.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Systems/Server/server-puzzle.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버 퍼즐
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+
+
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    구조
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Architecture/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Architecture/architecture.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 문서
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Architecture/structural-ambiguity-rationale.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Architecture/replication-role-animation-fix.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+
+
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    운영
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/blueprint-tasks.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Blueprint 작업
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/packaging-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Packaging
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/unreal-build-warnings.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Build 경고
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/history-rewrite-team-runbook.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    History rewrite 절차
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/unstaged-assets.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Git 제외 asset
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/unreelmcp-anomalies.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    UnreelMCP 이상 기록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Operations/docs-inventory.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Docs 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+
+
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    가이드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Guides/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Guides/code-intent-usage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 사용법
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Guides/unreal-coding-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Unreal coding 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Guides/commit-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Commit 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Guides/branching-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Branch 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+
+
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    변경 기록
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    변경 기록
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Create/20260703-161329-receive-damage-only-hitreact-refactor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage refactor
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Create/20260703-181632-hugh-anim-state-cleanup.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh animation 정리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Create/20260703-190759-gripgun-authority-boundary.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GripGun authority 경계
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+
+
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    다이어그램
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="Diagrams/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="KNOW_HOW.html" class="md-nav__link md-nav__link--active">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+      </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        문서 사용법
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#title-gameflow" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Title GameFlow
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lan-packaging-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        LAN Packaging Maps
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#room-code-session" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Room Code Session
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role State
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lobby-to-demo-role-handoff" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby to Demo Role Handoff
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-lobby-ui-and-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role Lobby UI and Preview
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-and-diana-control" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh and Diana Control
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-weapon-debug-crash" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh Weapon Debug Crash
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#gameplay-class-boundaries-and-enemy-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Gameplay Class Boundaries and Enemy Targets
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#enemy-hp-and-groggy-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Enemy HP and Groggy UI
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#monster-territory-returnhome" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Monster Territory ReturnHome
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#damage-flow-and-melee-hit-notify" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Damage Flow and Melee Hit Notify
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#look-input-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Look Input Contract
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-headvisor-spotlight" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh HeadVisor Spotlight
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#global-power-and-map-lights" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Global Power and Map Lights
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#item-box-interactable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Item Box Interactable
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#axis-movable-prop" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Axis Movable Prop
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-waistarm-and-diana-mount-sockets" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh WaistArm and Diana Mount Sockets
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#diana-scan-hack-and-node-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Diana Scan, Hack, and Node Interaction
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#diana-mount-animation-and-paired-montage" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Diana Mount Animation and Paired Montage
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#large-asset-git-hygiene" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Large Asset Git Hygiene
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#build-and-engine-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Build and Engine Baseline
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#unreelmcp-and-editor-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UnreelMCP and Editor Automation
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#ai-directive-and-documentation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        AI Directive and Documentation Gate
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+
+    </li>
+
+
+
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        문서 사용법
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#title-gameflow" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Title GameFlow
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lan-packaging-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        LAN Packaging Maps
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#room-code-session" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Room Code Session
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-state" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role State
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#lobby-to-demo-role-handoff" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Lobby to Demo Role Handoff
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#role-lobby-ui-and-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Role Lobby UI and Preview
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-and-diana-control" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh and Diana Control
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-weapon-debug-crash" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh Weapon Debug Crash
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#gameplay-class-boundaries-and-enemy-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Gameplay Class Boundaries and Enemy Targets
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#enemy-hp-and-groggy-ui" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Enemy HP and Groggy UI
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#monster-territory-returnhome" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Monster Territory ReturnHome
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#damage-flow-and-melee-hit-notify" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Damage Flow and Melee Hit Notify
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#look-input-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Look Input Contract
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-headvisor-spotlight" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh HeadVisor Spotlight
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#global-power-and-map-lights" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Global Power and Map Lights
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#item-box-interactable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Item Box Interactable
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#axis-movable-prop" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Axis Movable Prop
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#hugh-waistarm-and-diana-mount-sockets" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Hugh WaistArm and Diana Mount Sockets
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#diana-scan-hack-and-node-interaction" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Diana Scan, Hack, and Node Interaction
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#diana-mount-animation-and-paired-montage" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Diana Mount Animation and Paired Montage
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#large-asset-git-hygiene" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Large Asset Git Hygiene
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#build-and-engine-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        Build and Engine Baseline
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#unreelmcp-and-editor-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UnreelMCP and Editor Automation
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#ai-directive-and-documentation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        AI Directive and Documentation Gate
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="md-content" data-md-component="content">
+
+              <article class="md-content__inner md-typeset">
+
+
+
+
+
+<h1 id="know-how">Know How<a class="headerlink" href="#know-how" title="Permanent link">&para;</a></h1>
+<p>AI agent가 만든 주요 흐름을 나중에 다시 읽고 빠르게 복구하기 위한 문서.
+파일별 변경 목록이 아니라 subsystem별 동작 방식과 수정 기준을 기록한다.</p>
+<p>새 문제를 해결하거나 기존 로직을 개선하면 관련 항목을 바로 갱신한다.
+반복 디버깅 중 새 원인이나 해법이 확정되면 마지막에 몰아서 쓰지 않고 그때마다 반영한다.</p>
+<h2 id="_1">문서 사용법<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>먼저 이 문서에서 흐름과 수정 기준 확인</li>
+<li>설계 이유와 더 긴 근거는 <code>Docs/Architecture/architecture.md</code> 확인</li>
+<li>Editor/Blueprint에서 직접 만질 값은 <code>Docs/Operations/blueprint-tasks.md</code> 확인</li>
+<li>network/replication 디버그는 <code>Docs/Systems/Server/server.md</code>, <code>Docs/Architecture/replication-role-animation-fix.md</code> 확인</li>
+</ul>
+<p>항목 형식:</p>
+<ul>
+<li>문제</li>
+<li>현재 해법</li>
+<li>동작 흐름</li>
+<li>핵심 위치</li>
+<li>수정할 때 주의</li>
+<li>검증 방법</li>
+<li>관련 문서</li>
+</ul>
+<h2 id="title-gameflow">Title GameFlow<a class="headerlink" href="#title-gameflow" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Lobby가 title gate와 session UI를 동시에 맡으면 시작 입력, fade, session state가 섞임</li>
+<li>user가 game 시작 지점을 다시 이해하기 어려움</li>
+<li>map 전환값이 C++ 기본값 여러 곳에 흩어지면 Editor에서 흐름을 바꾸기 어려움</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>/Game/Map/Title</code>이 title 전용 entrypoint</li>
+<li><code>UPragmataGameFlowConfig</code> class default가 title 이후 흐름을 소유</li>
+<li>title 입력 후 fade-out, <code>LobbyMap</code> travel</li>
+<li>title controller는 현재 map이 <code>/Game/Map/Title</code>일 때만 UI/input/travel 처리</li>
+<li>lobby ready/start 후 host가 <code>LobbyGameMap?game=GameplayGameMode</code>로 server travel</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Title
+-&gt; APragmataTitlePlayerController
+-&gt; WBP_TitleScreen
+-&gt; fade
+-&gt; UPragmataGameFlowConfig
+-&gt; LobbyMap
+
+LobbyMap
+-&gt; WBP_RoleLobby
+-&gt; LobbyGameMap
+-&gt; GameplayGameMode
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>UPragmataGameFlowConfig</code>, <code>UPragmataGameFlowSettings</code></li>
+<li><code>APragmataTitleGameMode</code>, <code>APragmataTitlePlayerController</code>, <code>UPragmataTitleScreenWidget</code></li>
+<li><code>APragmataLobbyGameMode</code>, <code>APragmataLobbyPlayerController</code>, <code>UPragmataRoleLobbyWidget</code></li>
+<li><code>PragmataSessionUtils::BuildGameTravelURL</code></li>
+<li>기본값: <code>/Game/Map/Title</code>, <code>/Game/Map/MatchLobby</code>, <code>/Game/Map/Demo</code>, <code>/Game/Blueprints/BP_PragGameMode</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>map/game mode 변경은 GameFlow Blueprint class defaults에서 조정</li>
+<li>GameFlow class 연결은 Project Settings &gt; Pragmata Game Flow의 <code>GameFlowClass</code></li>
+<li>MatchLobby는 press-any-button gate를 다시 소유하지 않음</li>
+<li>특정 gameplay map 테스트는 해당 map을 직접 열고 listen/session flow로 시작</li>
+<li>title showcase actor는 playable pawn이 아님</li>
+<li>title camera가 없을 때 fallback camera는 개발 안전장치일 뿐 기본 구조가 아님</li>
+<li><code>.omx</code> 이전 세션의 <code>TestArea</code>, <code>PlayerTestLevel</code> entrypoint 언급은 현재 구조가 아님</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>PIE 시작 시 Title map 진입</li>
+<li>mouse click, Enter, Space, gamepad face bottom으로 start</li>
+<li>fade 후 <code>LobbyMap</code> 진입</li>
+<li>ready/start 후 <code>LobbyGameMap</code> travel</li>
+<li><code>Demo</code>, <code>PlayerTestLevel</code> 등 임의 map을 직접 열면 title GameFlow 자동 travel 없음</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Title Screen Flow</code>, <code>Game Flow</code></li>
+<li><code>Docs/Operations/blueprint-tasks.md</code>의 title/map/UI 항목</li>
+</ul>
+<h2 id="lan-packaging-maps">LAN Packaging Maps<a class="headerlink" href="#lan-packaging-maps" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li><code>BP_GameFlow_Default</code>에서 map을 바꾸면 packaged build에 해당 map이 cook되지 않을 수 있음</li>
+<li>packaging cook은 Editor에서 보이는 map 전환 의도보다 <code>ProjectPackagingSettings.MapsToCook</code>를 우선 확인</li>
+<li>C++ soft load asset은 Editor에서 보여도 packaged build에 자동 포함되지 않을 수 있음</li>
+<li>level 안의 preview actor가 불량 animation asset을 직접 참조하면 gameplay에서 쓰지 않아도 cook blocker가 될 수 있음</li>
+</ul>
+<p>발견 증상:</p>
+<ul>
+<li><code>UWaistArmComponent::SetArmState</code>가 <code>LNK2019 unresolved external symbol</code>로 Game target link 실패</li>
+<li><code>aqProf.dll</code>, <code>VtuneApi.dll</code>, <code>WinPixGpuCapturer.dll</code> load 실패가 먼저 보이지만 실제 blocker는 아님</li>
+<li><code>PlayerTestLevel</code> cook 중 <code>wp0900_00_unreal_Anim_Armature_wp0900_00_Select_Start_</code> hash-change assertion 발생</li>
+<li>같은 구간에서 <code>wp0900_00_unreal_Skeleton</code> missing bones, <code>Bone with no name detected</code> warning 반복</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>LAN play test package는 GameFlow에서 실제 도달 가능한 map만 <code>MapsToCook</code>에 명시</li>
+<li>현재 map list:</li>
+<li><code>/Game/Map/Title</code></li>
+<li><code>/Game/Map/MatchLobby</code></li>
+<li><code>/Game/Map/Demo</code></li>
+<li><code>/Game/Map/LunarMap</code></li>
+<li><code>/Game/Map/PlayerTestLevel</code></li>
+<li>runtime soft load 보장은 <code>/Game/CookLabels</code>의 <code>PrimaryAssetLabel</code>로 관리</li>
+<li>현재 label:</li>
+<li><code>PAL_CoreRuntime</code>: GameFlow, GameMode, UI, Enhanced Input, lobby ring material</li>
+<li><code>PAL_LobbyPreview</code>: lobby preview mesh와 idle animation</li>
+<li><code>PAL_EnemyRuntime</code>: Executor hacked mesh와 보수적 AI/enemy hard-load asset</li>
+<li>PAL 운영 원칙:</li>
+<li>새 runtime non-map asset은 cook owner 확인 필수</li>
+<li><code>TSoftObjectPtr</code>, <code>TSoftClassPtr</code>, <code>FSoftObjectPath</code>, string <code>/Game/...</code> load 대상은 PAL explicit asset 후보</li>
+<li>새 runtime <code>IMC_*</code>, <code>IA_*</code>는 <code>PAL_CoreRuntime</code>에 각각 직접 추가</li>
+<li>이미 PAL에 들어간 <code>IMC_*</code>가 <code>IA_*</code>를 참조해도, 현재 프로젝트 정책은 개별 <code>IA_*</code>도 명시</li>
+<li>map asset은 PAL이 아니라 <code>MapsToCook</code>에 추가</li>
+<li><code>/Game/Character</code>, <code>/Game/Enemy</code> 전체 directory cook 금지</li>
+<li><code>PAL_CoreRuntime</code> explicit asset:</li>
+<li><code>BP_GameFlow_Default</code>, <code>BP_PragGameMode</code></li>
+<li><code>WBP_TitleScreen</code>, <code>WBP_RoleLobby</code>, <code>WBP_HughHUD</code>, <code>WBP_DianaHUD</code>, <code>WBP_Crosshair</code></li>
+<li><code>M_LobbySelectionRing</code></li>
+<li><code>IMC_Title</code>, <code>IMC_Lobby</code>, <code>IMC_Hugh</code>, <code>IMC_Diana</code></li>
+<li><code>IA_TitleStart</code>, <code>IA_LobbySelect</code>, <code>IA_LobbyConfirm</code></li>
+<li><code>IA_Move</code>, <code>IA_Look</code>, <code>IA_Attack</code>, <code>IA_Dodge</code>, <code>IA_Jump</code>, <code>IA_Aim</code>, <code>IA_Boost</code>, <code>IA_HeadVisorLightToggle</code>, <code>IA_Scan</code></li>
+<li><code>PAL_LobbyPreview</code> explicit asset:</li>
+<li><code>SM_Hugh</code>, <code>SM_Diana</code></li>
+<li><code>AS_Hugh_General_0100_Stand_Loop_</code>, <code>AS_Diana_General_0100_Stan_Loop</code></li>
+<li><code>PAL_EnemyRuntime</code> explicit asset:</li>
+<li><code>SM_Executor_Hacked</code></li>
+<li><code>BB_Monster</code>, <code>SM_Executor</code>, <code>ABP_ExecutorMonster</code>, <code>BP_DamageText</code></li>
+<li><code>PlayerTestLevel</code>의 standalone <code>SkeletalMeshActor_1</code> preview actor 제거</li>
+<li><code>UWaistArmComponent::SetArmState</code>는 <code>UFUNCTION</code> wrapper가 link할 수 있게 header에서 <code>FORCEINLINE</code> 제거</li>
+<li>package output은 <code>Builds/</code> 아래 생성하고 Git 추적 제외</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">BP_GameFlow_Default map 변경
+-&gt; Edit &gt; Project Settings &gt; Packaging
+-&gt; MapsToCook에 실제 package map list 반영
+-&gt; soft load asset 추가 시 /Game/CookLabels의 PAL explicit asset에 추가
+-&gt; Package Project 또는 BuildCookRun
+-&gt; Cook log에서 missing map, bad asset reference, link error 확인
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>Config/DefaultGame.ini</code>의 <code>[/Script/UnrealEd.ProjectPackagingSettings]</code></li>
+<li><code>Content/Blueprints/GameFlow/BP_GameFlow_Default</code></li>
+<li><code>Content/CookLabels/PAL_CoreRuntime</code></li>
+<li><code>Content/CookLabels/PAL_LobbyPreview</code></li>
+<li><code>Content/CookLabels/PAL_EnemyRuntime</code></li>
+<li><code>Content/Map/PlayerTestLevel.umap</code></li>
+<li><code>Source/Pragmata_2P/Characters/WaistArmComponent.h</code></li>
+<li><code>.gitignore</code>의 <code>Builds/*</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>LobbyMap</code>과 <code>LobbyGameMap</code> 모두 cook list에 필요</li>
+<li><code>/Game/Character</code>, <code>/Game/Enemy</code> 전체를 <code>DirectoriesToAlwaysCook</code>에 넣지 않음</li>
+<li>Character/Enemy animation은 PAL explicit asset으로 필요한 것만 추가</li>
+<li><code>TSoftObjectPtr</code>, <code>TSoftClassPtr</code>, <code>FSoftObjectPath</code>, string path load 추가 시 PAL 누락 여부 확인</li>
+<li>runtime <code>IMC_*</code>, <code>IA_*</code> 추가 또는 이동 시 <code>PAL_CoreRuntime</code> explicit asset을 항상 재검증</li>
+<li>새 runtime asset을 만든 뒤 PIE에서 보인다는 이유만으로 packaged cook 포함을 가정하지 않음</li>
+<li>map 전환 대상은 PAL이 아니라 <code>MapsToCook</code>에 추가</li>
+<li>PAL은 directory recursive label을 끄고 explicit asset만 사용</li>
+<li>package log의 <code>aqProf.dll</code>, <code>VtuneApi.dll</code>, <code>WinPixGpuCapturer.dll</code> load 실패는 Windows optional profiler DLL noise</li>
+<li><code>Error_UnknownCookFailure</code>는 위쪽 cook log에서 최초 asset assertion 또는 load error를 먼저 확인</li>
+<li>standalone preview actor가 bad animation을 직접 참조하면 map에서 제거하거나 정상 animation으로 교체</li>
+<li>단순 asset resave가 cook hash-change assertion을 해결하지 못하면 level reference graph를 먼저 확인</li>
+<li><code>UFUNCTION</code> 선언에 <code>FORCEINLINE</code>을 붙이고 <code>.cpp</code> 구현만 두면 generated wrapper가 link할 외부 symbol을 찾지 못할 수 있음</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li><code>BuildCookRun ... -platform=Win64 -clientconfig=Development -build -cook -stage -pak -archive</code></li>
+<li><code>MapsToCook</code>에 <code>/Game/Map/Title</code>, <code>/Game/Map/MatchLobby</code>, <code>/Game/Map/Demo</code>, <code>/Game/Map/LunarMap</code>, <code>/Game/Map/PlayerTestLevel</code> 포함 확인</li>
+<li><code>BUILD SUCCESSFUL</code>, <code>AutomationTool exiting with ExitCode=0</code></li>
+<li><code>/Game/CookLabels</code>에 <code>PrimaryAssetLabel</code> 3개 존재 확인</li>
+<li>각 label의 <code>Rules.CookRule = AlwaysCook</code>, <code>bIsRuntimeLabel = true</code>, explicit asset 목록 확인</li>
+<li>새 runtime asset 또는 moved asset이 있으면 <code>PAL_CoreRuntime</code>, <code>PAL_LobbyPreview</code>, <code>PAL_EnemyRuntime</code> 중 하나에 포함됐는지 확인</li>
+<li>새 runtime map이면 PAL이 아니라 <code>MapsToCook</code>에 포함됐는지 확인</li>
+<li>packaged log에 <code>SkipPackage: /Game/UI</code>, <code>SkipPackage: /Game/Blueprints/Player/Input</code> 없음</li>
+<li>출력 폴더의 <code>Windows/Pragmata_2P.exe</code> 존재 확인</li>
+</ul>
+<h2 id="room-code-session">Room Code Session<a class="headerlink" href="#room-code-session" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>host/join 버튼이 gameplay role 의미까지 갖기 시작하면 lobby 선택과 network action이 섞임</li>
+<li>LAN session 검색 타이밍 차이로 join이 너무 빨리 실패할 수 있음</li>
+<li>packaged build에서 host session connect string이 <code>172.x.x.x:0</code>으로 광고되면 client가 timeout까지 대기</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>6자리 <code>RoomCode</code>를 session setting과 travel URL에 유지</li>
+<li>host는 room code를 먼저 생성하고 LAN listen session 생성</li>
+<li>join은 입력 code를 정규화한 뒤 LAN session을 retry 검색</li>
+<li>host/join은 network action이고, character role은 lobby 선택으로 분리</li>
+<li>host 최초 listen lobby 진입은 <code>ServerTravel</code>이 아니라 <code>OpenLevel(Map, "listen?...")</code></li>
+<li>client는 resolved connect string이 <code>:0</code>이면 <code>ClientTravel</code> 전에 실패 처리</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Host
+-&gt; GenerateRoomCode
+-&gt; CreateSession
+-&gt; OpenLevel MatchLobby with listen?RoomCode=code?PreferredRole=role
+
+Join
+-&gt; NormalizeRoomCode
+-&gt; FindSessions retry
+-&gt; ClientTravel connect?RoomCode=code?PreferredRole=role
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>UPragmataMultiplayerSessionSubsystem</code></li>
+<li><code>PragmataSessionUtils</code></li>
+<li><code>UPragmataRoleLobbyWidget</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>PreferredRole</code>은 lobby 초기 선택값일 뿐 Demo spawn 근거가 아님</li>
+<li>room code는 인증 수단이 아니라 같은 LAN session 검색 키</li>
+<li>code 공간은 혼동 문자 제외 32자 alphabet의 6자리라 <code>32^6 = 1,073,741,824</code></li>
+<li>다른 활성 LAN session 1개와 충돌 확률은 약 10.7억 분의 1</li>
+<li>session advertise는 Hugh/Diana 둘 다 연결된 뒤 끔</li>
+<li>ambiguous code session은 자동 선택하지 않고 실패 처리</li>
+<li>host 최초 listen 전환에서 <code>World-&gt;ServerTravel("/Game/Map/MatchLobby?listen...")</code>를 쓰지 않음</li>
+<li><code>OnlineSubsystemNull</code>은 session response를 만들 때 현재 <code>NetDriver</code> port를 읽으므로 listen <code>NetDriver</code>가 있어야 <code>:7777</code> 같은 실제 port가 광고됨</li>
+<li><code>:0</code> connect string은 방화벽 문제가 아니라 listen port 미준비 상태</li>
+<li>현재 LAN 범위에서는 수정 불필요, 공개 backend/대규모 room에서는 code 고유성 예약 필요</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>host room code 표시</li>
+<li>join code 입력 후 MatchLobby 참가</li>
+<li>packaged client log의 <code>Browse:</code> 주소가 <code>:0</code>이 아님</li>
+<li>host log에 game listen port 생성 확인</li>
+<li>없는 code는 retry 후 실패 message</li>
+<li>같은 code 중복 session은 ambiguous 실패</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Listen Server Session</code></li>
+<li><code>Docs/Systems/Server/server.md</code>의 <code>Session Flow</code>, <code>Travel Options</code></li>
+</ul>
+<h2 id="role-state">Role State<a class="headerlink" href="#role-state" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>lobby 선택, gameplay spawn, 향후 control swap이 같은 enum 하나에 묶이면 버그 원인 추적이 어려움</li>
+<li>host/join 순서와 character role을 혼동하기 쉬움</li>
+</ul>
+<p>현재 해법:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LobbySelectedRole</code></td>
+<td>lobby에서 고른 character 선택</td>
+</tr>
+<tr>
+<td><code>AssignedRole</code></td>
+<td>gameplay spawn, team identity, handoff 기준</td>
+</tr>
+<tr>
+<td><code>ActiveControlRole</code></td>
+<td>현재 input/camera 기준, 향후 control swap 준비값</td>
+</tr>
+</tbody>
+</table>
+<p>동작 흐름:</p>
+<pre><code class="language-text">local preselect
+-&gt; PreferredRole URL option
+-&gt; PlayerState.LobbySelectedRole
+-&gt; ready/start 검증
+-&gt; PlayerState.AssignedRole
+-&gt; Demo spawn
+-&gt; ActiveControlRole 기반 input/camera
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>APragmataPlayerState</code></li>
+<li><code>APragmataLobbyGameMode</code></li>
+<li><code>APragmataGameMode</code></li>
+<li><code>APragmataPlayerController</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>AssignedRole</code>은 control swap 때도 기본 identity로 남김</li>
+<li><code>ActiveControlRole</code> 변경은 pawn ownership 변경과 다름</li>
+<li>host가 항상 Hugh라는 가정 금지</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Host Hugh / Client Diana</li>
+<li>Host Diana / Client Hugh</li>
+<li>같은 role ready/start 거부</li>
+<li>role별 input mapping과 possession 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Role preselect / network action 분리</code></li>
+<li><code>Docs/Systems/Server/server.md</code>의 <code>Role State</code></li>
+</ul>
+<h2 id="lobby-to-demo-role-handoff">Lobby to Demo Role Handoff<a class="headerlink" href="#lobby-to-demo-role-handoff" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Demo travel 때 player별 URL에는 role이 없음</li>
+<li>PIE non-seamless travel에서는 <code>PlayerState::CopyProperties</code>만 믿으면 role이 사라질 수 있음</li>
+<li>role resolution 실패가 Hugh fallback spawn으로 숨으면 Diana possession 버그처럼 보임</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>lobby start 직전에 선택/ready 상태를 서버에서 재검증</li>
+<li><code>AssignedRole</code> 확정 후 subsystem에 handoff 저장</li>
+<li>session advertising on/off는 <code>UPragmataMultiplayerSessionSubsystem::SetSessionAdvertisingEnabled()</code> C++ 경로로만 제어하고 Blueprint API로 열지 않음</li>
+<li>Demo GameMode는 여러 source를 순서대로 확인</li>
+<li>role이 끝까지 없으면 Hugh fallback을 쓰지 않고 spawn 차단</li>
+<li><code>InitNewPlayer</code>의 lobby defer는 role 미확정(<code>pragmata_invalid_role</code>)만 허용하고, room code/class/slot 오류는 즉시 반환</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Lobby ready/start
+-&gt; AssignedRole 확정
+-&gt; RegisterLobbyRoleHandoff
+-&gt; ServerTravel Demo
+-&gt; InitNewPlayer / HandleStartingNewPlayer
+-&gt; role resolution
+-&gt; RestartPlayer
+-&gt; role pawn spawn
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>APragmataLobbyGameMode::RequestStartGame</code></li>
+<li><code>UPragmataMultiplayerSessionSubsystem::RegisterLobbyRoleHandoff</code></li>
+<li><code>APragmataGameMode</code></li>
+<li><code>APragmataGameState</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>role resolution 순서 변경 시 Host Diana / Client Hugh를 반드시 재검증</li>
+<li><code>DefaultPawnClass</code>로 Hugh fallback을 되살리지 않음</li>
+<li>Demo는 단일 <code>PlayerStart</code> anchor와 Diana offset을 사용</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Lobby에서 서로 다른 role 선택 후 ready/start</li>
+<li>Demo에서 Hugh는 <code>AHughCharacter</code>, Diana는 <code>ADianaOperatorPawn</code> possess</li>
+<li><code>APragmataGameState</code>의 Hugh/Diana pointer와 connected flag 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Demo 역할 스폰 이슈</code>, <code>Lobby Session and Travel Role</code></li>
+<li><code>Docs/Architecture/replication-role-animation-fix.md</code>의 <code>Role handoff test</code></li>
+</ul>
+<h2 id="role-lobby-ui-and-preview">Role Lobby UI and Preview<a class="headerlink" href="#role-lobby-ui-and-preview" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>C++ fallback UI가 커지면 WBP layout과 runtime state가 어긋남</li>
+<li>lobby preview actor가 gameplay pawn처럼 오해될 수 있음</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>WBP_RoleLobby</code>가 layout, label, visual affordance 소유</li>
+<li>C++는 named widget binding과 session/lobby state 연결만 담당</li>
+<li><code>UPragmataRoleLobbyWidget</code> button handler는 <code>HostLobbySession</code>/<code>JoinLobbySession</code>을 직접 호출하고, legacy <code>HostAsHugh</code>/<code>JoinAsDiana</code>는 deprecated wrapper로만 유지</li>
+<li><code>ALobbyCharacterPreviewActor</code>는 possession 없는 장식 actor</li>
+<li>preview actor는 선택 ring과 1P/2P label만 표시</li>
+<li>selection ring/label 표시 조건은 marker component만 숨기고 preview actor/mesh 자체를 숨기지 않음</li>
+<li><code>BeginPlay</code>, <code>ConfigureForRole</code>, <code>OnRep_PreviewRole</code>은 같은 refresh helper로 mesh/animation/marker를 갱신</li>
+<li>preview animation은 AnimBP 없이 Single Node Animation 사용</li>
+<li><code>MatchLobby</code>의 기본 preview loop는 <code>MeshComponent &gt; Animation &gt; Animation Asset</code>에서 조정</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">APragmataLobbyPlayerController
+-&gt; WBP_RoleLobby 표시
+-&gt; local preselect prediction
+-&gt; server PlayerState state 표시
+-&gt; preview actor ring/label 갱신
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>UPragmataRoleLobbyWidget</code></li>
+<li><code>APragmataLobbyPlayerController</code></li>
+<li><code>APragmataLobbyGameMode</code></li>
+<li><code>ALobbyCharacterPreviewActor</code></li>
+<li><code>/Game/UI/Widget/WBP_RoleLobby</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>C++에서 fallback UI 생성 금지</li>
+<li><code>BindWidget</code> 이름 변경 시 WBP와 C++를 같이 갱신</li>
+<li>preview actor는 gameplay role이나 possession의 source가 아님</li>
+<li>actor <code>IdleAnimation</code>이 C++ role default가 아니면 명시 override로 우선</li>
+<li>actor <code>IdleAnimation</code>이 role default이면 map 배치 <code>MeshComponent</code> animation이 우선</li>
+<li>map 배치 <code>MeshComponent</code> animation도 없으면 C++ role default idle 사용</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>preselect 전 Host/Join 숨김</li>
+<li>preselect 후 Host/Join 표시</li>
+<li>Creating/Searching/Joining overlay 표시</li>
+<li>room code 표시 후 host overlay 숨김</li>
+<li>local player prediction과 remote PlayerState 표시 구분</li>
+<li><code>MatchLobby</code> 진입 후 <code>LobbyPreview_Hugh</code>, <code>LobbyPreview_Diana</code>가 지정 preview loop 재생</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Operations/blueprint-tasks.md</code>의 <code>Role Lobby UI</code>, <code>Lobby Character Selection</code></li>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Role Lobby UI</code>, <code>Lobby Character Preview</code></li>
+</ul>
+<h2 id="hugh-and-diana-control">Hugh and Diana Control<a class="headerlink" href="#hugh-and-diana-control" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Diana는 Hugh mesh에 붙은 avatar와 별도 operator pawn을 동시에 사용</li>
+<li>input, camera, possession을 섞으면 Diana client가 Hugh처럼 보이거나 움직임이 막힘</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>Hugh player는 <code>AHughCharacter</code> possess</li>
+<li>Diana player는 <code>ADianaOperatorPawn</code> possess</li>
+<li>Hugh 등에 붙은 Diana skeletal mesh는 표현용 avatar</li>
+<li>controller는 <code>ActiveControlRole</code>에 맞춰 input mapping과 camera rule 적용</li>
+<li>pawn은 <code>UInputAction</code> binding만 소유하고 mapping context 추가는 player controller 책임</li>
+<li>gameplay HUD와 aim 중 표시되는 shared crosshair는 pawn/BP controller가 아니라 owning local <code>APragmataPlayerController</code> 책임</li>
+<li>Hugh aim/run/jump hold/hover 표시 상태는 <code>HughAnimState.bIs*</code>가 원본</li>
+<li><code>UHughAnimInstance</code>의 locomotion blend <code>MovementSpeed</code>/<code>Acceleration</code>은 실제 <code>CharacterMovement</code> velocity/acceleration을 읽음</li>
+<li>이유: 입력 intent 기반 speed를 쓰면 키를 뗀 순간 AnimBP는 idle인데 capsule은 braking으로 계속 움직여 발 미끄러짐 발생</li>
+<li>Hugh owner는 local prediction으로 <code>HughAnimState</code>를 직접 갱신하고, 서버 복제는 <code>COND_SkipOwner</code>로 owner를 건너뜀</li>
+<li><code>UPragmataHughMovementComponent::WantsTo*</code>는 movement prediction intent 전용이며, 표시 상태 저장소로 쓰지 않음</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">AssignedRole
+-&gt; role pawn possess
+-&gt; PlayerState.ActiveControlRole
+-&gt; PlayerController local role mirror
+-&gt; Enhanced Input mapping
+-&gt; role별 camera/input 처리
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>APragmataPlayerController</code></li>
+<li><code>AHughCharacter</code></li>
+<li><code>UPragmataPlayerStatsComponent</code></li>
+<li><code>ADianaOperatorPawn</code></li>
+<li><code>APragmataPlayerState</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>Diana look은 controller rotation이 아니라 operator pawn local rotation 중심</li>
+<li>Diana yaw는 Hugh forward 기준 제한</li>
+<li>Hugh movement input과 Diana camera/input을 한 pawn에 합치지 않음</li>
+<li>input asset 누락 fallback은 개발 안전장치이며 기본 구조가 아님</li>
+<li>legacy Hugh controller Blueprint asset과 native <code>AHughController</code> class는 삭제 완료</li>
+<li>HUD 생성 경로를 Blueprint controller EventGraph에 되살리지 않음</li>
+<li>Hugh에 raw <code>IsAiming/IsRunning/IsJumpInput/IsHovering</code> 캐시를 다시 만들지 않음</li>
+<li>AnimBP의 aim/run/hover 상태 getter는 <code>HughAnimState</code>를 읽고, locomotion blend speed는 실제 movement 값을 유지</li>
+<li>remote proxy 부작용은 <code>OnRep_HughAnimState()</code>에서만 재구성</li>
+</ul>
+<p>HUD 책임:</p>
+<ul>
+<li>목표: root gameplay HUD와 <code>WBP_Crosshair</code> 생성/viewport 추가를 local <code>APragmataPlayerController</code> 기준으로 한 번만 처리</li>
+<li>역할별 root HUD asset: <code>/Game/UI/Widget/WBP_HughHUD</code>, <code>/Game/UI/Widget/WBP_DianaHUD</code></li>
+<li>공통 표시 위젯: <code>WBP_EnemyHackingWidget</code>, <code>WBP_MapHackingWidget</code>은 역할별 root HUD 안에 배치</li>
+<li>이유: Demo gameplay <code>PlayerControllerClass</code>는 <code>/Script/Pragmata_2P.PragmataPlayerController</code>; Hugh/Diana 모두 같은 controller path 사용</li>
+<li>C++ 위치: <code>APragmataPlayerController::EnsureGameplayHUD</code>, <code>APragmataPlayerController::EnsureHughCrosshair</code></li>
+<li>class 선택 위치: <code>APragmataPlayerController::TryGetGameplayHUDClassForAssignedRole</code></li>
+<li>widget class source: <code>BP_HughCharacter</code>/<code>BP_DianaOperatorPawn</code> defaults의 <code>GameplayHUDClass</code></li>
+<li>C++ 기본값: <code>/Game/UI/Widget/WBP_HughHUD.WBP_HughHUD_C</code>, <code>/Game/UI/Widget/WBP_DianaHUD.WBP_DianaHUD_C</code></li>
+<li>최종 구조: root HUD 생성은 C++로 일원화. BP EventGraph에 별도 <code>Create Widget</code>이 남으면 HUD와 ViewModel binding이 중복됨</li>
+<li>crosshair class: <code>TSoftClassPtr&lt;UUserWidget&gt;</code>로 <code>/Game/UI/Widget/WBP_Crosshair.WBP_Crosshair_C</code> 참조</li>
+<li>호출 위치: <code>BeginPlay</code>, <code>AcknowledgePossession</code>, <code>OnRep_PlayerState</code></li>
+<li>공유 stat source: local pawn이 아니라 <code>APragmataGameState</code>의 replicated <code>HughCharacter</code>/<code>DianaOperatorPawn</code> pointer 기준</li>
+<li>공유 stat 바인딩: <code>APragmataPlayerController::RebindSharedHUDStats()</code> -&gt; <code>UPragmataHUDWidget::BindSharedHUDStats()</code> -&gt; <code>UPragmataHUDViewModel::BindSharedHUDStats()</code></li>
+<li>현재 공유 stat: Hugh <code>HealthComponent</code>, Hugh replicated stamina snapshot, Hugh <code>PlayerStatsComponent</code>, Diana <code>OverDriveComponent</code></li>
+<li>Hugh weapon wheel ammo 바인딩: <code>UPragmataHUDWidget::BindSharedHUDStats()</code> -&gt; <code>UWeaponWheelWidget::BindWeaponSource()</code> -&gt; <code>AWeaponBase::OnAmmoChange</code></li>
+<li><code>/Game/UI/Widget/WBP_HughHUD</code> 안 weapon wheel child 이름은 <code>WBP_WeaponWheel</code> 유지. C++는 <code>ResolveWeaponWheelRoot()</code>에서 <code>GetWidgetFromName("WBP_WeaponWheel")</code> fallback으로 연결</li>
+<li>Hugh <code>PlayerStatsComponent</code>: <code>Lunafilament</code>, <code>PlayerDamageMultiplier</code>, <code>RepairCartridge</code>, <code>MaxRepairCartridge</code>, <code>RepairCartridgeRecoveryAmount</code></li>
+<li><code>RepairCartridge</code> 사용은 <code>ConsumeRepairCartridge()</code>가 서버 기본 회복량으로 Hugh <code>HealthComponent::RecoverHP()</code>를 호출하고, 실제 회복 성공 시에만 1개 차감</li>
+<li>recovery hold/prohibited 값은 아직 gameplay source가 없으므로 shared stat 규칙에 포함하지 않음</li>
+<li>Hugh 기본 HP는 <code>AHughCharacter</code>가 자기 <code>HealthComponent</code>에만 1500으로 지정하며, <code>UPragmataHealthComponent</code> 전역 기본값은 enemy 영향 때문에 유지</li>
+<li><code>PlayerDamageMultiplier</code>는 Hugh weapon damage에만 좁게 적용. melee/player damage source 확장 시 같은 component 값을 사용</li>
+<li>조건: <code>IsLocalController()</code> true, <code>AssignedRole</code>과 possessed pawn이 Hugh/Diana로 일치, 기존 widget instance 없음, widget class load 성공</li>
+<li>저장: <code>UPROPERTY(Transient) TObjectPtr&lt;UPragmataHUDWidget&gt; GameplayHUD</code></li>
+<li>crosshair 저장: <code>UPROPERTY(Transient) TObjectPtr&lt;UUserWidget&gt; HughCrosshairWidget</code></li>
+<li>crosshair 표시: 생성 직후 <code>Hidden</code>, 각 local player의 aim callback에서 <code>Visible</code>/<code>Hidden</code> 토글</li>
+<li>role pawn pointer가 HUD 생성 뒤 늦게 복제되면 GameState delegate가 shared stat을 다시 바인딩</li>
+<li>실패 처리: missing class 또는 create 실패 시 <code>UE_LOG</code> warning/error</li>
+<li>삭제 완료: legacy Hugh controller Blueprint asset 제거</li>
+<li>중복 방지: pawn BP EventGraph가 root HUD를 직접 생성하지 않는지 확인</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>role별 possess actor 확인</li>
+<li>Hugh movement/aim/run/hover 입력 확인</li>
+<li>Diana look/scan/hack 입력 확인</li>
+<li>remote 화면에서 Hugh aim/hover/run animation 확인</li>
+<li>Standalone Demo에서 Hugh root HUD가 <code>WBP_HughHUD</code>인지 확인</li>
+<li>Standalone Demo 또는 2-player PIE에서 Diana root HUD가 <code>WBP_DianaHUD</code>인지 확인</li>
+<li>Standalone Demo에서 Hugh crosshair가 시작 시 숨겨지고 aim 중에만 표시되는지 확인</li>
+<li>2-player listen server Demo에서 host/client 각각 root HUD 1개만 생성 확인</li>
+<li>Hugh/Diana aim 시작/종료 후 각자 화면의 crosshair만 표시/숨김 확인</li>
+<li><code>WBP_EnemyHackingWidget</code>, <code>WBP_MapHackingWidget</code>이 양쪽 root HUD에서 같은 replicated target/component에 bind/unbind되는지 확인</li>
+<li>Hugh damage 후 Hugh/Diana HUD의 HP bar/text 동시 갱신 확인</li>
+<li>Hugh <code>RepairCartridge</code> 증감 후 Hugh/Diana HUD의 recovery item count 동시 갱신 확인</li>
+<li>Hugh 사격/재장전 후 weapon wheel <code>AmmoText</code>가 <code>current / max</code>로 즉시 갱신되는지 확인</li>
+<li>damaged Hugh가 <code>ConsumeRepairCartridge()</code>로 300 HP 회복하고, full HP에서는 cartridge를 소모하지 않는지 확인</li>
+<li><code>PlayerDamageMultiplier</code>가 Hugh weapon damage에 반영되고 음수 값은 0으로 clamp되는지 확인</li>
+<li>Hugh dash/jump/hover stamina 변화와 locked 색상이 Hugh/Diana HUD에 동시 반영되는지 확인</li>
+<li>Diana enemy hack 완료 후 OverDrive gauge가 Hugh/Diana HUD에 동시 반영되는지 확인</li>
+<li>Host Diana / Client Hugh에서도 client Hugh stamina 변화가 host Diana HUD에 반영되는지 확인</li>
+<li>legacy controller Blueprint asset 삭제 후 native HUD와 이중 생성 없음 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Systems/Server/server.md</code>의 <code>Hugh Replication</code>, <code>Diana Replication</code></li>
+<li><code>Docs/Architecture/replication-role-animation-fix.md</code></li>
+</ul>
+<h2 id="hugh-weapon-debug-crash">Hugh Weapon Debug Crash<a class="headerlink" href="#hugh-weapon-debug-crash" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li><code>AHughCharacter::PrintDebugMsg()</code>가 <code>Tick()</code>마다 실행</li>
+<li>debug ammo 출력에서 <code>CurrentWeapon-&gt;GetCurAmmo()</code>를 null guard 없이 호출</li>
+<li><code>EXCEPTION_ACCESS_VIOLATION reading address 0x0000000000000490</code></li>
+</ul>
+<p>원인:</p>
+<ul>
+<li><code>CurrentWeapon</code>은 <code>PostInitializeComponents()</code>에서 server authority가 <code>DefaultWeaponClass</code>를 spawn해야 세팅</li>
+<li>client는 weapon actor pointer가 replicate되기 전까지 <code>CurrentWeapon == nullptr</code></li>
+<li><code>DefaultWeaponClass</code>가 비었거나 <code>SpawnActor</code>가 실패해도 <code>CurrentWeapon == nullptr</code></li>
+<li>crash address <code>0x490</code>은 null object에서 <code>AWeaponBase::CurAmmunition</code> 멤버 오프셋을 읽으려 한 형태</li>
+<li>실제 crash 지점은 <code>PrintDebugMsg()</code>의 debug 출력이며, 사격 로직 자체는 이미 <code>!CurrentWeapon</code> guard 보유</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>PrintDebugMsg()</code>의 ammo 출력은 <code>CurrentWeapon</code> 유효성 확인 후 <code>GetCurAmmo()</code> 호출</li>
+<li>weapon이 아직 없으면 <code>Ammo: None</code> 출력</li>
+<li>debug HUD는 gameplay state를 확정하지 않고 관찰만 해야 함</li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>debug 출력, HUD 표시, ViewModel bind 같은 표시 계층도 replicated actor pointer를 바로 역참조하지 않음</li>
+<li>server spawn 직후와 client <code>OnRep_CurrentWeapon()</code> 사이에는 정상적으로 null 구간 존재</li>
+<li><code>DefaultWeaponClass</code> assignment 누락은 별도 Editor 설정 문제이므로 crash 대신 <code>None</code> 표시와 warning으로 추적</li>
+<li><code>CurrentWeapon</code> 기반 새 기능을 추가할 때는 <code>OnRep_CurrentWeapon()</code>, <code>EquipWeapon()</code>, client 초기 tick 순서를 함께 확인</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Standalone에서 Hugh spawn 후 debug HUD에 <code>Ammo</code> 또는 <code>Ammo: None</code> 표시 확인</li>
+<li>2-player PIE listen server에서 client 첫 tick 중 crash 없음 확인</li>
+<li><code>BP_HughCharacter</code> defaults의 <code>DefaultWeaponClass</code>가 비어 있을 때도 <code>PrintDebugMsg()</code>가 crash하지 않음 확인</li>
+<li>weapon replication 도착 후 ammo 값이 정상 표시되는지 확인</li>
+</ul>
+<h2 id="gameplay-class-boundaries-and-enemy-targets">Gameplay Class Boundaries and Enemy Targets<a class="headerlink" href="#gameplay-class-boundaries-and-enemy-targets" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>AI 세션 기록에 <code>CharacterBase</code>, <code>PlayerCharacter</code>, <code>EnemyCharacter</code> 같은 과거/추정 이름이 섞여 있음</li>
+<li>Walker만 scan/hack 대상이라고 보면 Executor leaf와 공통 monster interface 경계를 놓치기 쉬움</li>
+<li>Diana operator pawn을 일반 playable character로 합치면 role possession 구조가 다시 흐려짐</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>APlayableCharacter</code>는 Hugh처럼 physical playable body가 필요한 class의 공통 기반</li>
+<li><code>AHughCharacter</code>는 몸, camera, movement, Diana avatar attachment, paired hit react의 중심</li>
+<li><code>ADianaOperatorPawn</code>은 Diana player가 possess하는 camera/input/scan/hack operator pawn</li>
+<li><code>AMonsterBase</code>는 damage, hack, scan interface와 공통 AI/health/team 상태를 소유</li>
+<li>enemy leaf는 현재 <code>AWalkerMonster</code>와 <code>AExecutorMonster</code>가 있고, 각 leaf가 scan 표시 ID를 정함</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">AssignedRole
+-&gt; Hugh면 APlayableCharacter 계열 AHughCharacter possess
+-&gt; Diana면 ADianaOperatorPawn possess
+-&gt; Diana scan/hack trace
+-&gt; IPragmataScannable / IPragmataHackable
+-&gt; AMonsterBase common validation/state
+-&gt; Walker 또는 Executor leaf display/id
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>APlayableCharacter</code></li>
+<li><code>AHughCharacter</code></li>
+<li><code>ADianaOperatorPawn</code></li>
+<li><code>AMonsterBase</code></li>
+<li><code>AWalkerMonster</code></li>
+<li><code>AExecutorMonster</code></li>
+<li><code>IPragmataDamageable</code>, <code>IPragmataHackable</code>, <code>IPragmataScannable</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>새 코드나 문서에 <code>CharacterBase</code>, <code>PlayerCharacter</code>, <code>EnemyCharacter</code> 전제를 되살리지 않음</li>
+<li>Diana를 walking <code>ACharacter</code>로 합치지 않고 operator pawn 경계를 유지</li>
+<li>scan/hack 대상 추가 시 <code>AMonsterBase</code> interface contract와 leaf display/id를 같이 확인</li>
+<li><code>AExecutorMonster</code>의 constructor asset load pattern은 현재 구현 사실일 뿐 새 enemy leaf의 기본 패턴으로 복사하지 않음</li>
+<li>enemy leaf를 추가하면 <code>Docs/Architecture/architecture.md</code> class tree와 <code>Docs/Operations/blueprint-tasks.md</code> asset 연결 항목도 함께 확인</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Walker와 Executor가 scan UI에서 각 display text로 표시되는지 확인</li>
+<li>hack 성공 시 <code>AMonsterBase</code>의 hack/damage state와 OverDrive 증가가 서버에서 처리되는지 확인</li>
+<li>새 enemy leaf 추가 시 interface 구현, AI controller/BT, mesh/AnimBP assignment 경로를 분리 검증</li>
+<li>오래된 <code>.omx</code> 제안이 현재 source class 이름과 맞는지 <code>rg</code>로 재확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Systems/Damage/damage-flow.md</code></li>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Damage Flow</code></li>
+<li><code>Docs/Architecture/architecture.md</code>의 player/monster class 구조</li>
+<li><code>Docs/Operations/blueprint-tasks.md</code>의 enemy/asset 연결 항목</li>
+</ul>
+<h2 id="enemy-hp-and-groggy-ui">Enemy HP and Groggy UI<a class="headerlink" href="#enemy-hp-and-groggy-ui" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Enemy HP와 groggy gauge는 같은 위치에 보이지만 서로 다른 WBP와 material 상태를 가져야 함</li>
+<li>C++이 layout을 만들기 시작하면 WBP visual 작업과 충돌함</li>
+<li>material scalar parameter 이름이 C++에 강하게 고정되면 material 수정 때 WBP 연결이 깨지기 쉬움</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>WBP_EnemyHPBar</code> parent class는 <code>UEnemyHPBarWidget</code></li>
+<li>groggy 전용 WBP parent class는 <code>UEnemyGroggyGaugeWidget</code></li>
+<li>두 WBP를 묶는 상위 enemy HP WBP parent class는 <code>UEnemyHPWidget</code></li>
+<li>enemy 머리 위 표시는 <code>UEnemyHPWidgetComponent</code>를 enemy BP에 추가해 처리</li>
+<li>C++은 <code>Percent</code> scalar parameter만 갱신하고, bar 크기, segment 모양, 색, 배치는 WBP/material이 소유</li>
+<li><code>UEnemyHPWidget</code>은 <code>UPragmataHealthComponent</code>의 <code>OnHealthChanged</code>, <code>OnDeath</code> delegate에 bind해 HP bar를 갱신</li>
+<li><code>UEnemyHPWidgetComponent</code>는 owner actor의 <code>UPragmataHealthComponent</code>를 찾아 <code>UEnemyHPWidget</code>에 자동 bind</li>
+<li>groggy는 아직 공통 component가 없으므로 <code>SetGroggyValue(Current, Max)</code> 또는 <code>SetGroggyPercent(Percent)</code>를 외부에서 호출</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Enemy actor
+-&gt; UEnemyHPWidgetComponent
+-&gt; owner UPragmataHealthComponent
+-&gt; UEnemyHPWidget::BindToHealth
+-&gt; UEnemyHPBarWidget::SetHealthValue
+-&gt; HP material Percent
+
+Groggy source
+-&gt; UEnemyHPWidget::SetGroggyValue
+-&gt; UEnemyGroggyGaugeWidget::SetGroggyValue
+-&gt; groggy material Percent
+</code></pre>
+<p>접속 위치:</p>
+<ul>
+<li><code>UEnemyHPWidget</code></li>
+<li><code>UEnemyHPBarWidget</code></li>
+<li><code>UEnemyGroggyGaugeWidget</code></li>
+<li><code>UEnemyHPWidgetComponent</code></li>
+<li><code>/Game/UI/Widget/Enemy/WBP_EnemyHPBar</code></li>
+<li><code>/Game/UI/Widget/Enemy/WBP_EnemyHPWidget</code> 또는 새 <code>WBP_EnemyHP</code></li>
+<li><code>/Game/UI/Material/Enemy/M_EnemyHP_Segmented</code></li>
+<li><code>/Game/UI/Material/Enemy/M_EnemyGroggy_Segmented</code></li>
+</ul>
+<p>수정 주의:</p>
+<ul>
+<li><code>WBP_EnemyHPBar</code> 내부 Image 이름은 <code>HPBar</code></li>
+<li>groggy WBP 내부 Image 이름은 <code>GroggyBar</code> 또는 <code>GroggyGauge</code></li>
+<li>상위 WBP의 child widget 이름은 HP 쪽 <code>HPBar</code> 또는 <code>EnemyHPBar</code>, groggy 쪽 <code>GroggyBar</code> 또는 <code>GroggyGauge</code></li>
+<li>material parameter 이름을 바꾸면 각 WBP Details의 <code>PercentParameterName</code>도 같이 수정</li>
+<li>C++에서 size, padding, anchor를 강제하지 않음</li>
+<li>BP preview와 WidgetComponent 생성 직후에는 target bind 전이어도 기본 bar가 보여야 하므로, no-target 숨김은 명시적인 runtime unbind 때만 적용</li>
+<li>enemy 머리 위 위치, socket, relative offset은 enemy BP의 <code>UEnemyHPWidgetComponent</code>에서 조정</li>
+<li><code>UEnemyHPWidgetComponent</code>의 Widget Class는 상위 enemy HP WBP로 지정</li>
+<li>죽은 적 표시 유지가 필요하면 상위 WBP의 <code>bHideWhenDead</code>를 false로 설정</li>
+<li><code>UEnemyHPWidgetComponent</code>(및 다른 Screen space <code>UWidgetComponent</code> 서브클래스)에서 <code>PrimaryComponentTick.bCanEverTick</code>을 false로 끄지 않음: Screen space는 <code>UWidgetComponent::TickComponent()</code> -&gt; <code>UpdateWidgetOnScreen()</code> -&gt; <code>AddWidgetToScreen()</code> 경로로만 game layer에 등록되고 <code>OnRegister()</code>/<code>InitWidget()</code>은 game world에서 이 경로를 타지 않으므로, tick을 끄면 Widget object는 생성되지만 화면에는 영원히 추가되지 않음 (<code>ADamageText</code>의 plain <code>WidgetComponent</code>가 tick 기본값 유지로 정상 렌더링되는 대조군)</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>WBP parent class 재지정 후 Compile 성공 확인</li>
+<li>enemy BP에 <code>UEnemyHPWidgetComponent</code> 추가 후 Widget Class가 상위 enemy HP WBP인지 확인</li>
+<li>PIE에서 enemy 머리 위 HP bar가 실제로 화면에 보이는지 확인 (data bind와 별개로 렌더링 자체를 확인)</li>
+<li>PIE에서 enemy가 damage를 받을 때 머리 위 HP bar가 감소하는지 확인</li>
+<li>groggy 테스트 입력으로 <code>SetGroggyPercent(0.0/0.5/1.0)</code> 호출 후 주황 bar material이 갱신되는지 확인</li>
+<li><code>Percent</code> parameter 누락 시 bar가 움직이지 않으므로 material parameter spelling 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Systems/Hacking/enemy-hacking-integration.md</code></li>
+<li><code>Docs/Operations/blueprint-tasks.md</code></li>
+</ul>
+<h2 id="monster-territory-returnhome">Monster Territory ReturnHome<a class="headerlink" href="#monster-territory-returnhome" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>공격 종료 후 cooldown 중 monster가 Territory 밖으로 나가면 <code>ReturnHome</code>과 <code>NoAttack</code>이 경계에서 반복 전환</li>
+<li>경계 overlap 즉시 <code>bInsideTerritory = true</code>가 되면 <code>ReturnHome</code>의 self abort와 <code>NoAttack</code> 이동이 같은 경계에서 반복</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>AMonsterAIController::RunAI()</code>는 controller 생성자 hard-load가 아니라 monster <code>BTAsset</code>이 선언한 Blackboard를 schema source로 사용</li>
+<li><code>BBKEY_TARGET</code>은 <code>AActor*</code> 계약으로 유지하고 BT service/decorator에서 <code>APawn*</code>으로 좁히지 않음</li>
+<li><code>BT_Executor</code>의 <code>ReturnHome</code> Blackboard Decorator는 <code>bInsideTerritory Is Not Set</code> 유지</li>
+<li><code>Observer Aborts = Both</code>를 유지해 안전한 재진입 후 Chase 중간 전환 허용</li>
+<li>Territory 이탈 monster를 <code>ReturningMonsters</code>에 기록하고 <code>bInsideTerritory = false</code> 즉시 반영</li>
+<li>경계 overlap만으로 복귀 완료 처리하지 않고 <code>MonsterReentryMargin</code>만큼 안쪽 진입 후 true 반영</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">bInsideTerritory = false
+-&gt; ReturnHome이 전투 분기 중단
+-&gt; Move To HomePos
+-&gt; 경계 재진입은 ReturnHome 유지
+-&gt; MonsterReentryMargin 안쪽 진입
+-&gt; bInsideTerritory = true
+-&gt; ReturnHome self abort 후 Chase 재평가
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>Content/AI/BT_Executor.uasset</code>의 <code>ReturnHome</code> Decorator</li>
+<li><code>AMonsterTerritoryActor::HandleBeginOverlap</code>, <code>HandleEndOverlap</code>, <code>UpdateReturningMonsters</code></li>
+<li><code>AMonsterTerritoryActor::MonsterReentryMargin</code></li>
+<li><code>AMonsterBase::StartCommonAttackCooldown</code>, <code>RefreshAttackAvailability</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>ReturnHome</code>의 <code>Both</code>는 안전한 안쪽 재진입 후 Chase 전환에 필요</li>
+<li><code>MonsterReentryMargin</code>이 너무 작으면 경계 반복 가능, 너무 크면 Chase 전환 지연</li>
+<li>cooldown은 <code>NoAttack</code> 선택 조건이며 반복 전환의 직접 원인은 경계에서 즉시 뒤집히는 Territory 상태</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>공격 직후 cooldown 상태에서 monster를 Territory 밖으로 유도</li>
+<li>재진입 경계에서는 ReturnHome이 유지되는지 확인</li>
+<li>설정한 안쪽 여유 거리 통과 후 HomePos 도착 전 Chase 전환 확인</li>
+<li><code>ReturnHome</code>과 <code>NoAttack</code>의 프레임 단위 반복 전환이 사라지는지 확인</li>
+<li>cooldown 종료 후 정상 공격 전환 확인</li>
+</ul>
+<h2 id="damage-flow-and-melee-hit-notify">Damage Flow and Melee Hit Notify<a class="headerlink" href="#damage-flow-and-melee-hit-notify" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>gameplay damage가 Unreal damage event와 project interface로 갈라지면 health 적용 경로가 헷갈림</li>
+<li><code>Apply*</code> 이름은 caller/receiver 방향이 흐림</li>
+<li>melee 공격은 animation의 실제 타격 구간과 damage 판정이 맞아야 함</li>
+<li>Hugh 피격 반응은 실제 health 감소 후에만 실행되어야 하며 Diana lock은 큰 피격에서만 필요</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>caller 함수는 <code>Deal*</code>, receiver 함수는 <code>Receive*</code></li>
+<li>type/class 이름은 <code>Pragmata</code> prefix 유지</li>
+<li>공통 진입점: <code>UPragmataDamageLibrary::DealDamageToActor</code></li>
+<li><code>DealDamageToActor</code>는 target actor authority에서만 <code>ReceiveDamage</code>를 호출</li>
+<li>faction 판정 source는 <code>SourceActor</code> 우선, 없으면 <code>DamageCauser</code> fallback</li>
+<li>양쪽 actor에 <code>UPragmataFactionComponent</code>가 있으면 같은 진영/neutral 조합은 공통 진입점에서 차단</li>
+<li>공통 수신점: <code>IPragmataDamageable::ReceiveDamage</code></li>
+<li>최종 체력 변경: <code>UPragmataHealthComponent::ReceiveDamage</code></li>
+<li>Unreal <code>ApplyDamage</code>, <code>ApplyPointDamage</code>, <code>ApplyRadialDamage</code>는 gameplay damage 경로로 사용하지 않음</li>
+<li><code>TakeDamage</code> bridge는 제거했고, source가 <code>FPragmataDamageSpec</code>을 직접 만든 뒤 <code>ReceiveDamage</code> 경로로 전달</li>
+<li>gun damage는 server fire trace 결과를 <code>FPragmataDamageSpec</code>으로 전달</li>
+<li>client gun 입력은 damage 없이 local cooldown만 시작해 중복 RPC와 recoil을 막음</li>
+<li><code>AGripGun::PullTrigger()</code>는 non-authority 호출을 즉시 거부하고, 서버만 <code>CommitServerShot()</code>에서 ammo 소모·reload 전환·trace·damage를 확정</li>
+<li><code>AWeaponBase::PullTrigger()</code>는 서버 권한과 ammo/cooldown gate를 통과한 경우에만 <code>true</code> 반환</li>
+<li>impact VFX는 서버 trace 결과를 <code>MulticastSpawnImpactEffect()</code>로 전달해 gameplay damage와 시각 효과 경계를 분리</li>
+<li>enemy damage text는 server가 실제 감소량과 위치를 정하고 <code>MulticastSpawnDamageText()</code>로 각 peer가 로컬 표시 actor를 생성</li>
+<li><code>BeginServerReload()</code>는 서버 reload state를 열고, Hugh server montage 완료 callback이 <code>OnCompleteReload()</code>로 gameplay reload를 닫음</li>
+<li>범용 public <code>RefillAmmo()</code> 경로는 두지 않고 weapon별 서버 reload helper가 ammo state를 소유</li>
+<li><code>ReplenishAmmo()</code>와 auto replenish helper는 private 서버 helper로 유지해 외부 호출부가 ammo/reload 상태를 직접 조합하지 않게 함</li>
+<li><code>UWeaponDataAsset::GetDefaultCurrentAmmo()</code>는 UI 초기 획득값을 <code>MaxAmmo</code> 범위 안으로 clamp해 data default가 ammo 표시 계약을 넘지 않게 함</li>
+<li>환경 위험물은 <code>AEnvironmentalHazard</code>가 server overlap만 확정하고, 실제 플레이어 피해/상태이상 호출은 <code>ApplyHazardToActor</code> TODO 위치에서 연결</li>
+<li>휘두르는 melee/critical damage는 <code>UAnimNotifyState_AttackHitWindow</code>에서 server socket sweep으로 판정</li>
+<li>순간 범위 melee damage는 <code>UAnimNotify_AttackHitOverlap</code>에서 server socket box overlap으로 판정</li>
+<li><code>AttackHitOverlap</code>과 <code>AttackHitWindow</code> damage는 runtime owner의 <code>IPragmataDamageSource</code>에서 조회</li>
+<li><code>AMonsterBase</code>는 <code>CombatData.AttackDamage</code>를 현재 공격 damage로 제공</li>
+<li>근접 종료형 공격은 <code>EndSectionName</code>으로 몽타주의 기존 종료 section 지정</li>
+<li>loop 진입은 현재 section의 next section이 자기 자신인지 runtime에서 자동 판정</li>
+<li>server는 loop 중 target 거리·유실·최대 지속 시간을 검사해 end section으로 즉시 전환</li>
+<li>loop 활성화와 end 전환은 multicast로 전달해 server/client가 같은 montage 경로 사용</li>
+<li>AI 공격은 server에서 몽타주를 재생하기 직전에 target의 수평 방향으로 즉시 정렬</li>
+<li>공격 시작 후에는 BT <code>Simple Parallel</code>의 <code>Turn To Target</code>이 기존처럼 target을 계속 추적</li>
+<li>monster 치명타는 <code>HealthComponent::ReceiveDamage</code> 호출 전에 공격·이동·피격 상황에 맞는 <code>DeathAnimation</code>을 고정</li>
+<li><code>OnDeath -&gt; HandleDeath -&gt; SetDead</code>에서 AI·이동·공격 상태를 정리하고 모든 peer의 활성 montage를 중단</li>
+<li>Mesh만 공중에 뜨는 공격은 <code>DeathMontageBlendOutTime</code> 동안 현재 montage 포즈에서 Death sequence로 전환</li>
+<li><code>IsDead()</code>는 상태 조회만 담당하며 사망 side effect는 실행하지 않음</li>
+<li>monster는 hack 전 damage를 <code>0.1</code>배로 줄이고 damage text는 실제 감소량 표시</li>
+<li>모든 damage는 <code>SourceActor</code> 위치를 monster 정면 벡터와 비교해 <code>Front/Back</code> 방향 계산</li>
+<li><code>SourceActor</code>가 없으면 <code>DamageCauser</code>를 사용하고 <code>ImpactDirection</code>은 <code>공격자 -&gt; Monster</code>로 저장</li>
+<li>Hugh는 <code>ReceiveDamage</code>에서 <code>Super</code> 호출 전후 health를 비교해 실제 감소량으로 HitReact 강도를 계산</li>
+<li>Hugh HitReact 기준은 <code>Small &lt;= 0.04</code>, <code>Medium &lt;= 0.10</code>, <code>Large &gt; 0.10</code></li>
+<li>Hugh <code>Small/Medium</code> 피격은 Hugh montage만 재생하고, <code>Large/Death/ForcedPair</code>만 Diana paired cue를 보냄</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Gun trace
+-&gt; AGripGun::PullTrigger server authority gate
+-&gt; CommitServerShot ammo/reload/trace 확정
+-&gt; DealDamageToHitActor
+-&gt; FPragmataDamageSpec 생성
+-&gt; DealDamageToActor
+-&gt; ReceiveDamage
+-&gt; HealthComponent::ReceiveDamage
+
+Melee montage
+-&gt; AnimNotifyState_AttackHitWindow
+-&gt; socket sweep
+-&gt; FPragmataDamageSpec 생성
+-&gt; DealDamageToActor
+-&gt; ReceiveDamage
+
+Impact montage
+-&gt; AnimNotify_AttackHitOverlap
+-&gt; socket box overlap
+-&gt; FPragmataDamageSpec 생성
+-&gt; DealDamageToActor
+-&gt; ReceiveDamage
+
+Diana hack
+-&gt; ApplySuccessfulHack
+-&gt; FPragmataDamageSpec 생성
+-&gt; ReceiveDamage (DamageKind == Hack은 pre-hack 0.1배 감쇠 제외)
+-&gt; damage 적용 성공 시 bHacked = true
+
+Proximity loop montage
+-&gt; montage asset에 설정된 self-loop section 반복
+-&gt; server가 매 tick target 거리와 최대 시간 검사
+-&gt; 근접·target 유실·시간 초과 시 EndSectionName으로 즉시 전환
+
+AI attack facing
+-&gt; AttackByAI가 montage 재생 직전에 target 방향으로 즉시 회전
+-&gt; montage 재생 중에는 BT Turn To Target이 계속 회전 추적
+
+Monster death
+-&gt; 치명타 직전 DeathAnimation 확정
+-&gt; HealthComponent가 bIsDead 설정 후 OnDeath 전달
+-&gt; server는 BT·이동·공격 runtime 정리
+-&gt; 각 peer는 multicast로 재생된 montage 중단
+-&gt; AnimBP Death 상태의 Sequence Player가 선택된 animation 재생
+
+Hugh hit react
+-&gt; AHughCharacter::ReceiveDamage_Implementation
+-&gt; PreviousHealth 저장
+-&gt; Super::ReceiveDamage_Implementation
+-&gt; ActualDamage = PreviousHealth - CurrentHealth
+-&gt; Hugh HitReact montage 직접 재생
+-&gt; Large/Death/ForcedPair이면 Diana paired cue 전송
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>FPragmataDamageSpec</code></li>
+<li><code>UPragmataDamageLibrary</code></li>
+<li><code>IPragmataDamageable</code></li>
+<li><code>IPragmataDamageSource</code></li>
+<li><code>UPragmataHealthComponent</code></li>
+<li><code>AWeaponBase</code></li>
+<li><code>AMonsterBase</code></li>
+<li><code>UMonsterAnimInstance</code></li>
+<li><code>AHughCharacter::ReceiveDamage_Implementation</code></li>
+<li><code>AHughCharacter::ResolveHitReactStrength</code></li>
+<li><code>AHughCharacter::ResolveHitReactDirection</code></li>
+<li><code>UAnimNotifyState_AttackHitWindow</code></li>
+<li><code>UAnimNotify_AttackHitOverlap</code></li>
+<li><code>AEnvironmentalHazard</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>damage 함수명에 <code>Apply</code>, <code>Try</code>, 불필요한 <code>Pragmata</code>를 다시 넣지 않음</li>
+<li>Unreal damage API를 main gameplay path로 되돌리지 않음</li>
+<li>새 damage source는 source 쪽에서 <code>FPragmataDamageSpec</code> 생성 후 <code>DealDamageToActor</code> 호출</li>
+<li><code>AGripGun::PullTrigger()</code> 안에서 client-side ammo, reload, damage 판정을 다시 열지 않음</li>
+<li>GripGun 재장전 완료는 Hugh server montage 완료 callback의 <code>OnCompleteReload()</code> 하나로 처리하고, 탄약 보충이나 reload state 변경은 서버 private helper를 통해서만 수행</li>
+<li>melee notify는 server authority에서만 damage 확정</li>
+<li>notify window마다 hit actor set을 유지해 같은 공격 window 중복 피해 방지</li>
+<li>overlap notify는 한 번의 query에서 actor별 1회만 damage 전달</li>
+<li>overlap과 hit window notify owner가 <code>IPragmataDamageSource</code>를 구현하지 않거나 damage가 0 이하면 판정 중단</li>
+<li>overlap box는 socket 회전을 따르며 <code>HitBoxExtent</code> X/Y/Z를 montage Details에서 조정</li>
+<li>laser와 molten asphalt 같은 접촉형 위험물은 BP에서 <code>AEnvironmentalHazard</code> 상속 후 <code>HazardTrigger</code> 크기와 시각 컴포넌트만 다르게 구성</li>
+<li>montage preview viewport는 overlap의 box와 hit window의 sweep sphere를 각각 runtime 크기로 표시</li>
+<li><code>AttackHitWindow.HitRadius</code>는 runtime sphere sweep과 editor preview sphere에 함께 적용</li>
+<li><code>bPreviewOnlyNearNotifyTime</code> 선택 시 point notify는 trigger 주변, state notify는 window 전후 <code>PreviewTimeTolerance</code> 동안만 표시</li>
+<li>montage에 notify를 배치하는 작업은 Editor 수동 작업</li>
+<li><code>IsDead()</code> 같은 query 함수에 montage 중단이나 AI 정리 side effect를 넣지 않음</li>
+<li>사망 시 <code>FinishAttackByAI()</code>를 호출하지 않아 attack cooldown과 정상 완료 delegate 실행 방지</li>
+<li>공격별 <code>FMonsterAttackPattern.DeathAnimation</code>은 각 monster BP의 pattern에 직접 지정</li>
+<li>Default·Locomotion·Hack·Critical 사망은 monster BP별 <code>FMonsterDeathAnimationSet</code>에 지정</li>
+<li>각 상태의 <code>Use &lt;State&gt; Direction Variants</code>를 끄면 단일 animation, 켜면 <code>Front/Back Animation</code> 지정</li>
+<li><code>Front/Back Animation</code>은 쓰러지는 방향이 아니라 공격이 들어온 면을 기준으로 매핑</li>
+<li><code>DamageKind == Melee</code> 치명타는 현재 공격·이동 상태보다 우선해 <code>Critical Animation</code> 선택</li>
+<li><code>ABP_ExecutorMonster</code>의 Death 상태는 Sequence Player의 Sequence pin에 <code>DeathAnimation</code> 연결</li>
+<li><code>DeathMontageBlendOutTime</code>과 <code>ToDeath -&gt; Death</code> transition crossfade를 비슷한 값으로 설정</li>
+<li>Mesh-only 공중 높이 차이는 blend로 부드럽게 만들 수 있지만 capsule world 위치는 바뀌지 않음</li>
+<li>근접 loop 코드는 section을 생성하지 않으며 montage에 이미 존재하는 이름만 사용</li>
+<li>section 이름이나 <code>EndSectionName</code>이 없으면 원본 montage 기본 연결로 재생</li>
+<li>원본 montage의 <code>Start -&gt; Loop -&gt; End</code> 연결은 runtime 설정 실패에 대비한 fallback으로 유지</li>
+<li>Start부터 End까지 이어지는 montage-level NotifyState는 loop 자기 반복 중에도 활성 범위를 유지</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>unhacked monster weapon hit: damage <code>0.1</code>배</li>
+<li>hacked monster weapon hit: full damage</li>
+<li>hack damage: full damage 적용 성공 후 <code>bHacked</code> true</li>
+<li>melee notify window: target당 1회 damage</li>
+<li>melee notify window: <code>HitRadius</code>를 변경하면 runtime sweep과 editor sphere가 같은 크기로 변경</li>
+<li>melee notify window: damage는 notify 고정값이 아니라 source interface에서 조회하며 monster는 <code>CombatData.AttackDamage</code>를 반환</li>
+<li>melee overlap notify: 타격 프레임의 범위 안 target당 1회 damage</li>
+<li>공격 중 사망: 공격 montage가 중단되고 해당 pattern의 <code>DeathAnimation</code>으로 전환</li>
+<li>Locomotion 사망: Idle/Move 구분 없이 같은 sequence 선택</li>
+<li>listen server와 client에서 같은 <code>DeathAnimation</code> 재생 확인</li>
+<li>근접 loop montage: 접근 중 <code>Loop -&gt; Loop</code>, 근접 시 즉시 <code>End -&gt; StandUp</code></li>
+<li>target 유실 또는 최대 loop 시간 초과 시 End로 빠져 공격 task 종료</li>
+<li>listen server와 client에서 같은 section 순서와 공격 종료 시점 확인</li>
+<li>damage text: health 실제 감소량 표시</li>
+</ul>
+<h2 id="look-input-contract">Look Input Contract<a class="headerlink" href="#look-input-contract" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li><code>IA_Look</code>가 <code>Boolean</code>이면 <code>Mouse2D</code> 입력이 작은 움직임에도 카메라 spin처럼 보일 수 있음</li>
+<li>C++는 <code>FVector2D</code> look 값을 기대하므로 InputAction asset type과 runtime contract가 맞아야 함</li>
+<li>PIE/package에서 mouse가 viewport 밖으로 빠지면 <code>IA_Look</code>가 register되지 않음</li>
+<li><code>Title</code>/<code>Lobby</code>의 <code>GameAndUI</code> input mode와 visible cursor가 gameplay까지 남으면 mouse capture가 풀림</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>/Game/Blueprints/Player/Input/Common/IA_Look</code>의 value type은 <code>Axis2D</code></li>
+<li>Hugh는 <code>AHughCharacter::OnTriggerLook()</code>에서 <code>FVector2D</code>를 controller yaw/pitch로 적용</li>
+<li>Diana는 같은 look action을 <code>ADianaOperatorPawn</code> camera rotation intent로 적용하되 pitch는 C++에서 <code>Mouse2D.Y</code>를 반전</li>
+<li><code>IMC_Hugh</code>, <code>IMC_Diana</code>, <code>IMC_Lobby</code>, <code>IMC_Title</code>이 key 배치를 소유하고 C++은 <code>InputAction</code>만 load/bind</li>
+<li>gameplay controller 진입 시 <code>APragmataPlayerController::ApplyGameplayInputMode()</code>에서 <code>FInputModeGameOnly</code>, <code>bShowMouseCursor=false</code>, look/move ignore 해제를 적용</li>
+<li><code>BeginPlay</code>, <code>OnPossess</code>, <code>AcknowledgePossession</code>, <code>OnRep_PlayerState</code> 모두 gameplay input mode를 다시 보정</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">IA_Look Axis2D
+-&gt; gameplay PlayerController GameOnly input mode
+-&gt; IMC_Hugh 또는 IMC_Diana
+-&gt; FInputActionValue.Get&lt;FVector2D&gt;()
+-&gt; Hugh controller rotation 또는 Diana operator pawn rotation
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>/Game/Blueprints/Player/Input/Common/IA_Look</code></li>
+<li><code>/Game/Blueprints/Player/Input/Hugh/IMC_Hugh</code></li>
+<li><code>/Game/Blueprints/Player/Input/Diana/IMC_Diana</code></li>
+<li><code>AHughCharacter::OnTriggerLook</code></li>
+<li><code>ADianaOperatorPawn::OnTriggerLook</code></li>
+<li><code>APragmataPlayerController::ApplyGameplayInputMode</code></li>
+<li><code>APragmataPlayerController::ApplyRoleInputAndCamera</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>camera spin이나 look 입력 이상은 C++ 보정 전에 InputAction <code>ValueType</code>부터 확인</li>
+<li>mouse가 창 밖으로 빠지거나 <code>IA_Look</code>가 아예 register되지 않으면 input mode/cursor capture부터 확인</li>
+<li>Hugh와 Diana가 같은 <code>IA_Look</code> asset을 공유하므로 변경 시 양쪽 입력을 모두 검증</li>
+<li>Diana 세로 look 반전은 shared <code>IA_Look</code> asset이 아니라 <code>ADianaOperatorPawn::AddCameraInput()</code>에서만 처리</li>
+<li>input asset 이동 시 C++ soft path와 PAL explicit asset을 같이 갱신</li>
+<li>asset 저장 작업은 target asset만 바뀌었는지 확인</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li><code>IA_Look.uasset</code> binary text에 <code>EInputActionValueType::Axis2D</code> 또는 <code>ValueType Axis2D</code> 확인</li>
+<li><code>git diff --stat -- Content/Blueprints/Player/Input/Common/IA_Look.uasset</code>로 target asset만 변경됐는지 확인</li>
+<li>PIE에서 mouse look이 작은 이동량에 비례해 움직이는지 확인</li>
+<li>PIE에서 gameplay viewport 클릭 후 mouse가 창 밖으로 빠지지 않는지 확인</li>
+<li>Diana client에서 mouse up/down이 기대 방향과 일치하는지 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Input Flow</code></li>
+<li><code>Docs/Systems/Server/server.md</code>의 role별 input/replication 확인 항목</li>
+</ul>
+<h2 id="hugh-headvisor-spotlight">Hugh HeadVisor Spotlight<a class="headerlink" href="#hugh-headvisor-spotlight" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li><code>SK_Hugh</code> socket은 attach 위치만 제공하고 runtime light component를 직접 소유하지 않음</li>
+<li>visor light toggle은 Hugh 소유자 입력과 remote 화면 표시를 함께 맞춰야 함</li>
+<li>visor light toggle은 실제 Enhanced Input action/mapping asset으로 보여야 함</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>AHughCharacter</code>가 <code>HeadVisorSpotlight</code> <code>USpotLightComponent</code>를 생성</li>
+<li>기본 attach socket은 Hugh body mesh의 <code>HeadVisor_LightSocket</code></li>
+<li>socket이 없으면 mesh root fallback attach 후 warning log 출력</li>
+<li><code>bHeadVisorSpotlightEnabled</code>를 서버 replicated bool로 유지</li>
+<li>owner 입력은 local 예측 적용 후 <code>Server_SetHeadVisorSpotlightEnabled()</code>로 서버 확정</li>
+<li><code>/Game/Blueprints/Player/Input/Hugh/IA_HeadVisorLightToggle</code>는 Boolean Input Action</li>
+<li><code>IMC_Hugh</code>가 <code>IA_HeadVisorLightToggle</code>을 <code>T</code>, <code>Gamepad_LeftShoulder</code>에 매핑</li>
+<li>C++은 <code>ResolveInputActions()</code>에서 해당 IA asset을 load한 뒤 <code>SetupPlayerInputComponent()</code>에서 bind</li>
+</ul>
+<p>핵심 위치:</p>
+<ul>
+<li><code>AHughCharacter::EnsureHeadVisorSpotlightAttachment</code></li>
+<li><code>AHughCharacter::ResolveInputActions</code></li>
+<li><code>AHughCharacter::OnToggleHeadVisorSpotlight</code></li>
+<li><code>AHughCharacter::OnRep_HeadVisorSpotlightEnabled</code></li>
+<li><code>Content/Blueprints/Player/Input/Hugh/IA_HeadVisorLightToggle.uasset</code></li>
+<li><code>Content/Blueprints/Player/Input/Hugh/IMC_Hugh.uasset</code></li>
+<li><code>BP_HughCharacter &gt; Mesh</code></li>
+<li><code>Content/Character/Hugh/SK_Hugh.uasset</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>socket transform 조정은 <code>SK_Hugh</code> 또는 <code>BP_HughCharacter</code> viewport에서 확인</li>
+<li>left shoulder가 다른 Hugh action과 충돌하면 <code>IMC_Hugh</code> mapping 정책을 먼저 확인</li>
+<li>light cone 방향은 socket attach 직후 relative yaw <code>-90</code> 오프셋 재적용</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>PIE에서 Hugh spawn 후 visor light가 <code>HeadVisor_LightSocket</code>을 따라감</li>
+<li><code>T</code> 입력으로 on/off 전환</li>
+<li>gamepad left shoulder 입력으로 on/off 전환</li>
+<li>2-player listen server에서 remote 화면도 같은 on/off 상태 확인</li>
+<li>socket 저장 전이면 <code>Missing socket: HeadVisor_LightSocket</code> warning 확인</li>
+</ul>
+<h2 id="global-power-and-map-lights">Global Power and Map Lights<a class="headerlink" href="#global-power-and-map-lights" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li><code>ALightBase</code>는 <code>ULightComponent::SetVisibility()</code>를 로컬에서 적용</li>
+<li>listen server에서 전원 장치를 켜면 서버 화면은 갱신되지만 remote client는 전원 변경 신호를 받지 못할 수 있음</li>
+<li>LightComponent visibility 자체를 서버에서 바꾼다고 client 표시가 자동으로 맞지 않음</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>AInteractionPowerSupply</code>는 서버에서만 <code>APragmataGameState::SetGlobalPowerState(true)</code> 호출</li>
+<li><code>APragmataGameState::bGlobalPowerOn</code>은 <code>ReplicatedUsing=OnRep_GlobalPowerOn</code>으로 복제</li>
+<li>서버는 <code>SetGlobalPowerState()</code>에서 <code>OnPowerStateChanged</code>를 broadcast</li>
+<li>client는 <code>OnRep_GlobalPowerOn()</code>에서 같은 <code>OnPowerStateChanged</code>를 broadcast</li>
+<li><code>ALightBase</code>와 <code>APoweredResponBox</code>는 GameState delegate를 구독하고 각자 로컬 표시/잠금 상태를 갱신</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">AInteractionPowerSupply::Interact_Implementation
+-&gt; APragmataGameState::SetGlobalPowerState(true)
+-&gt; server OnPowerStateChanged broadcast
+-&gt; bGlobalPowerOn replication
+-&gt; client OnRep_GlobalPowerOn
+-&gt; client OnPowerStateChanged broadcast
+-&gt; ALightBase::HandlePowerStateChanged
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>APragmataGameState::SetGlobalPowerState</code></li>
+<li><code>APragmataGameState::OnRep_GlobalPowerOn</code></li>
+<li><code>ALightBase::HandlePowerStateChanged</code></li>
+<li><code>APoweredResponBox::HandlePowerStateChanged</code></li>
+<li><code>AInteractionPowerSupply::Interact_Implementation</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>client에서 <code>SetGlobalPowerState()</code>를 직접 실행하지 않음</li>
+<li>새 전원 반응 actor는 GameState의 <code>OnPowerStateChanged</code>를 구독하고 BeginPlay에서 <code>GetGlobalPowerState()</code>로 초기 동기화</li>
+<li>개별 LightComponent visibility를 gameplay state로 취급하지 않고, 복제된 전원 bool에서 로컬 표시를 재생성</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>2-player listen server에서 Diana가 전원 노드 완료</li>
+<li>listen server 화면과 remote client 화면 모두 맵 조명 켜짐 확인</li>
+<li>전원 의존 문/상자도 client에서 같은 잠금 상태로 동작하는지 확인</li>
+</ul>
+<h2 id="item-box-interactable">Item Box Interactable<a class="headerlink" href="#item-box-interactable" title="Permanent link">&para;</a></h2>
+<p>현재 구조:</p>
+<ul>
+<li><code>AItemBoxInteractable</code>은 <code>APropInteractionBase</code>를 상속해 상호작용 키 진입점을 그대로 사용</li>
+<li>상호작용은 서버에서만 확정하고 <code>bIsOpened</code>로 1회만 처리</li>
+<li>플레이어 보상/아이템 지급은 <code>Interact_Implementation()</code>의 TODO 위치에서 <code>Interactor</code> 기준으로 연결</li>
+<li><code>ItemBoxMesh</code>에 skeletal mesh를 지정하고 <code>OpenAnimation</code>에 열림 animation asset 지정</li>
+<li><code>OpenAnimationSerial</code>을 복제해 listen server와 client가 같은 열림 애니메이션을 로컬 재생</li>
+<li><code>OnInteractionActivated</code> delegate는 상자 열림 확정 후 broadcast</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Interaction input
+-&gt; AItemBoxInteractable::Interact_Implementation
+-&gt; server bIsOpened 확정
+-&gt; TODO player item/reward function
+-&gt; PlayOpenAnimation
+-&gt; OpenAnimationSerial replication
+-&gt; client PlayOpenAnimation
+</code></pre>
+<p>수정 시 주의:</p>
+<ul>
+<li>아이템 지급 로직은 client가 직접 확정하지 않고 서버 상호작용 경로에 연결</li>
+<li>animation asset은 C++에서 hard load하지 않고 BP/Editor에서 지정</li>
+<li>이미 열린 상자는 다시 상호작용해도 보상과 애니메이션을 반복하지 않음</li>
+<li>static mesh만 있는 상자라면 skeletal mesh와 animation asset 또는 별도 timeline 구조가 필요</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>BP 자식 생성 후 <code>ItemBoxMesh</code>, <code>OpenAnimation</code>, <code>OpenAnimationPlayRate</code> 지정</li>
+<li>listen server에서 상호작용 시 server 화면에서 상자 열림 확인</li>
+<li>client 화면에서도 같은 상자 열림 애니메이션 확인</li>
+<li>두 번째 상호작용에서 보상 TODO 위치와 애니메이션이 반복되지 않는지 확인</li>
+</ul>
+<h2 id="axis-movable-prop">Axis Movable Prop<a class="headerlink" href="#axis-movable-prop" title="Permanent link">&para;</a></h2>
+<p>현재 구조:</p>
+<ul>
+<li><code>AAxisMovableProp</code>은 <code>AActor</code>로 이동 행동만 담당</li>
+<li><code>InteractionActor</code>에 <code>APropInteractionBase</code> 계열 액터를 스포이드로 지정</li>
+<li><code>APropInteractionBase::OnInteractionActivated</code> delegate를 구독</li>
+<li>일반 상호작용은 <code>APropInteractionBase::Interact_Implementation()</code>에서 delegate broadcast</li>
+<li>퍼즐 상호작용은 server <code>APuzzleInteractable::CompletePuzzle()</code>에서 delegate broadcast</li>
+<li><code>AAxisMovableProp</code>은 <code>APropInteractionBase</code>나 <code>IPuzzleTargetInterface</code>를 구현하지 않음</li>
+<li>BP 자식 생성 후 <code>SceneRoot</code> 아래에 <code>StaticMeshComponent</code> 또는 <code>SkeletalMeshComponent</code> 추가</li>
+<li><code>APingPongAxisMovableProp</code>은 <code>AAxisMovableProp</code>을 상속해 server timer로 목표 상태를 자동 왕복 토글</li>
+</ul>
+<p>현재 흐름:</p>
+<pre><code class="language-text">Diana/Hugh interaction
+-&gt; InteractionActor::Interact_Implementation
+-&gt; APropInteractionBase::OnInteractionActivated
+-&gt; AAxisMovableProp::HandleInteractionActivated
+-&gt; server SetMoved
+-&gt; bIsAtTarget replication
+-&gt; client OnRep_IsAtTarget
+</code></pre>
+<p>자동 왕복:</p>
+<pre><code class="language-text">APingPongAxisMovableProp::BeginPlay
+-&gt; server StartAutoMove
+-&gt; SetMoved(!IsMoved())
+-&gt; 부모 이동/복제 경로
+-&gt; MoveDuration + WaitAtEndsDuration 뒤 재토글
+</code></pre>
+<p>문제:</p>
+<ul>
+<li>맵 장치를 수직/좌우 등 한 축으로 이동시키는 프롭 필요</li>
+<li>이동 방향과 거리는 Editor에서 actor별로 조절 필요</li>
+<li>사용자 상호작용 액터와 실제 이동 액터 분리 필요</li>
+<li>listen server와 client가 같은 목표 위치와 이동 상태를 봐야 함</li>
+</ul>
+<p>핵심 위치:</p>
+<ul>
+<li><code>AAxisMovableProp</code></li>
+<li><code>APingPongAxisMovableProp</code></li>
+<li><code>APropInteractionBase</code></li>
+<li><code>APuzzleInteractable::CompletePuzzle</code></li>
+</ul>
+<p>수정 시 주의:</p>
+<ul>
+<li><code>MoveDirection</code>은 0 벡터면 <code>UpVector</code> fallback</li>
+<li>이동 기준점은 <code>BeginPlay()</code>의 actor 위치</li>
+<li>배치 후 열린 상태로 시작하려면 <code>bStartMoved=true</code></li>
+<li>자동 왕복은 <code>MoveDuration</code>을 한쪽 이동 시간으로 사용하고 <code>WaitAtEndsDuration</code>만큼 끝점에서 대기</li>
+<li>runtime에서 방향/거리까지 바꾸는 기능이 필요하면 서버 값 복제와 재보간 타이밍을 같이 검토</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>BP 자식 생성 후 <code>SceneRoot</code> 아래에 <code>StaticMeshComponent</code> 또는 <code>SkeletalMeshComponent</code> 추가</li>
+<li>배치한 <code>AAxisMovableProp.InteractionActor</code>에 상호작용 actor 지정</li>
+<li>퍼즐 완료로 움직일 경우 <code>InteractionActor</code>에 puzzle node actor 지정</li>
+<li><code>MoveDirection=(0,0,1)</code>, <code>MoveDistance=300</code>으로 수직 이동 확인</li>
+<li>2-player listen server에서 상호작용 후 양쪽 화면 위치 일치 확인</li>
+<li><code>MoveDuration=0</code>이면 즉시 이동 확인</li>
+<li><code>APingPongAxisMovableProp</code> BP에서 <code>bAutoMoveOnBeginPlay=true</code>, <code>MoveDuration=2</code>, <code>WaitAtEndsDuration=1</code>로 왕복 확인</li>
+</ul>
+<h2 id="hugh-waistarm-and-diana-mount-sockets">Hugh WaistArm and Diana Mount Sockets<a class="headerlink" href="#hugh-waistarm-and-diana-mount-sockets" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Diana avatar, Diana IK target, Hugh waist arm이 서로 다른 mesh/socket owner를 사용</li>
+<li><code>WaistArmMesh</code>를 잘못 reparent하면 Blueprint override가 깨지고 mesh invisible 또는 <code>Template Mismatch</code>가 발생</li>
+<li><code>HipCarrySocket</code> 누락 시 waist arm attach가 root fallback으로 가면 위치 기준이 흔들림</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>UWaistArmComponent</code>가 <code>WaistArmMesh</code>를 child component로 소유</li>
+<li><code>AHughCharacter::AttachWaistArm()</code>은 <code>WaistArmComponent</code>를 Hugh mesh <code>HipCarrySocket</code>에 attach</li>
+<li><code>HipCarrySocket</code>이 없으면 <code>Hip</code> bone fallback을 사용하고 로그로 원인을 남김</li>
+<li>Diana avatar mesh는 Hugh body <code>DianaMountSocket_root</code>에 attach</li>
+<li>Diana paddle IK sockets는 <code>WaistArmMesh</code>, hand/side handle sockets는 Hugh body mesh에서 조회</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">AHughCharacter
+-&gt; WaistArmComponent
+-&gt; WaistArmMesh child 유지
+-&gt; HipCarrySocket attach
+-&gt; DianaAnimInstance socket lookup
+-&gt; ABP_Diana IK target
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>AHughCharacter::AttachWaistArm</code></li>
+<li><code>UWaistArmComponent::EnsureWaistArmMeshAttachment</code></li>
+<li><code>UDianaAnimInstance::UpdateIKTargets</code></li>
+<li><code>BP_HughCharacter &gt; WaistArmComponent &gt; WaistArmMesh</code></li>
+<li><code>SK_Hugh</code>, <code>SK_Hugh_WaistArm</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>WaistArmMesh</code>를 Hugh mesh에 직접 붙이지 않음</li>
+<li><code>WaistArmMesh</code> skeletal mesh assignment는 <code>BP_HughCharacter</code> override와 함께 확인</li>
+<li><code>HipCarrySocket</code>은 Hugh body skeleton 쪽 socket</li>
+<li>paddle socket은 <code>SK_Hugh_WaistArm</code>, handle socket은 <code>SK_Hugh</code> 기준으로 확인</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>PIE log에 <code>No SkeletalMesh for Component(WaistArmMesh)</code> 없음</li>
+<li><code>Missing socket or bone: HipCarrySocket</code> 없음</li>
+<li>Diana avatar가 Hugh 등에 고정</li>
+<li>Diana toe/hand IK alpha가 socket 존재 여부에 맞게 0/1 전환</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>WaistArm attachment 보정</code>, <code>Diana Mount Socket / IK</code></li>
+<li><code>Docs/Operations/blueprint-tasks.md</code>의 <code>Diana Mount Socket / IK</code></li>
+</ul>
+<h2 id="diana-scan-hack-and-node-interaction">Diana Scan, Hack, and Node Interaction<a class="headerlink" href="#diana-scan-hack-and-node-interaction" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>client가 camera origin/direction이나 target intent를 그대로 보내면 hack/scan 판정 조작 위험</li>
+<li>Diana가 Hugh와 너무 멀거나 화면 중앙 밖 대상을 scan/hack/node interaction할 수 있음</li>
+<li>monster hack, map hack, puzzle node complete가 같은 Diana 입력 경계 안에서 섞일 수 있음</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>client input은 RPC 요청만 보냄</li>
+<li>서버가 Diana authoritative camera intent를 다시 계산</li>
+<li>scan은 Diana assigned role, Hugh anchor distance, Hugh forward cone, line of sight, interface를 서버에서 검증</li>
+<li><code>IPragmataScannable</code> 구현체는 display metadata를 반환하고, 최종 scan 거리/유효성은 <code>UDianaScanComponent</code>가 서버 trace 결과로 덮어씀</li>
+<li>enemy hack은 Hugh anchor distance, line of sight, interface를 서버에서 검증하고 Hugh 방향은 보지 않음</li>
+<li>paired montage lock 중 scan/hack 거부</li>
+<li>scan 결과는 <code>UDianaScanComponent::LastScanResult</code>에 복제되어 UI 갱신에 사용</li>
+<li>monster hack 시작은 별도 hack 시작 버튼 없이 aim 중 reticle trace로 얻은 target actor를 자동 요청</li>
+<li>reticle line trace가 enemy collision을 직접 못 잡으면 reticle 주변 <code>ECC_Pawn</code>/<code>ECC_WorldDynamic</code> sweep에서 가장 중앙에 가까운 hackable actor를 후보로 사용</li>
+<li>line/sweep hit가 child actor에 맞아도 attached parent가 hackable이면 같은 target으로 해석</li>
+<li>sweep 후보도 visibility LOS를 통과해야 서버 거절 RPC 반복을 줄임</li>
+<li>enemy hack active 중 reticle 후보가 active target에서 0.15초 이상 벗어나면 Diana가 서버 cancel을 요청해 양쪽 HUD를 닫음</li>
+<li>cancel 요청은 active target당 1회만 보내고, 서버는 expected target이 현재 active target과 다르면 늦은 cancel로 보고 무시</li>
+<li>enemy hack ViewModel은 이전 cancel/complete animation finish가 새 active puzzle의 <code>bIsActive</code>를 false로 내리지 않도록 현재 bound puzzle state를 확인</li>
+<li>같은 enemy 재시작도 Hugh HUD가 다시 열리도록 <code>ActiveEnemyHackTarget</code>과 별도 serial 복제를 함께 사용</li>
+<li>Hugh HUD처럼 이미 시작된 puzzle에 나중에 bind되는 화면은 ViewModel 동기화 때 <code>StartedTrigger</code>를 다시 토글해 표시를 복구</li>
+<li>enemy hack은 즉시 damage가 아니라 <code>UEnemyHackingPuzzleComponent</code> 시작 후 완료 시 <code>GetProjectedDamage()</code>로 서버 damage 적용</li>
+<li>완료 시 <code>UDianaHackComponent</code>는 damage/OverDrive를 먼저 처리하고 <code>ActiveEnemyHackTarget</code> null 복제를 <code>CompletedHackHudHoldSeconds</code>만큼 지연해 success animation 시간을 보장</li>
+<li><code>UEnemyHackingWidget</code>은 ViewModel의 <code>OnHackCompletedWithDamage</code>를 받아 <code>OnHackCompleted()</code> BP event를 호출해 WBP 성공 애니메이션을 시작</li>
+<li>hacked monster는 <code>CanBeHacked()</code>에서 거부해 damage/OverDrive 중복 적용을 막음</li>
+<li><code>IPragmataHackable</code>의 actor 인자는 target이 아니라 <code>HackInstigator</code>이며, target actor는 interface 구현체 자신</li>
+<li><code>bIsAiming</code>은 replicated bool로 유지하고 camera FOV/spring arm length를 local tick에서 보간</li>
+<li><code>APragmataPlayerController</code> runtime duplicate fallback도 <code>RightMouseButton=IA_Aim</code>, <code>Tab=IA_Scan</code> 기준 유지</li>
+<li>enemy hack은 Diana <code>OperatorMode</code>와 무관하게 aim 중 reticle target으로 <code>UDianaHackComponent</code> enemy hack puzzle을 자동 시작</li>
+<li>map hack은 Diana assigned role의 <code>Roaming + non-combat + Aim</code>이고 <code>AreDianaActionsLocked() == false</code>일 때만 node <code>Interact()</code>를 호출하며, <code>APuzzleInteractable::Interact_Implementation()</code>이 <code>UMapHackingPuzzleComponent</code>를 찾아 puzzle을 시작</li>
+<li>해킹 UI active 중 방향 입력은 <code>W/A/S/D</code>와 gamepad face button <code>Top/Left/Bottom/Right</code>를 <code>EHackDirection</code>으로 변환</li>
+<li>aim 해제는 active enemy/map hack cancel 요청</li>
+<li>node interaction 후보는 <code>AInteractionPowerSupply</code>와 <code>APuzzleInteractable</code>만 허용</li>
+<li>node interaction 거리는 Hugh 위치 기준 <code>1500cm</code>, 화면 중앙 판정은 <code>10도</code> half-angle</li>
+<li><code>APuzzleInteractable</code>에 <code>UMapHackingPuzzleComponent</code>가 없으면 기존 <code>Interact_Implementation()</code>의 <code>CompletePuzzle()</code> 경로 유지</li>
+<li><code>APuzzleInteractable</code>의 <code>PuzzleMesh</code>와 <code>CompleteAnimation</code>을 지정하면 <code>CompletePuzzle()</code>에서 완료 애니메이션 재생</li>
+<li>완료 애니메이션은 <code>CompleteAnimationSerial</code> 복제로 client에서도 로컬 재생</li>
+<li><code>AInteractionPowerSupply</code> 같은 non-puzzle interactable은 기존 <code>Interact()</code> 경로 유지</li>
+<li>맵 해킹 퍼즐은 <code>APuzzleInteractable</code> 계열 노드에 <code>UMapHackingPuzzleComponent</code>를 붙이고, 완료 시 <code>CompletePuzzle()</code> -&gt; <code>TargetActors</code> 경로로 문/장치를 트리거</li>
+<li><code>APuzzleLockedDoor</code>는 완료 개수와 lock mirror를 복제하고 <code>OnRep_PuzzleDoorProgress()</code>에서 BP progress event와 door state를 갱신</li>
+<li>enemy/map 해킹 시작/방향/취소는 Diana 소유 actor의 Server RPC에서 호출하며, HUD는 <code>APragmataGameState</code>의 active actor 복제값을 보고 표시</li>
+<li>hacking ViewModel의 legacy Start/Stop 함수는 deprecated지만 기존 Blueprint 호환을 위해 bind/unbind와 start/cancel을 함께 수행</li>
+<li>새 HUD 경로는 active actor 복제값을 보고 <code>BindToComponent()</code> / <code>UnbindFromComponent()</code>를 직접 호출</li>
+<li>enemy combat state는 monster AI target 획득/해제 기준으로 <code>APragmataGameState::bEnemyCombatActive</code>에 복제</li>
+<li>combat state는 <code>UHughAnimInstance</code>/<code>UDianaAnimInstance</code>의 <code>bEnemyCombatActive</code>와 root HUD <code>OnEnemyCombatActiveChanged(bool)</code> BP event로 전달</li>
+<li><code>ActiveEnemyHackTarget</code>은 root HUD C++ 기본 경로가 <code>WBP_EnemyHackingWidget</code>의 <code>UEnemyHackingPuzzleViewModel::SetHackTarget()</code>으로 연결</li>
+<li><code>ActiveMapPuzzleActor</code>는 root HUD <code>OnActiveMapPuzzleActorChanged(PuzzleActor)</code> BP event에서 <code>UHackingPuzzleViewModel::BindToComponent()</code>로 연결</li>
+<li>node hint/result는 Diana local top-left on-screen log만 사용</li>
+</ul>
+<p>Executor hack visual:</p>
+<ul>
+<li><code>AMonsterBase::bHacked</code>는 replicated hack 기준 상태이며, server 적용 직후와 client <code>OnRep_Hacked()</code>에서 <code>HandleHackStateChanged()</code>를 호출</li>
+<li><code>AExecutorMonster</code>는 mesh를 <code>SM_Executor</code>로 유지하고, <code>bHacked</code> 상태에 따라 material slot 8/9/16만 교체</li>
+<li>hacked material은 <code>ch6200_00_BlueEmissive_01_NoStamp_Hacked</code>, <code>ch6200_00_Inside_01_NoStamp_Hacked</code>, <code>ch6200_00_Inside_02_NoStamp_Hacked</code></li>
+<li><code>bHacked == false</code>로 돌아오면 BeginPlay 이후 cache한 normal material을 같은 slot에 복원</li>
+<li><code>AS_Executor_Hack_Open_Loop</code>는 원본 <code>AS_Executor_Add_2100_Hack_Body_Open</code>의 0번 프레임을 base pose로 쓰는 local-space additive single-frame open pose</li>
+<li><code>ABP_ExecutorMonster</code>는 <code>DefaultSlot</code> 이후 포즈를 <code>ExecutorFinalPoseCache</code>로 저장하고, normal pose와 <code>Apply Additive</code> 결과를 <code>Blend Poses by bool</code>로 전환</li>
+<li><code>Blend Poses by bool</code>의 active value는 <code>Event BlueprintUpdateAnimation -&gt; TryGetPawnOwner -&gt; Cast To MonsterBase -&gt; bHacked -&gt; bIsHacked</code>로 갱신</li>
+<li>hacked true로 전환될 때 blend time은 <code>0.5초</code>, additive 자체 alpha는 <code>1.0</code></li>
+<li>flap bone 수가 많으므로 per-bone slot/filter를 만들지 않고, 공격 montage용 <code>DefaultSlot</code>은 그대로 유지</li>
+<li>C++ 쪽에는 AnimBP/Blueprint 조회용 <code>AMonsterBase::IsHacked()</code> getter를 둔다. material swap과 ABP overlay는 같은 replicated <code>bHacked</code> 상태를 기준으로 움직인다.</li>
+</ul>
+<p>재타겟 깜빡임 원인/수정:</p>
+<ul>
+<li>증상: 첫 enemy hack UI는 Hugh/Diana 양쪽에 정상 표시, 이후 crosshair 이탈 후 재조준 또는 aim 해제 후 재입력 시 UI가 1프레임 수준으로 뜬 뒤 닫힘</li>
+<li>1차 원인: active enemy hack 중 reticle trace/sweep이 한 tick 흔들리면 Diana가 즉시 cancel RPC를 보내 새 puzzle을 닫을 수 있었음</li>
+<li>1차 수정: reticle target lost가 <code>0.15초</code> 지속될 때만 expected target cancel RPC 전송, 서버는 expected target이 현재 active target과 다르면 stale cancel로 무시</li>
+<li>잔여 원인: WBP cancel/complete animation finish callback이 이전 세션에서 예약된 뒤 새 target bind와 새 Active 복제 뒤에 도착해 <code>bIsActive=false</code>를 적용</li>
+<li>최종 수정: <code>UEnemyHackingPuzzleViewModel</code>의 cancel/complete animation finish와 cancel delegate 처리에서 현재 bound puzzle state가 <code>Active</code>면 stale UI callback으로 보고 숨김/취소 연출 무시</li>
+<li>주의: 정상 cancel은 <code>UEnemyHackingPuzzleComponent::CancelHack()</code>이 state를 <code>Idle</code>로 바꾼 뒤 broadcast하므로 위 가드에 막히지 않음</li>
+</ul>
+<p>완료 애니메이션 경로:</p>
+<ul>
+<li><code>UEnemyHackingPuzzleComponent::CompleteHack()</code>가 <code>OnHackCompleted</code> broadcast</li>
+<li>서버 <code>UDianaHackComponent::HandleEnemyHackCompleted()</code>가 damage/OverDrive 1회 적용</li>
+<li>양쪽 HUD의 <code>UEnemyHackingPuzzleViewModel::HandleHackCompleted()</code>가 final grid/cursor snapshot을 먼저 반영</li>
+<li>이후 <code>OnHackCompletedWithDamage</code> broadcast와 <code>CompletedTrigger</code> 토글</li>
+<li><code>UEnemyHackingWidget::HandleHackCompleted()</code>가 <code>OnHackCompleted()</code> BP event 호출</li>
+<li>hold timer가 끝나면 서버가 <code>ActiveEnemyHackTarget=nullptr</code> 복제, 양쪽 HUD 해제</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Diana input
+-&gt; IA_Scan: RequestScan -&gt; server RPC
+-&gt; Aim + enemy reticle: FindHackTargetAtReticle -&gt; RequestHack(target) -&gt; server RPC -&gt; enemy puzzle start
+-&gt; Roaming + non-combat + Aim + map puzzle focus: RequestNodeInteraction -&gt; server RPC -&gt; Interact_Implementation -&gt; map puzzle start
+-&gt; Hack UI active: W/A/S/D 또는 gamepad face button -&gt; server RPC -&gt; ProcessDirectionInput
+-&gt; Enemy puzzle complete: damage/OverDrive -&gt; OnHackCompleted BP event -&gt; HUD hold -&gt; target clear
+-&gt; Aim release: force cancel server RPC
+-&gt; Enemy reticle target lost 0.15초: expected target cancel server RPC
+-&gt; authoritative camera origin/direction
+-&gt; scan은 Hugh distance/cone/LOS, enemy hack은 Hugh distance/LOS 검증
+-&gt; scan result, enemy hack damage, 또는 map puzzle CompletePuzzle
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>ADianaOperatorPawn</code></li>
+<li><code>UDianaScanComponent</code></li>
+<li><code>UDianaHackComponent</code></li>
+<li><code>UDianaNodeInteractionComponent</code></li>
+<li><code>UMapHackingPuzzleComponent</code></li>
+<li><code>UHackingPuzzleViewModel</code></li>
+<li><code>UEnemyHackingPuzzleComponent</code></li>
+<li><code>UEnemyHackingPuzzleViewModel</code></li>
+<li><code>AInteractionPowerSupply</code></li>
+<li><code>APuzzleInteractable</code></li>
+<li><code>APragmataGameState</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>client-sent camera 값을 gameplay 판정에 직접 쓰지 않음</li>
+<li>node interaction target actor도 client에서 받지 않고 서버가 다시 찾음</li>
+<li>scan 실패도 빈 결과를 broadcast해 UI stale state를 남기지 않음</li>
+<li>enemy hack 완료 후 damage와 OverDrive 증가까지 서버에서 처리</li>
+<li>완료 animation은 <code>OnHackCompleted()</code> BP event에서 시작하고, animation 길이가 바뀌면 <code>CompletedHackHudHoldSeconds</code> 기본값도 같이 조정</li>
+<li>완료 trigger 전에 final grid/cursor snapshot을 반영해 Diana client가 마지막 trail 복제를 놓치지 않게 함</li>
+<li>완료 hold timer는 target 일치 확인 후 null 처리해 새 hack session을 늦게 닫지 않음</li>
+<li>reticle 이탈 cancel은 expected target을 같이 보내 새 hack session을 늦은 cancel RPC로 닫지 않음</li>
+<li>cancel/complete animation finish callback은 현재 bound puzzle이 Active면 무시해 재타겟 UI 깜빡임을 막음</li>
+<li>enemy hack 서버 RPC는 Diana role, aim, Hugh 거리, LOS를 다시 검증하고 Diana OperatorMode/Combat state에는 의존하지 않음</li>
+<li><code>AreDianaActionsLocked()</code> 조건을 scan/hack 양쪽에 유지</li>
+<li><code>LastScanResult</code>는 현재 hack source가 아님</li>
+<li>scan result cache 기반 enemy hack을 추가할 때도 서버 distance/LOS/interface 검증은 유지</li>
+<li>cached target을 만들면 target invalidation, stale UI clear, reticle hack path와의 우선순위를 명시</li>
+<li>props class는 <code>Interact_Implementation()</code> entrypoint를 보존하고 Diana 전용 진행 상태는 <code>UDianaNodeInteractionComponent</code>에 둠</li>
+<li><code>ADianaOperatorPawn::RequestNodeInteraction()</code>은 component 호출만 담당하고 Roaming/non-combat/Aim/role gate는 <code>UDianaNodeInteractionComponent::CanOwnerUseNodeInteraction()</code>에 둠</li>
+<li>임시 node feedback은 billboard/actor component가 아니라 local on-screen log 기준</li>
+<li>맵 해킹은 <code>APuzzleInteractable::Interact_Implementation()</code>에서 component 유무를 분기해, component 있음이면 map hack helper, component 없음이면 기존 <code>CompletePuzzle()</code> 경로</li>
+<li><code>UMapHackingPuzzleComponent::TotalDepths</code>는 metadata와 <code>GenerateSequence()</code>에서 1~3으로 고정하며, 3보다 늘리려면 <code>UHackingPuzzleViewModel</code>과 WBP의 3-slot 표시도 함께 확장</li>
+<li>enemy/map hack <code>StartHack()</code>은 새 active session을 연 경우에만 <code>true</code>를 반환하고 caller는 상태 재조회 대신 이 결과로 bind 여부를 결정</li>
+<li><code>CancelHack()</code>는 현재 reset trigger를 broadcast하지 않으므로 강제 취소 UI 정리는 별도 HUD 바인딩 해제 또는 cancel trigger 설계 필요</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Hugh 기준 거리 안 대상은 Hugh 방향과 무관하게 enemy hack 성공</li>
+<li>scan은 기존 Hugh 전방 cone 검증 유지</li>
+<li>거리 밖, LOS 막힘, interface 없음 실패</li>
+<li>forced paired montage 중 scan/hack 실패</li>
+<li>client UI scan result 갱신 확인</li>
+<li>scan 후 reticle을 옮겼을 때 현재 hack이 어느 target을 쓰는지 확인</li>
+<li><code>RightMouseButton</code> aim camera zoom in/out 확인</li>
+<li><code>Tab</code> scan 입력 확인</li>
+<li><code>Roaming</code>이지만 aim이 아니면 node interaction 실패</li>
+<li><code>Roaming + Aim</code>, Hugh 1500cm 이내, 화면 중앙 10도 target이면 <code>Interactable: &lt;NodeName&gt;</code> 1회 출력</li>
+<li>node complete 후 owning Diana client에 <code>Done: &lt;NodeName&gt;</code> 1회 출력</li>
+<li><code>Combat</code>에서는 node interaction 대신 enemy hack puzzle 경로 유지</li>
+<li>enemy hack active 중 Diana 방향 입력이 서버 <code>ProcessDirectionInput()</code>으로만 진행</li>
+<li>enemy hack 완료 후 <code>ApplySuccessfulHack()</code>와 OverDrive가 1회 적용</li>
+<li>맵 해킹 active 중 Diana 방향 입력이 서버 <code>ProcessDirectionInput()</code>으로만 진행</li>
+<li>Hugh/Diana HUD가 같은 depth, direction, success ring, reset/success trigger 표시</li>
+<li>맵 해킹 완료 후 <code>TargetActors</code>의 문/장치가 양쪽에서 같은 상태로 반응</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Systems/Hacking/map-hacking-integration.md</code></li>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Role Input and Camera</code></li>
+<li><code>Docs/Systems/Server/server.md</code>의 <code>Diana Replication</code></li>
+</ul>
+<h2 id="diana-mount-animation-and-paired-montage">Diana Mount Animation and Paired Montage<a class="headerlink" href="#diana-mount-animation-and-paired-montage" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Diana avatar는 Hugh 등에 붙어 따라가지만, Diana operator mode와 forced paired animation도 반영해야 함</li>
+<li>hard hit/death/shelter 중 Diana 독립 조작이 montage를 덮으면 연출과 gameplay state가 어긋남</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>UDianaAnimInstance</code>가 Hugh movement와 GameState의 Diana pawn mode를 읽어 AnimBP state 변수 계산</li>
+<li>Diana operator pawn 조회는 <code>APragmataGameState::GetDianaOperatorPawn()</code>을 우선하고 PIE 초기화 fallback만 world scan을 사용</li>
+<li>toe/hand IK target은 C++에서 socket 위치를 Diana mesh local space로 변환</li>
+<li>hand IK target mode는 layer/follow state로 정하며, 현재 양손은 같은 mode를 사용</li>
+<li><code>ABP_Diana</code> AnimGraph의 FABRIK/Slot node는 Blueprint asset에 유지</li>
+<li>EventGraph runtime IK 계산은 제거하고 native 변수 getter만 AnimGraph에 연결</li>
+<li>Diana hacking pose도 Hugh convention처럼 C++ asset hard reference 없이 native AnimInstance state만 읽음</li>
+<li>enemy hack 성공은 <code>ADianaOperatorPawn::EnemyHackSuccessSerial</code> 복제값으로 one-shot 전달</li>
+<li><code>UDianaAnimInstance</code>는 serial 변화 시 <code>bHackSuccessRequested</code>를 짧게 열어 <code>ABP_Diana</code> success state 진입을 보장</li>
+<li>AnimInstance가 새 Diana pawn을 처음 관측할 때는 현재 success serial을 기준값으로만 저장해 과거 성공 애니메이션 재생을 막음</li>
+<li><code>IA_Aim</code> 중에는 <code>UDianaAnimInstance::SetRightHandIKEnabled(false)</code>로 오른손 IK alpha를 0으로 유지</li>
+<li><code>ABP_Diana</code> <code>Main State Machine</code>은 <code>CombatIdle</code>, <code>HackingStart</code>, <code>HackingLoop</code>, <code>HackingEnd</code>, <code>HackingSuccess</code> 상태를 사용</li>
+<li>hacking animation asset:</li>
+<li>start: <code>AS_Diana_Attack_0100_Hacking_Start</code></li>
+<li>loop: <code>AS_Diana_Attack_0110_Hacking_Loop</code></li>
+<li>end: <code>AS_Diana_Attack_0150_Hacking_End</code></li>
+<li>success: <code>AS_Diana_Attack_0120_Hacking_End_Success_VerA</code></li>
+<li><code>FPairedAnimationEntry</code>는 cue, Hugh/Diana montage, play rate만 저장</li>
+<li><code>UPairedAnimationSet::FindEntry()</code>는 cue+strength+direction, cue+strength, cue-only 순서로 montage fallback을 고름</li>
+<li><code>UPairedAnimationComponent</code>가 server time 기반 paired montage cue를 복제</li>
+<li>forced cue 중 <code>APragmataGameState::bDianaActionsLocked</code>로 scan/hack/combat camera 차단</li>
+<li><code>ADianaOperatorPawn::CanUseDianaActionIntent()</code>가 action lock 중 local scan/hack/reticle/direction intent를 component RPC 전에 차단</li>
+<li>death가 아닌 forced cue action lock은 현재 montage 길이가 아니라 <code>DefaultActionLockDuration</code> 고정 timer로 해제</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">Hugh movement + Diana operator mode
+-&gt; UDianaAnimInstance state 계산
+-&gt; hand target mode 계산
+-&gt; ABP_Diana state machine / IK
+
+Diana IA_Aim
+-&gt; ADianaOperatorPawn::bIsAiming replication
+-&gt; UDianaAnimInstance::bHackAimActive / CombatState
+-&gt; UDianaAnimInstance::bRightHandIKEnabled false
+-&gt; ABP_Diana HackingStart -&gt; HackingLoop
+-&gt; aim release면 HackingEnd -&gt; CombatIdle
+
+Enemy hack success
+-&gt; UDianaHackComponent::HandleEnemyHackCompleted()
+-&gt; ADianaOperatorPawn::NotifyEnemyHackSucceeded()
+-&gt; EnemyHackSuccessSerial replication
+-&gt; UDianaAnimInstance::bHackSuccessRequested
+-&gt; ABP_Diana HackingSuccess
+-&gt; HackingLoop 복귀 후 aim 상태에 따라 loop 유지 또는 end
+
+Server paired cue
+-&gt; LastCue replication
+-&gt; montage start offset 보정
+-&gt; forced cue면 Diana action lock
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>UDianaAnimInstance</code></li>
+<li><code>UPairedAnimationComponent</code></li>
+<li><code>UWaistArmComponent</code></li>
+<li><code>APragmataGameState</code></li>
+<li><code>/Game/Blueprints/Player/ABP_Diana</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>GetDianaOperatorPawn()</code>이 주 runtime 경로</li>
+<li><code>TActorIterator</code> Diana lookup은 GameState pointer가 비어 있는 초기화/PIE fallback</li>
+<li>AnimBP는 native property를 읽고, socket/IK 계산은 C++가 담당</li>
+<li><code>_0</code> suffix Blueprint duplicate variable을 만들지 않음</li>
+<li>AnimGraph skeletal-control node를 C++로 억지로 옮기지 않음</li>
+<li>forced cue와 일반 follow/combat layer 우선순위를 섞지 않음</li>
+<li>hacking success는 montage 직접 재생이 아니라 state machine one-shot state로 처리</li>
+<li>success signal window를 너무 짧게 줄이면 remote proxy가 transition을 놓칠 수 있음</li>
+<li>success transition priority는 aim-release end transition보다 높게 유지</li>
+<li><code>HackingSuccess -&gt; HackingLoop</code>는 sequence-player automatic rule이며, aim이 풀려 있으면 곧바로 <code>HackingLoop -&gt; HackingEnd</code>로 빠짐</li>
+<li>right hand IK는 hacking pose 중 꺼야 하며 AnimGraph는 기존 <code>RightHandIKAlpha</code>를 그대로 사용</li>
+<li>animation별 hand target이 필요하면 montage name 추론이 아니라 data asset field로 명시</li>
+<li>forced cue lock duration을 고칠 때는 montage length, play rate, start offset을 함께 고려</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>Hugh idle/walk/jog/boost에 Diana mount locomotion 동기화</li>
+<li>jump/hover/death top-level transition 확인</li>
+<li>IK alpha가 socket 유무에 맞게 0/1 전환</li>
+<li><code>ABP_Diana</code> EventGraph에 runtime IK 계산 노드 없음</li>
+<li>AnimGraph IK alpha/location pin이 native <code>UDianaAnimInstance</code> property getter 사용</li>
+<li>IA_Aim press 때 hacking start 1회 후 loop 유지</li>
+<li>IA_Aim 중 <code>RightHandIKAlpha == 0</code>, aim release 후 socket 유효 시 1 복귀</li>
+<li>IA_Aim release 때 hacking end 1회 후 idle 복귀</li>
+<li>enemy hack success 때 success animation 1회 재생</li>
+<li>success 중 aim 유지면 loop 복귀, aim release 상태면 end/idle 경로로 빠짐</li>
+<li>Hugh 화면의 Diana avatar도 같은 success serial을 받아 같은 state로 전환</li>
+<li>hard hit/death/shelter cue에서 Diana action lock 확인</li>
+<li><code>UPairedAnimationSet</code> entry가 montage/play rate만 소유하는지 확인</li>
+<li>non-death forced cue lock 시간이 montage 길이와 어긋나면 <code>DefaultActionLockDuration</code> path부터 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Diana Animation Blueprint</code>, <code>Paired Animation</code></li>
+<li><code>Docs/Operations/blueprint-tasks.md</code>의 <code>Diana Mount Socket / IK</code>, <code>Diana</code></li>
+</ul>
+<h2 id="large-asset-git-hygiene">Large Asset Git Hygiene<a class="headerlink" href="#large-asset-git-hygiene" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Unreal binary asset은 쉽게 Git history를 비대하게 만듦</li>
+<li>Map prop mesh/texture/animation과 일부 character animation은 source 없이도 재수급 가능</li>
+<li>purge 후 다시 stage되면 develop history 정리 효과가 사라짐</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>대형 재수급 asset은 일반 Git history에서 제외</li>
+<li>source asset은 작업 폴더에 남기고 Git index에서만 제거</li>
+<li><code>Docs/Operations/unstaged-assets.md</code>에 외부 보관 대상과 복원 기준 기록</li>
+<li><code>gd-upload/</code> bundle로 Google Drive 업로드용 구조 생성</li>
+<li><code>Content/Map/Props*</code> 정리는 <code>origin/minwon</code> mirror 여부와 purge target list를 같이 확인</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">large asset 발견
+-&gt; tracked 여부 확인
+-&gt; git index에서 제거
+-&gt; .gitignore exact/pattern 반영
+-&gt; Docs/Operations/unstaged-assets.md 기록
+-&gt; gd-upload bundle 갱신
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>Docs/Operations/unstaged-assets.md</code></li>
+<li><code>.gitignore</code></li>
+<li><code>.agents/skills/unstage/SKILL.md</code></li>
+<li><code>.agents/skills/gen-gd/SKILL.md</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>source asset 파일을 디스크에서 삭제하지 않음</li>
+<li><code>.uasset</code>, <code>.umap</code>은 텍스트처럼 병합하지 않음</li>
+<li>purge/history 작업은 explicit user request 없이 수행하지 않음</li>
+<li><code>Content/Map/Props/</code> 계열은 minwon/develop 기준과 혼동하지 않게 경로 단위로 확인</li>
+<li>purged <code>origin/develop</code> 위로 올릴 때는 merge보다 rebase/force-with-lease 정책을 먼저 확인</li>
+<li>old-history branch를 develop에 다시 merge하지 않음</li>
+<li>broad <code>git clean -ffdx</code>로 asset policy 문제를 해결하지 않음</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li><code>git status --short</code>에서 의도한 asset만 staged/unstaged인지 확인</li>
+<li><code>git check-ignore -v &lt;asset&gt;</code>로 ignore rule 확인</li>
+<li><code>Docs/Operations/unstaged-assets.md</code> row와 실제 <code>gd-upload/Content/...</code> 경로 대조</li>
+<li>필요 시 <code>gd-upload/unstaged-assets-content.zip</code> 재생성</li>
+<li>history purge 후에는 <code>Docs/Operations/history-rewrite-team-runbook.md</code> 기준으로 branch ancestry와 purge target object 재유입 여부 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Operations/unstaged-assets.md</code></li>
+<li><code>Docs/Operations/history-rewrite-team-runbook.md</code></li>
+<li><code>.agents/directives/12-unstaged-assets.md</code></li>
+</ul>
+<h2 id="build-and-engine-baseline">Build and Engine Baseline<a class="headerlink" href="#build-and-engine-baseline" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>engine version, module dependency, generated solution file 기준이 흐려지면 다음 작업자가 다른 환경에서 같은 문제를 다시 밟음</li>
+<li>Runtime module에 Editor-only dependency가 섞이면 package/build boundary가 깨질 수 있음</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>project baseline은 <code>Pragmata_2P.uproject</code>의 <code>EngineAssociation: 5.8</code> 기준</li>
+<li>Runtime module은 gameplay/runtime dependency만 유지하고 Editor-only 작업은 plugin/Editor path로 분리</li>
+<li>session/lobby runtime은 <code>OnlineSubsystemNull</code>, <code>OnlineSubsystemUtils</code>, <code>UMG</code>, <code>ModelViewViewModel</code>, <code>EngineCameras</code>, <code>AIModule</code> 계열 dependency를 명시</li>
+<li>generated solution/cache 산출물은 repo history에 넣지 않음</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">engine/tooling 변경
+-&gt; .uproject EngineAssociation 확인
+-&gt; Build.cs runtime dependency 확인
+-&gt; Editor-only plugin은 TargetAllowList/Editor path로 제한
+-&gt; generated solution/cache 파일 stage 제외
+-&gt; README/AGENTS/directive baseline 갱신
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>Pragmata_2P.uproject</code></li>
+<li><code>Source/Pragmata_2P/Pragmata_2P.Build.cs</code></li>
+<li><code>.gitignore</code></li>
+<li><code>README.md</code></li>
+<li><code>AGENTS.md</code></li>
+<li><code>.agents/directives/02-unreal-code.md</code></li>
+<li><code>.agents/directives/05-architecture-pitfalls.md</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>EngineAssociation</code>이 바뀌면 README와 agent directive의 engine baseline도 같이 갱신</li>
+<li>Runtime module에 <code>UnrealEd</code> 같은 Editor-only dependency를 넣지 않음</li>
+<li><code>.sln</code>, <code>.slnx</code>, <code>Binaries/</code>, <code>Intermediate/</code>, <code>Saved/</code>는 generated/local state로 취급</li>
+<li>UnreelMCP는 Editor tooling 경로이며 gameplay runtime dependency로 옮기지 않음</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li><code>Pragmata_2P.uproject</code>의 engine/plugin 설정 확인</li>
+<li><code>Pragmata_2P.Build.cs</code> dependency가 runtime/editor boundary를 넘지 않는지 확인</li>
+<li><code>git status --short</code>에서 generated solution/cache 파일이 stage되지 않았는지 확인</li>
+<li>build 검증이 필요하면 full Unreal build는 사용자 명시 요청 후 실행</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>README.md</code></li>
+<li><code>.agents/directives/02-unreal-code.md</code></li>
+<li><code>.agents/directives/05-architecture-pitfalls.md</code></li>
+<li><code>Docs/Operations/unreal-build-warnings.md</code></li>
+</ul>
+<h2 id="unreelmcp-and-editor-automation">UnreelMCP and Editor Automation<a class="headerlink" href="#unreelmcp-and-editor-automation" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>Blueprint/Widget/Map 작업을 C++로 억지 구현하면 runtime code가 asset layout 책임까지 떠안음</li>
+<li>Editor automation tool이 바뀌면 다음 agent가 어떤 경로로 자산을 고쳤는지 잃어버림</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li>live Editor 작업은 UnreelMCP 지시문을 먼저 읽고 진행</li>
+<li>C++는 schema, runtime behavior, validation, replication 담당</li>
+<li>layout, named widget, map actor 배치, asset assignment는 Editor/Blueprint 쪽이 소유</li>
+<li>자동화 결과와 수동 확인 항목은 <code>Docs/Operations/blueprint-tasks.md</code>에 남김</li>
+<li>commandlet/script가 nonzero로 끝나도 저장 검증이 성공하면 tool bootstrap 실패와 asset 작업 성공을 분리해 판단</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">asset/UI/map 변경 요청
+-&gt; C++ boundary 확인
+-&gt; UnreelMCP 또는 manual Editor 경로 선택
+-&gt; asset 저장/컴파일
+-&gt; Docs/Operations/blueprint-tasks.md 갱신
+-&gt; gameplay smoke 또는 Editor 확인
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>.agents/directives/08-unreelmcp-tools.md</code></li>
+<li><code>.agents/directives/09-unreelmcp-operation-recipes.md</code></li>
+<li><code>Docs/Operations/blueprint-tasks.md</code></li>
+<li><code>Content/UI/Widget/WBP_RoleLobby</code>, <code>Content/UI/Widget/WBP_TitleScreen</code></li>
+<li><code>Content/Map/Title</code>, <code>Content/Map/MatchLobby</code>, <code>Content/Map/Demo</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li>C++ fallback UI 생성 금지</li>
+<li><code>BindWidget</code> 이름은 WBP와 C++가 동시에 맞아야 함</li>
+<li>command-driven Editor 작업은 저장/컴파일/검증 결과를 남김</li>
+<li>port bind 실패 같은 tool bootstrap 오류를 asset 저장 실패로 단정하지 않음</li>
+<li>Editor가 필요한 일을 runtime hard load나 constructor asset load로 우회하지 않음</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li>target asset compile/save 확인</li>
+<li>binary/text inspection으로 target property 값 확인</li>
+<li><code>git diff --stat -- &lt;target asset&gt;</code>로 의도한 asset만 바뀌었는지 확인</li>
+<li>map <code>WorldSettings.DefaultGameMode</code> 확인</li>
+<li>named widget bind 실패 log 확인</li>
+<li>PIE에서 Title, MatchLobby, Demo 주요 흐름 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>Docs/Operations/blueprint-tasks.md</code></li>
+<li><code>Docs/Architecture/architecture.md</code>의 <code>Editor 연결</code></li>
+<li><code>.agents/directives/05-architecture-pitfalls.md</code></li>
+</ul>
+<h2 id="ai-directive-and-documentation-gate">AI Directive and Documentation Gate<a class="headerlink" href="#ai-directive-and-documentation-gate" title="Permanent link">&para;</a></h2>
+<p>문제:</p>
+<ul>
+<li>AI agent가 numbered directive를 자동으로 읽지 않으면 comment, docs, surgical change 규칙을 놓침</li>
+<li>작업이 끝난 뒤 문서만 한 번 쓰면 iterative debugging 중 얻은 know-how가 사라짐</li>
+</ul>
+<p>현재 해법:</p>
+<ul>
+<li><code>AGENTS.md</code>에 prime directives와 loading matrix 유지</li>
+<li>Unreal C++ 변경 전 <code>02-unreal-code.md</code> 로드 강제</li>
+<li>human docs 작성 시 <code>11-human-documentation-style.md</code> 적용</li>
+<li>non-trivial 문제 해결/로직 개선 시 <code>Docs/KNOW_HOW.md</code> recipe 갱신</li>
+</ul>
+<p>동작 흐름:</p>
+<pre><code class="language-text">task 수신
+-&gt; AGENTS.md prime directives 확인
+-&gt; task surface별 numbered directive 로드
+-&gt; 구현/검증
+-&gt; comment gate
+-&gt; docs/KNOW_HOW gate
+-&gt; final report 또는 ship
+</code></pre>
+<p>핵심 위치:</p>
+<ul>
+<li><code>AGENTS.md</code></li>
+<li><code>.agents/directives/01-behavior.md</code></li>
+<li><code>.agents/directives/02-unreal-code.md</code></li>
+<li><code>.agents/directives/03-workflow.md</code></li>
+<li><code>.agents/directives/11-human-documentation-style.md</code></li>
+<li><code>Docs/KNOW_HOW.md</code></li>
+</ul>
+<p>수정할 때 주의:</p>
+<ul>
+<li><code>AGENTS.md</code>에는 짧은 trigger와 matrix만 유지</li>
+<li>세부 규칙은 numbered directive에 둠</li>
+<li>root <code>.md</code> 새 문서는 만들지 않음</li>
+<li>단순 오타/한 줄 수정은 KNOW_HOW 갱신 불필요 사유만 final에 명시</li>
+</ul>
+<p>검증 방법:</p>
+<ul>
+<li><code>AGENTS.md</code>만 읽은 agent가 C++ task에서 <code>02</code>를 고르는지 smoke test</li>
+<li>session/Blueprint/asset/doc task별 loading directive가 과하지 않은지 확인</li>
+<li><code>rg -n "KNOW_HOW|Documentation Gate"</code>로 directive hook 확인</li>
+</ul>
+<p>관련 문서:</p>
+<ul>
+<li><code>AGENTS.md</code></li>
+<li><code>.agents/directives/03-workflow.md</code></li>
+<li><code>.agents/directives/11-human-documentation-style.md</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </article>
+            </div>
+
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+
+      </main>
+
+        <footer class="md-footer">
+
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+
+
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+
+</div>
+
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+
+
+
+
+
+      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["navigation.sections", "navigation.top"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+
+
+      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+  </body>
+</html>

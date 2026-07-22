@@ -1,0 +1,12 @@
+﻿sequenceDiagram
+    participant Source as Damage Source
+    participant Gate as DealDamageToActor
+    participant Target as ReceiveDamage
+    participant Health as HealthComponent
+    Source->>Source: FPragmataDamageSpec 생성
+    Source->>Gate: DealDamageToActor(Target, Spec)
+    Gate->>Target: ReceiveDamage(Spec)
+    Target->>Target: CanReceiveDamage(Spec)
+    Target->>Health: ReceiveDamage(Spec)
+    Health-->>Target: applied
+    Target-->>Source: applied

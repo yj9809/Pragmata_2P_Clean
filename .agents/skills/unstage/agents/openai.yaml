@@ -1,0 +1,4 @@
+interface:
+  display_name: "Unstage Asset"
+  short_description: "asset 추적 제외와 업로드 파일 복사"
+  default_prompt: "Unstage a specified asset, ask whether to copy only the new asset or rebuild the full Google Drive upload bundle, and preserve the local source file."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Fix"
+  short_description: "[언리얼 에디터 꺼짐] Unreal build 오류 수정"
+  default_prompt: "Use $build-fix: [언리얼 에디터 꺼짐] 이 프로젝트의 Unreal Editor를 종료하고 Editor target build 오류를 수정."

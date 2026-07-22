@@ -1,0 +1,4 @@
+interface:
+  display_name: "Land Quick"
+  short_description: "사용자 판단으로 빌드 생략 PR 병합"
+  default_prompt: "Use $land-quick to publish and immediately merge my Pragmata_2P changes into develop without running build-fix."

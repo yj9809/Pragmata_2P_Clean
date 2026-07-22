@@ -1,0 +1,4 @@
+interface:
+  display_name: "Land"
+  short_description: "주의: PR 즉시 병합, 복잡한 충돌은 즉시 중단"
+  default_prompt: "Use $land to validate, publish, and immediately merge my current Pragmata_2P changes into develop; stop and report any conflict that is not a literal Accept Both case."

@@ -1,0 +1,22 @@
+compilation_database_dir: ../../Saved/CodeIntent/compile
+output_directory: Saved/CodeIntent/diagrams
+diagrams:
+  damage_flow:
+    type: class
+    glob:
+      - ../../Source/Pragmata_2P/Combat/*.cpp
+      - ../../Source/Pragmata_2P/Components/PragmataHealthComponent.cpp
+      - ../../Source/Pragmata_2P/Animation/AnimNotifyState_AttackHitWindow.cpp
+      - ../../Source/Pragmata_2P/Weapon/WeaponBase.cpp
+      - ../../Source/Pragmata_2P/Enemy/MonsterBase.cpp
+    using_namespace:
+      - Pragmata_2P
+    include:
+      namespaces:
+        - "::"
+    exclude:
+      paths:
+        - ../../Intermediate
+        - ../../Binaries
+        - ../../Saved
+        - ../../Content

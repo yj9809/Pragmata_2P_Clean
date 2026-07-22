@@ -1,0 +1,9 @@
+﻿flowchart LR
+    Source["Damage source<br/>weapon, notify, hack"] --> Spec["FPragmataDamageSpec 생성"]
+    Spec --> Gate["UPragmataDamageLibrary::DealDamageToActor"]
+    Gate --> Receiver["IPragmataDamageable::ReceiveDamage"]
+    Receiver --> Can{"CanReceiveDamage?"}
+    Can -- "false" --> Reject["reject"]
+    Can -- "true" --> Rules["actor별 규칙"]
+    Rules --> Health["UPragmataHealthComponent::ReceiveDamage"]
+    Health --> Result["hit react / death / damage text"]

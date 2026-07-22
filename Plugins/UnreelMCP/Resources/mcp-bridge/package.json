@@ -1,0 +1,24 @@
+{
+  "name": "unreel-mcp-bridge",
+  "version": "0.1.0",
+  "description": "Thin MCP bridge for the UnreelMCP Unreal Editor service catalog",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --check index.js"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "unreal-engine",
+    "unreelmcp"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

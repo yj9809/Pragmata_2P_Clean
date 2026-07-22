@@ -1,0 +1,95 @@
+site_name: Pragmata_2P Code Intent
+docs_dir: Docs
+site_dir: Saved/CodeIntent/mkdocs-site
+use_directory_urls: false
+exclude_docs: |
+  CodeIntentSite/**
+theme:
+  name: material
+  language: ko
+  palette:
+    scheme: slate
+    primary: black
+    accent: cyan
+  features:
+    - navigation.sections
+    - navigation.top
+nav:
+  - 홈: index.md
+  - 실행 계획: Plans/PLAN-code-intent-visualization.md
+  - Code Intent 작성 규칙: code-intent-style.md
+  - 의도 카드:
+      - 의도 카드 목록: Intent/README.md
+      - 피해:
+          - ReceiveDamage 의도: Intent/Damage/ReceiveDamage.md
+          - DealDamageToActor 의도: Intent/Damage/DealDamageToActor.md
+          - FPragmataDamageSpec 의도: Intent/Damage/FPragmataDamageSpec.md
+          - WeaponBase 피해 처리: Intent/Damage/WeaponBase-DealDamageToHitActor.md
+          - HealthComponent 피해 수신: Intent/Damage/PragmataHealthComponent-ReceiveDamage.md
+          - Hugh 피해 수신: Intent/Damage/HughCharacter-ReceiveDamage.md
+          - PlayableCharacter 피해 수신: Intent/Damage/PlayableCharacter-ReceiveDamage.md
+      - 해킹:
+          - Diana 해킹 요청: Intent/Hacking/DianaHackComponent-RequestHack.md
+          - Diana 방향 입력 요청: Intent/Hacking/DianaHackComponent-RequestHackDirection.md
+          - Diana 서버 해킹 요청: Intent/Hacking/DianaHackComponent-ServerRequestHack.md
+          - Diana 서버 적 해킹 방향: Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.md
+          - 적 해킹 시작: Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.md
+          - 적 해킹 방향 처리: Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.md
+          - 적 해킹 완료: Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.md
+          - 노드 상호작용 요청: Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.md
+          - 노드 맵 해킹 방향 요청: Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.md
+          - 노드 맵 해킹 시작: Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.md
+          - 맵 해킹 시작: Intent/Hacking/MapHackingPuzzleComponent-StartHack.md
+          - 맵 해킹 방향 처리: Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.md
+          - 맵 해킹 완료: Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.md
+      - HUD:
+          - 적 해킹 대상 상태: Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.md
+          - 맵 퍼즐 대상 상태: Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.md
+          - gameplay HUD 보장: Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.md
+          - 적 해킹 HUD 연결: Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.md
+          - 맵 해킹 HUD 연결: Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.md
+      - 이동:
+          - WaistArm 상태 설정: Intent/Movement/WaistArmComponent-SetArmState.md
+          - WaistArm 부착: Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.md
+      - 게임 흐름:
+          - GameFlow 설정: Intent/GameFlow/PragmataGameFlowConfig.md
+  - 시스템:
+      - 시스템 목록: Systems/README.md
+      - 피해 흐름: Systems/Damage/damage-flow.md
+      - 적 해킹: Systems/Hacking/enemy-hacking-integration.md
+      - 맵 해킹: Systems/Hacking/map-hacking-integration.md
+      - Hugh 이동: Systems/Movement/hugh-movement-component-guide.md
+      - 서버: Systems/Server/server.md
+      - 서버 퍼즐: Systems/Server/server-puzzle.md
+  - 구조:
+      - 구조 목록: Architecture/README.md
+      - 구조 문서: Architecture/architecture.md
+      - 구조 모호성 근거: Architecture/structural-ambiguity-rationale.md
+      - Replication 역할 애니메이션: Architecture/replication-role-animation-fix.md
+  - 운영:
+      - 운영 목록: Operations/README.md
+      - Blueprint 작업: Operations/blueprint-tasks.md
+      - Packaging: Operations/packaging-guide.md
+      - Build 경고: Operations/unreal-build-warnings.md
+      - History rewrite 절차: Operations/history-rewrite-team-runbook.md
+      - Git 제외 asset: Operations/unstaged-assets.md
+      - UnreelMCP 이상 기록: Operations/unreelmcp-anomalies.md
+      - Docs 목록: Operations/docs-inventory.md
+  - 가이드:
+      - 가이드 목록: Guides/README.md
+      - Code Intent 사용법: Guides/code-intent-usage.md
+      - Unreal coding 규칙: Guides/unreal-coding-rules.md
+      - Commit 규칙: Guides/commit-rules.md
+      - Branch 규칙: Guides/branching-rules.md
+  - 변경 기록:
+      - ReceiveDamage refactor: Create/20260703-161329-receive-damage-only-hitreact-refactor.md
+      - Hugh animation 정리: Create/20260703-181632-hugh-anim-state-cleanup.md
+      - GripGun authority 경계: Create/20260703-190759-gripgun-authority-boundary.md
+  - 다이어그램:
+      - 다이어그램 목록: Diagrams/README.md
+  - 노하우: KNOW_HOW.md
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true

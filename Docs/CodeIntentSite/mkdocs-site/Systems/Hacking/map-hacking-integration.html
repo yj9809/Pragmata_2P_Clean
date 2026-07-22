@@ -1,0 +1,3653 @@
+﻿
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+
+
+
+
+        <link rel="prev" href="enemy-hacking-integration.html">
+
+
+        <link rel="next" href="../Movement/hugh-movement-component-guide.html">
+
+
+
+
+
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+
+
+
+        <title>맵 해킹 - Pragmata_2P Code Intent</title>
+
+
+
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+
+
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+
+
+
+
+
+
+
+
+
+
+
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+
+
+
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+
+
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+
+
+        <a href="#_1" class="md-skip">
+          콘텐츠로 이동
+        </a>
+
+    </div>
+    <div data-md-component="announce">
+
+    </div>
+
+
+
+
+
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../index.html" title="Pragmata_2P Code Intent" class="md-header__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pragmata_2P Code Intent
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+
+              맵 해킹
+
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+        <label class="md-header__button md-icon" for="__search">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  </nav>
+
+</header>
+
+    <div class="md-container" data-md-component="container">
+
+
+
+
+
+
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+
+
+
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../index.html" title="Pragmata_2P Code Intent" class="md-nav__button md-logo" aria-label="Pragmata_2P Code Intent" data-md-component="logo">
+
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pragmata_2P Code Intent
+  </label>
+
+  <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    홈
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Plans/PLAN-code-intent-visualization.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    실행 계획
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../code-intent-style.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 작성 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+
+
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    의도 카드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    의도 카드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+
+
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    피해
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/DealDamageToActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    DealDamageToActor 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/FPragmataDamageSpec.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    FPragmataDamageSpec 의도
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/WeaponBase-DealDamageToHitActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WeaponBase 피해 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/PragmataHealthComponent-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HealthComponent 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/HughCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Damage/PlayableCharacter-ReceiveDamage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    PlayableCharacter 피해 수신
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+
+
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    해킹
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    해킹
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-RequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-RequestHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 방향 입력 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-ServerRequestHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 해킹 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaHackComponent-ServerProcessEnemyHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Diana 서버 적 해킹 방향
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/EnemyHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-RequestNodeInteraction.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 상호작용 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-RequestMapHackDirection.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 방향 요청
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/DianaNodeInteractionComponent-StartMapHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노드 맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-StartHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 시작
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-ProcessDirectionInput.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 방향 처리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Hacking/MapHackingPuzzleComponent-CompleteHack.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 완료
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+
+
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    HUD
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    HUD
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataGameState-ActiveEnemyHackTarget.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataGameState-ActiveMapPuzzleActor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 퍼즐 대상 상태
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataPlayerController-EnsureGameplayHUD.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    gameplay HUD 보장
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataHUDWidget-HandleActiveEnemyHackTargetChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/HUD/PragmataHUDWidget-HandleActiveMapPuzzleActorChanged.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹 HUD 연결
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+
+
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    이동
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    이동
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Movement/WaistArmComponent-SetArmState.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 상태 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/Movement/WaistArmComponent-EnsureWaistArmMeshAttachment.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    WaistArm 부착
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_6" >
+
+
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+
+
+
+  <span class="md-ellipsis">
+
+
+    게임 흐름
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    게임 흐름
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Intent/GameFlow/PragmataGameFlowConfig.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GameFlow 설정
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+
+
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    시스템
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    시스템 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Damage/damage-flow.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    피해 흐름
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="enemy-hacking-integration.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    적 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--active">
+
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+
+
+
+
+
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+
+      <a href="map-hacking-integration.html" class="md-nav__link md-nav__link--active">
+
+
+
+  <span class="md-ellipsis">
+
+
+    맵 해킹
+
+
+
+  </span>
+
+
+
+      </a>
+
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0. 현재 구현 상태
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        1. 전체 구조
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#2-actor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        2. 퍼즐 노드 actor 구성
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#3-rpc" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        3. 서버 RPC 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4. 완료 처리
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5-hud" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5. HUD 바인딩
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6. 입력 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7. API 요약
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7. API 요약">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#umaphackingpuzzlecomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UMapHackingPuzzleComponent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#uhackingpuzzleviewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UHackingPuzzleViewModel
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#apuzzleinteractable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        APuzzleInteractable
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#8-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        8. Editor 연결 절차
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        9. 검증 체크리스트
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        10. 수정 시 주의
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Movement/hugh-movement-component-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh 이동
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Server/server.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../Server/server-puzzle.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    서버 퍼즐
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+
+
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    구조
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/architecture.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 문서
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/structural-ambiguity-rationale.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    구조 모호성 근거
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Architecture/replication-role-animation-fix.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Replication 역할 애니메이션
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+
+
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    운영
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    운영 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/blueprint-tasks.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Blueprint 작업
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/packaging-guide.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Packaging
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unreal-build-warnings.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Build 경고
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/history-rewrite-team-runbook.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    History rewrite 절차
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unstaged-assets.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Git 제외 asset
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/unreelmcp-anomalies.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    UnreelMCP 이상 기록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Operations/docs-inventory.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Docs 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+
+
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    가이드
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    가이드 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/code-intent-usage.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Code Intent 사용법
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/unreal-coding-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Unreal coding 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/commit-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Commit 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Guides/branching-rules.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Branch 규칙
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+
+
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    변경 기록
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    변경 기록
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-161329-receive-damage-only-hitreact-refactor.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    ReceiveDamage refactor
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-181632-hugh-anim-state-cleanup.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    Hugh animation 정리
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Create/20260703-190759-gripgun-authority-boundary.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    GripGun authority 경계
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+
+
+
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+
+
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램
+
+
+
+  </span>
+
+
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+
+
+    다이어그램
+
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../Diagrams/index.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    다이어그램 목록
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+
+          </ul>
+        </nav>
+
+    </li>
+
+
+
+
+
+
+
+
+
+    <li class="md-nav__item">
+      <a href="../../KNOW_HOW.html" class="md-nav__link">
+
+
+
+  <span class="md-ellipsis">
+
+
+    노하우
+
+
+
+  </span>
+
+
+
+      </a>
+    </li>
+
+
+
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+
+
+
+
+
+
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+
+        <li class="md-nav__item">
+  <a href="#0" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        0. 현재 구현 상태
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        1. 전체 구조
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#2-actor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        2. 퍼즐 노드 actor 구성
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#3-rpc" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        3. 서버 RPC 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        4. 완료 처리
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#5-hud" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        5. HUD 바인딩
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        6. 입력 연결
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#7-api" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        7. API 요약
+
+    </span>
+  </a>
+
+    <nav class="md-nav" aria-label="7. API 요약">
+      <ul class="md-nav__list">
+
+          <li class="md-nav__item">
+  <a href="#umaphackingpuzzlecomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UMapHackingPuzzleComponent
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#uhackingpuzzleviewmodel" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        UHackingPuzzleViewModel
+
+    </span>
+  </a>
+
+</li>
+
+          <li class="md-nav__item">
+  <a href="#apuzzleinteractable" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        APuzzleInteractable
+
+    </span>
+  </a>
+
+</li>
+
+      </ul>
+    </nav>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#8-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        8. Editor 연결 절차
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        9. 검증 체크리스트
+
+    </span>
+  </a>
+
+</li>
+
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+
+        10. 수정 시 주의
+
+    </span>
+  </a>
+
+</li>
+
+    </ul>
+
+</nav>
+                  </div>
+                </div>
+              </div>
+
+
+
+            <div class="md-content" data-md-component="content">
+
+              <article class="md-content__inner md-typeset">
+
+
+
+
+
+<h1 id="_1">맵 해킹 퍼즐 연결 가이드<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>팀원이 맵에 배치된 퍼즐 노드와 문/장치를 연결할 때 쓰는 문서.</p>
+<p>전제:</p>
+<ul>
+<li>퍼즐 시퀀스, 진행도, 성공/실패 상태 복제는 <code>UMapHackingPuzzleComponent</code>가 담당</li>
+<li>HUD 표시 상태는 <code>UHackingPuzzleViewModel</code>이 담당</li>
+<li>실제 맵 장치 완료 처리는 기존 <code>APuzzleInteractable::CompletePuzzle()</code> -&gt; <code>TargetActors</code> -&gt; <code>IPuzzleTargetInterface::OnPuzzleTriggered()</code> 경로 사용</li>
+<li>다이애나 입력은 클라이언트 intent일 뿐이며, 퍼즐 시작/방향 입력/완료 처리는 서버 권위로 실행</li>
+</ul>
+<h2 id="0">0. 현재 구현 상태<a class="headerlink" href="#0" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>상태</th>
+<th>위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>방향 시퀀스 생성, 입력 판정, 성공/실패 처리</td>
+<td>완료</td>
+<td><code>UMapHackingPuzzleComponent</code></td>
+</tr>
+<tr>
+<td>퍼즐 상태/진행도/시퀀스 복제</td>
+<td>완료</td>
+<td><code>UMapHackingPuzzleComponent</code></td>
+</tr>
+<tr>
+<td>HUD 표시용 ViewModel</td>
+<td>완료</td>
+<td><code>UHackingPuzzleViewModel</code></td>
+</tr>
+<tr>
+<td>기본 표시 위젯 클래스</td>
+<td>일부 완료</td>
+<td><code>UMapHackingWidget</code>, <code>/Game/UI/Widget/MapHacking/WBP_MapHackingWidget</code></td>
+</tr>
+<tr>
+<td>역할별 HUD asset</td>
+<td>존재</td>
+<td><code>/Game/UI/Widget/WBP_HughHUD</code>, <code>/Game/UI/Widget/WBP_DianaHUD</code></td>
+</tr>
+<tr>
+<td>Diana Roaming + Aim 노드 상호작용</td>
+<td>완료</td>
+<td><code>UDianaNodeInteractionComponent</code></td>
+</tr>
+<tr>
+<td>노드 완료 후 타겟 장치 트리거</td>
+<td>완료</td>
+<td><code>APuzzleInteractable::CompletePuzzle()</code></td>
+</tr>
+<tr>
+<td>맵 퍼즐 시작/방향/취소용 Diana Server RPC</td>
+<td>완료</td>
+<td><code>ADianaOperatorPawn</code> + <code>UDianaNodeInteractionComponent</code></td>
+</tr>
+<tr>
+<td>퍼즐 완료 델리게이트 -&gt; <code>CompletePuzzle()</code> 연결</td>
+<td>완료</td>
+<td><code>UDianaNodeInteractionComponent::HandleMapHackCompleted</code></td>
+</tr>
+<tr>
+<td>양쪽 HUD가 현재 퍼즐을 바인딩하는 복제 신호</td>
+<td>완료</td>
+<td><code>APragmataGameState.ActiveMapPuzzleActor</code></td>
+</tr>
+<tr>
+<td>역할별 HUD 생성 경로</td>
+<td>완료</td>
+<td><code>APragmataPlayerController::EnsureGameplayHUD</code> → possessed pawn <code>GameplayHUDClass</code></td>
+</tr>
+</tbody>
+</table>
+<p>추측:</p>
+<ul>
+<li>팀원이 연결할 맵 퍼즐 노드는 기존 <code>APuzzleInteractable</code> 계열 actor를 기준으로 배치한다고 가정</li>
+<li>문, 화물 박스, 레이저 같은 결과물은 <code>IPuzzleTargetInterface</code>를 구현한 actor라고 가정</li>
+</ul>
+<p>HUD 생성 전제:</p>
+<ul>
+<li>root HUD는 <code>APragmataPlayerController::EnsureGameplayHUD()</code>가 local controller에서 1회 생성</li>
+<li>Hugh는 possessed <code>BP_HughCharacter</code> defaults의 <code>GameplayHUDClass</code>에서 <code>WBP_HughHUD</code>를 읽음</li>
+<li>Diana는 possessed <code>BP_DianaOperatorPawn</code> defaults의 <code>GameplayHUDClass</code>에서 <code>WBP_DianaHUD</code>를 읽음</li>
+<li>Blueprint EventGraph에서 별도 <code>Create Widget</code> 경로를 남기면 중복 HUD와 중복 ViewModel 바인딩이 생길 수 있음</li>
+<li>이 문서는 역할별 HUD asset이 viewport에 뜬다는 전제에서 WBP 내부 연결을 설명</li>
+</ul>
+<h2 id="1">1. 전체 구조<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<pre><code class="language-text">Diana input
+-&gt; ADianaOperatorPawn 또는 UDianaNodeInteractionComponent Server RPC
+-&gt; 서버가 현재 조준 가능한 APuzzleInteractable 재검증
+-&gt; UMapHackingPuzzleComponent::StartHack()
+-&gt; APragmataGameState.ActiveMapPuzzleActor 복제
+-&gt; Hugh/Diana 각 HUD ViewModel이 BindToComponent()
+-&gt; Diana 방향 입력 Server RPC
+-&gt; UMapHackingPuzzleComponent::ProcessDirectionInput()
+-&gt; 성공 시 OnHackCompleted
+-&gt; APuzzleInteractable::CompletePuzzle()
+-&gt; TargetActors의 IPuzzleTargetInterface::OnPuzzleTriggered()
+</code></pre>
+<p>핵심 원칙:</p>
+<ul>
+<li><code>StartHack()</code>, <code>ProcessDirectionInput()</code>, <code>CancelHack()</code>는 서버에서만 의미 있음</li>
+<li>Diana 클라이언트에서 ViewModel 함수만 호출하면 퍼즐이 시작되지 않음</li>
+<li>맵 장치 트리거는 퍼즐 컴포넌트가 직접 하지 않고, 퍼즐 노드 actor가 완료 델리게이트를 받아 <code>CompletePuzzle()</code> 호출</li>
+<li>양쪽 HUD 표시는 서버가 복제한 현재 퍼즐 actor를 보고 각 클라이언트가 로컬 ViewModel에 바인딩</li>
+</ul>
+<h2 id="2-actor">2. 퍼즐 노드 actor 구성<a class="headerlink" href="#2-actor" title="Permanent link">&para;</a></h2>
+<p>추천 방식:</p>
+<ul>
+<li><code>APuzzleInteractable</code> 기반 Blueprint 또는 C++ 자식 사용</li>
+<li>같은 actor에 <code>UMapHackingPuzzleComponent</code> 추가</li>
+<li><code>TargetActors</code>에 퍼즐 완료 후 움직일 actor 연결</li>
+<li>1회성 퍼즐이면 <code>bIsRepeatable=false</code></li>
+<li>반복 퍼즐이면 <code>bIsRepeatable=true</code></li>
+</ul>
+<p>현재 <code>APuzzleInteractable::Interact_Implementation()</code> 기준:</p>
+<ul>
+<li><code>UMapHackingPuzzleComponent</code>가 있으면 Diana component의 map hack helper 호출</li>
+<li><code>UMapHackingPuzzleComponent</code>가 없으면 기존 <code>CompletePuzzle()</code> 호출</li>
+<li>Diana 쪽 Server RPC는 target 검증 후 <code>Interact_Implementation()</code>을 호출하는 entrypoint 역할</li>
+<li>완료 시점은 반드시 <code>UMapHackingPuzzleComponent::OnHackCompleted</code> 이후</li>
+</ul>
+<p>맵 배치 체크:</p>
+<ul>
+<li>퍼즐 노드 actor가 복제되는지 확인</li>
+<li><code>UMapHackingPuzzleComponent</code>가 같은 actor에 붙어 있는지 확인</li>
+<li><code>TotalDepths=3</code> 유지 권장</li>
+<li><code>TargetActors</code>에 <code>APuzzleLockedDoor</code> 또는 <code>IPuzzleTargetInterface</code> 구현 actor 지정</li>
+<li>문 여러 개를 한 퍼즐로 열면 <code>TargetActors</code>에 모두 추가</li>
+<li>문 하나를 여러 퍼즐로 열면 <code>APuzzleLockedDoor.RequiredPuzzleCount</code>를 필요한 개수로 설정</li>
+</ul>
+<h2 id="3-rpc">3. 서버 RPC 연결<a class="headerlink" href="#3-rpc" title="Permanent link">&para;</a></h2>
+<p><code>UMapHackingPuzzleComponent</code>는 서버 권위 component라 Diana 입력을 직접 받을 수 없음.</p>
+<p>추천 위치:</p>
+<ul>
+<li>시작/방향/취소 RPC: <code>ADianaOperatorPawn</code> 또는 <code>UDianaNodeInteractionComponent</code></li>
+<li>현재 active puzzle 저장: 서버의 Diana pawn, node interaction component, 또는 <code>APragmataGameState</code></li>
+<li>양쪽 HUD 표시용 복제 신호: <code>APragmataGameState</code></li>
+</ul>
+<p>현재 RPC:</p>
+<pre><code class="language-cpp">UFUNCTION(Server, Reliable)
+void Server_RequestNodeInteraction();
+
+UFUNCTION(Server, Reliable)
+void Server_ProcessMapHackDirection(EHackDirection Direction);
+
+UFUNCTION(Server, Reliable)
+void Server_CancelMapHack();
+</code></pre>
+<p>시작 RPC 흐름:</p>
+<pre><code class="language-text">Server_RequestNodeInteraction
+-&gt; CanOwnerUseNodeInteraction() 재검증
+-&gt; FindBestNodeInteractionTarget() 재검색
+-&gt; IPropInteractableInterface::Interact(target, DianaPawn)
+-&gt; APuzzleInteractable::Interact_Implementation()
+-&gt; TryStartMapHackFromInteractable(target)
+-&gt; target-&gt;FindComponentByClass&lt;UMapHackingPuzzleComponent&gt;() 확인
+-&gt; PuzzleComp-&gt;StartHack()
+-&gt; PuzzleComp-&gt;OnHackCompleted에 서버 완료 핸들러 바인딩
+-&gt; GameState.ActiveMapPuzzleActor = target 복제
+</code></pre>
+<p>방향 RPC 흐름:</p>
+<pre><code class="language-text">Server_ProcessMapHackDirection(Direction)
+-&gt; 현재 active puzzle actor/component 확인
+-&gt; PuzzleState == Active 확인
+-&gt; PuzzleComp-&gt;ProcessDirectionInput(Direction)
+</code></pre>
+<p>취소 RPC 흐름:</p>
+<pre><code class="language-text">Server_CancelMapHack
+-&gt; 현재 active puzzle actor/component 확인
+-&gt; PuzzleComp-&gt;CancelHack()
+-&gt; GameState.ActiveMapPuzzleActor = nullptr
+-&gt; 서버 저장 active puzzle 정리
+</code></pre>
+<p>주의:</p>
+<ul>
+<li>client가 보낸 target actor를 그대로 신뢰하지 않음</li>
+<li>시작 target은 서버가 <code>FindBestNodeInteractionTarget()</code> 조건으로 다시 고름</li>
+<li>방향 입력은 target actor를 매번 받기보다 서버가 저장한 active puzzle을 사용</li>
+<li><code>UDianaNodeInteractionComponent::RequestNodeInteraction()</code>은 검증 후 <code>Interact_Implementation()</code>을 호출하는 entrypoint</li>
+</ul>
+<h2 id="4">4. 완료 처리<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>완료는 서버의 <code>UMapHackingPuzzleComponent::OnHackCompleted</code>에서 받음.</p>
+<p>추천 완료 핸들러:</p>
+<pre><code class="language-cpp">void UYourMapPuzzleBridge::HandleMapPuzzleCompleted()
+{
+    APuzzleInteractable* PuzzleNode = ActivePuzzleNode.Get();
+    UMapHackingPuzzleComponent* PuzzleComp = ActivePuzzleComp.Get();
+    if (!PuzzleNode || !PuzzleComp || PuzzleComp-&gt;GetOwner() != PuzzleNode)
+    {
+        return;
+    }
+
+    PuzzleNode-&gt;CompletePuzzle();
+    PuzzleComp-&gt;OnHackCompleted.RemoveAll(this);
+    ClearActiveMapPuzzleForHUD();
+}
+</code></pre>
+<p>왜 <code>CompletePuzzle()</code>을 호출하는가:</p>
+<ul>
+<li>1회성 퍼즐이면 <code>bIsSolved=true</code> 복제</li>
+<li>Blueprint 자식의 <code>OnPuzzleSolvedChanged(true)</code>가 표시 상태를 바꿈</li>
+<li><code>TargetActors</code>의 <code>OnPuzzleTriggered()</code>가 호출되어 문/장치가 열림</li>
+<li>기존 문/장치 연결 구조를 그대로 사용</li>
+</ul>
+<p>실패 처리:</p>
+<ul>
+<li>잘못된 방향 입력 시 <code>ResetHack()</code> 경로로 <code>OnHackReset</code>이 발생</li>
+<li>ViewModel은 <code>bResetTrigger</code>를 토글</li>
+<li>WBP 실패 애니메이션 종료 시 <code>OnFailureAnimationFinished()</code> 호출 필요</li>
+<li><code>OnFailureAnimationFinished()</code>는 <code>StopMapHacking()</code> -&gt; <code>CancelHack()</code> -&gt; <code>UnbindFromComponent()</code> 순서로 정리</li>
+</ul>
+<p>성공 처리:</p>
+<ul>
+<li><code>OnHackCompleted</code> 수신 시 ViewModel은 <code>bSolvedTrigger</code> 토글</li>
+<li>WBP 성공 애니메이션 종료 시 <code>OnSuccessAnimationFinished()</code> 호출 필요</li>
+<li>서버 쪽은 <code>CompletePuzzle()</code> 후 HUD active puzzle을 null로 정리</li>
+</ul>
+<p>현재 구현 주의:</p>
+<ul>
+<li><code>CancelHack()</code>는 <code>OnHackReset</code>을 broadcast하지 않음</li>
+<li>강제 취소 UI를 확실히 닫으려면 HUD 바인딩 해제 또는 별도 cancel trigger가 필요</li>
+<li><code>TotalDepths</code>는 최소 1로 clamp되지만 ViewModel/WBP 표시는 현재 3단계 기준</li>
+</ul>
+<h2 id="5-hud">5. HUD 바인딩<a class="headerlink" href="#5-hud" title="Permanent link">&para;</a></h2>
+<p>각 클라이언트는 복제된 active puzzle actor를 보고 자기 HUD ViewModel에 로컬 바인딩.</p>
+<p>추천 복제 신호:</p>
+<pre><code class="language-cpp">// APragmataGameState 예시
+UPROPERTY(ReplicatedUsing=OnRep_ActiveMapPuzzleActor)
+TObjectPtr&lt;AActor&gt; ActiveMapPuzzleActor = nullptr;
+</code></pre>
+<p>OnRep 또는 delegate 흐름:</p>
+<pre><code class="language-text">ActiveMapPuzzleActor 변경
+-&gt; local HUD 찾기
+-&gt; UHackingPuzzleViewModel 찾기
+-&gt; Actor-&gt;FindComponentByClass&lt;UMapHackingPuzzleComponent&gt;()
+-&gt; ViewModel-&gt;BindToComponent(PuzzleComp)
+-&gt; null이면 ViewModel-&gt;UnbindFromComponent()
+</code></pre>
+<p>Hugh/Diana 표시 차이:</p>
+<ul>
+<li>Diana HUD: 전체 퍼즐 조작 화면 표시</li>
+<li>Hugh HUD: <code>UMapHackingWidget::SetCompactMode(true)</code>로 요약 표시 가능</li>
+<li>같은 <code>UMapHackingPuzzleComponent</code> 복제 상태를 보므로 정답 방향, 완료 ring, 성공/실패 trigger는 양쪽이 동일</li>
+</ul>
+<p>역할별 HUD host:</p>
+<ul>
+<li><code>WBP_DianaHUD</code> 안에 <code>WBP_MapHackingWidget</code> 배치</li>
+<li><code>WBP_HughHUD</code> 안에도 <code>WBP_MapHackingWidget</code> 배치하되, 필요 시 <code>SetCompactMode(true)</code> 호출</li>
+<li>두 HUD 모두 같은 active puzzle actor에서 <code>UMapHackingPuzzleComponent</code>를 찾아 <code>UHackingPuzzleViewModel::BindToComponent()</code> 호출</li>
+<li><code>BP_HughCharacter</code>/<code>BP_DianaOperatorPawn</code> class defaults의 <code>GameplayHUDClass</code>가 역할별 root HUD를 가리키는지 확인</li>
+<li>root HUD 생성은 C++ 경로로 일원화. BP EventGraph에서 따로 <code>Create Widget</code>을 남기면 role별 HUD가 2개 생길 수 있음</li>
+</ul>
+<p>WBP 연결 체크:</p>
+<ul>
+<li><code>UHackingPuzzleViewModel</code> 인스턴스 생성 또는 MVVM ViewModel 지정</li>
+<li><code>IsActiveVisibility</code>를 root visibility에 바인딩</li>
+<li><code>Direction0Index</code>, <code>Direction1Index</code>, <code>Direction2Index</code>를 방향 이미지 선택에 사용</li>
+<li><code>Depth1SuccessRingVisibility</code> ~ <code>Depth3SuccessRingVisibility</code>를 성공 ring에 바인딩</li>
+<li><code>Depth1DirectionOpacity</code> ~ <code>Depth3DirectionOpacity</code>를 완료된 방향 아이콘 opacity에 바인딩</li>
+<li><code>ResetTrigger</code> 변경 시 실패 애니메이션 재생</li>
+<li><code>SolvedTrigger</code> 변경 시 성공 애니메이션 재생</li>
+<li>성공 애니메이션 끝에서 <code>OnSuccessAnimationFinished()</code> 호출</li>
+<li>실패 애니메이션 끝에서 <code>OnFailureAnimationFinished()</code> 호출</li>
+</ul>
+<h2 id="6">6. 입력 연결<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>현재 Diana aim 기반 해킹 입력:</p>
+<ul>
+<li><code>Roaming + non-combat + Aim</code>이면 map puzzle reticle 경로</li>
+<li>enemy hack은 combat state와 무관하게 aim 중 monster reticle 경로</li>
+</ul>
+<p>맵 해킹 추천 입력:</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>입력</th>
+<th>서버 호출</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roaming + non-combat + Aim + 퍼즐 노드 조준</td>
+<td>focus 자동 요청</td>
+<td><code>Server_RequestNodeInteraction()</code></td>
+</tr>
+<tr>
+<td>퍼즐 Active 중 위</td>
+<td><code>W</code> 또는 gamepad face button Top</td>
+<td><code>Server_ProcessMapHackDirection(Up)</code></td>
+</tr>
+<tr>
+<td>퍼즐 Active 중 아래</td>
+<td><code>S</code> 또는 gamepad face button Bottom</td>
+<td><code>Server_ProcessMapHackDirection(Down)</code></td>
+</tr>
+<tr>
+<td>퍼즐 Active 중 왼쪽</td>
+<td><code>A</code> 또는 gamepad face button Left</td>
+<td><code>Server_ProcessMapHackDirection(Left)</code></td>
+</tr>
+<tr>
+<td>퍼즐 Active 중 오른쪽</td>
+<td><code>D</code> 또는 gamepad face button Right</td>
+<td><code>Server_ProcessMapHackDirection(Right)</code></td>
+</tr>
+<tr>
+<td>퍼즐 Active 중 취소</td>
+<td>aim 해제</td>
+<td><code>Server_CancelMapHack()</code></td>
+</tr>
+</tbody>
+</table>
+<p>입력 분기 원칙:</p>
+<ul>
+<li>active map puzzle이 있으면 방향 입력을 캐릭터 이동보다 퍼즐 입력으로 우선 처리</li>
+<li>active map puzzle이 없으면 기존 이동/조준 입력 유지</li>
+<li>별도 hack 시작 버튼 없이 aim focus 경로로 맵 퍼즐 시작</li>
+<li><code>APuzzleInteractable</code> 중 맵 해킹 component가 있으면 퍼즐 시작, 없으면 기존 즉시 node interaction 경로 사용 가능</li>
+</ul>
+<h2 id="7-api">7. API 요약<a class="headerlink" href="#7-api" title="Permanent link">&para;</a></h2>
+<h3 id="umaphackingpuzzlecomponent">UMapHackingPuzzleComponent<a class="headerlink" href="#umaphackingpuzzlecomponent" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>멤버</th>
+<th>용도</th>
+<th>권한</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StartHack()</code></td>
+<td>시퀀스 생성, depth 초기화, Active 전환</td>
+<td>서버</td>
+</tr>
+<tr>
+<td><code>ProcessDirectionInput(EHackDirection)</code></td>
+<td>방향 정답 판정, depth 진행, 실패 reset</td>
+<td>서버</td>
+</tr>
+<tr>
+<td><code>CancelHack()</code></td>
+<td>Idle로 강제 정리</td>
+<td>서버</td>
+</tr>
+<tr>
+<td><code>GetPuzzleState()</code></td>
+<td><code>Idle</code> / <code>Active</code> / <code>Solved</code> 조회</td>
+<td>양쪽</td>
+</tr>
+<tr>
+<td><code>GetCurrentDepth()</code></td>
+<td>현재 depth index 조회</td>
+<td>양쪽</td>
+</tr>
+<tr>
+<td><code>GetCurrentDirection()</code></td>
+<td>현재 정답 방향 조회</td>
+<td>양쪽</td>
+</tr>
+<tr>
+<td><code>GetCompletedDepthCount()</code></td>
+<td>완료한 depth 수 조회</td>
+<td>양쪽</td>
+</tr>
+<tr>
+<td><code>GetDepthSequence()</code></td>
+<td>전체 방향 시퀀스 조회</td>
+<td>양쪽</td>
+</tr>
+<tr>
+<td><code>OnHackStarted</code></td>
+<td>시작 UI 동기화</td>
+<td>C++</td>
+</tr>
+<tr>
+<td><code>OnSequenceReady</code></td>
+<td>전체 방향 시퀀스 UI 전달</td>
+<td>C++</td>
+</tr>
+<tr>
+<td><code>OnDepthChanged</code></td>
+<td>현재 depth/방향 UI 전달</td>
+<td>C++</td>
+</tr>
+<tr>
+<td><code>OnDepthSolved</code></td>
+<td>성공 ring UI 전달</td>
+<td>C++</td>
+</tr>
+<tr>
+<td><code>OnHackReset</code></td>
+<td>실패 trigger</td>
+<td>C++</td>
+</tr>
+<tr>
+<td><code>OnHackCompleted</code></td>
+<td>완료 trigger와 맵 장치 완료 연결</td>
+<td>C++</td>
+</tr>
+</tbody>
+</table>
+<h3 id="uhackingpuzzleviewmodel">UHackingPuzzleViewModel<a class="headerlink" href="#uhackingpuzzleviewmodel" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>멤버</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BindToComponent(PuzzleComp)</code></td>
+<td>HUD가 복제 component 상태 구독</td>
+</tr>
+<tr>
+<td><code>UnbindFromComponent()</code></td>
+<td>HUD 상태 초기화</td>
+</tr>
+<tr>
+<td><code>StartMapHacking(PuzzleComp)</code></td>
+<td>Standalone 테스트용. 클라에서는 <code>StartHack()</code> no-op 가능</td>
+</tr>
+<tr>
+<td><code>StopMapHacking()</code></td>
+<td>UI 정리와 권위가 있을 때 cancel</td>
+</tr>
+<tr>
+<td><code>OnSuccessAnimationFinished()</code></td>
+<td>성공 애니 후 UI 숨김</td>
+</tr>
+<tr>
+<td><code>OnFailureAnimationFinished()</code></td>
+<td>실패 애니 후 stop/unbind</td>
+</tr>
+<tr>
+<td><code>GetIsActiveVisibility()</code></td>
+<td>root visibility</td>
+</tr>
+<tr>
+<td><code>GetDirection0Index()</code> ~ <code>GetDirection2Index()</code></td>
+<td>방향 이미지 선택</td>
+</tr>
+<tr>
+<td><code>GetDepth1SuccessRingVisibility()</code> ~ <code>GetDepth3SuccessRingVisibility()</code></td>
+<td>성공 ring 표시</td>
+</tr>
+<tr>
+<td><code>GetResetTrigger()</code></td>
+<td>실패 애니 trigger</td>
+</tr>
+<tr>
+<td><code>GetSolvedTrigger()</code></td>
+<td>성공 애니 trigger</td>
+</tr>
+</tbody>
+</table>
+<h3 id="apuzzleinteractable">APuzzleInteractable<a class="headerlink" href="#apuzzleinteractable" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>멤버</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TargetActors</code></td>
+<td>완료 후 신호를 보낼 문/장치 목록</td>
+</tr>
+<tr>
+<td><code>bIsRepeatable</code></td>
+<td>반복 가능한 퍼즐 여부</td>
+</tr>
+<tr>
+<td><code>CanInteractWithPuzzle()</code></td>
+<td>이미 푼 1회성 퍼즐인지 확인</td>
+</tr>
+<tr>
+<td><code>CompletePuzzle()</code></td>
+<td>완료 상태 복제와 <code>TargetActors</code> trigger</td>
+</tr>
+<tr>
+<td><code>OnPuzzleSolvedChanged(bool)</code></td>
+<td>BP 표시 상태 변경 event</td>
+</tr>
+</tbody>
+</table>
+<h2 id="8-editor">8. Editor 연결 절차<a class="headerlink" href="#8-editor" title="Permanent link">&para;</a></h2>
+<ol>
+<li>퍼즐 노드 actor 준비</li>
+<li><code>APuzzleInteractable</code> 기반 BP 또는 전용 자식 BP 생성</li>
+<li><code>UMapHackingPuzzleComponent</code> 추가</li>
+<li>
+<p><code>TotalDepths=3</code></p>
+</li>
+<li>
+<p>맵 배치</p>
+</li>
+<li>퍼즐 노드를 문/장치 근처에 배치</li>
+<li>Diana가 Roaming + Aim 상태에서 화면 중앙으로 조준할 수 있는 위치 확인</li>
+<li>Hugh 기준 1500cm 안에 들어오는지 확인</li>
+<li>
+<p>visibility trace가 막히지 않게 collision 확인</p>
+</li>
+<li>
+<p>타겟 연결</p>
+</li>
+<li>퍼즐 노드의 <code>TargetActors</code>에 열릴 문/장치 지정</li>
+<li>문이면 <code>APuzzleLockedDoor.RequiredPuzzleCount</code> 확인</li>
+<li>
+<p>반복 장치면 퍼즐 노드 <code>bIsRepeatable=true</code> 검토</p>
+</li>
+<li>
+<p>HUD 연결</p>
+</li>
+<li>Hugh/Diana HUD에 map hacking widget 배치</li>
+<li><code>UHackingPuzzleViewModel</code>을 widget에 연결</li>
+<li>GameState active puzzle actor 변경 시 <code>BindToComponent()</code> 호출 경로 연결</li>
+<li>Hugh HUD는 필요 시 <code>SetCompactMode(true)</code> 호출</li>
+<li>active puzzle actor가 null이면 <code>UnbindFromComponent()</code> 호출</li>
+<li>
+<p><code>BP_HughCharacter</code>/<code>BP_DianaOperatorPawn</code> defaults의 <code>GameplayHUDClass</code>가 역할별 root HUD를 가리키는지 확인</p>
+</li>
+<li>
+<p>입력 연결</p>
+</li>
+<li>Roaming + Aim + puzzle node 조준 시 시작 RPC 호출</li>
+<li>active puzzle 중 방향 입력을 <code>EHackDirection</code>으로 변환</li>
+<li>방향 입력은 서버 RPC를 통해 <code>ProcessDirectionInput()</code> 호출</li>
+<li>성공/실패 애니 종료 callback 연결</li>
+</ol>
+<h2 id="9">9. 검증 체크리스트<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p>Standalone:</p>
+<ul>
+<li>[ ] 퍼즐 노드에서 <code>StartHack()</code> 호출 시 HUD 표시</li>
+<li>[ ] 방향 3개가 UI에 표시</li>
+<li>[ ] 정답 방향 입력 때 success ring 순서대로 표시</li>
+<li>[ ] 오답 입력 때 실패 애니 trigger</li>
+<li>[ ] 성공 애니 종료 후 UI 숨김</li>
+<li>[ ] 완료 시 <code>CompletePuzzle()</code> 호출</li>
+<li>[ ] <code>TargetActors</code>의 문/장치가 반응</li>
+</ul>
+<p>2-player listen server:</p>
+<ul>
+<li>[ ] Diana client가 Roaming + Aim 상태에서 퍼즐 노드 조준 가능</li>
+<li>[ ] 서버가 Hugh 거리, 화면 중앙 각도, LOS를 재검증</li>
+<li>[ ] Diana 입력이 서버 RPC로만 퍼즐 진행</li>
+<li>[ ] Hugh HUD와 Diana HUD가 같은 방향/진행도 표시</li>
+<li>[ ] 오답 reset이 양쪽 HUD에 보임</li>
+<li>[ ] 성공 후 양쪽 HUD가 정리</li>
+<li>[ ] 문/장치 완료 상태가 서버와 client에서 일치</li>
+<li>[ ] 이미 푼 1회성 퍼즐은 다시 시작되지 않음</li>
+</ul>
+<p>실패 원인 빠른 확인:</p>
+<ul>
+<li>HUD가 안 뜸: active puzzle actor 복제 또는 ViewModel <code>BindToComponent()</code> 호출 확인</li>
+<li>HUD asset 자체가 안 뜸: possessed pawn class default의 <code>GameplayHUDClass</code>가 <code>WBP_HughHUD</code>/<code>WBP_DianaHUD</code>를 가리키는지 확인</li>
+<li>Diana에서 시작 안 됨: client에서 <code>StartHack()</code> 직접 호출 중인지 확인</li>
+<li>방향 입력이 안 먹음: <code>ProcessDirectionInput()</code>이 서버에서 호출되는지 확인</li>
+<li>문이 안 열림: <code>OnHackCompleted</code> -&gt; <code>CompletePuzzle()</code> 바인딩 확인</li>
+<li>Hugh만 표시 안 됨: GameState active puzzle actor OnRep가 Hugh local HUD에도 연결됐는지 확인</li>
+<li>실패 후 UI가 남음: WBP가 <code>OnFailureAnimationFinished()</code>를 호출하는지 확인</li>
+</ul>
+<h2 id="10">10. 수정 시 주의<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>UMapHackingPuzzleComponent</code>에 문/장치 직접 참조를 넣지 않음</li>
+<li>맵 결과 처리는 <code>APuzzleInteractable::TargetActors</code> 경로 유지</li>
+<li>client target actor, camera origin, direction을 서버 판정에 그대로 쓰지 않음</li>
+<li><code>TotalDepths</code>를 3보다 크게 늘리려면 ViewModel/WBP 슬롯도 같이 확장</li>
+<li><code>CancelHack()</code> UI 동작이 필요하면 reset/cancel trigger 설계를 먼저 정리</li>
+<li>Blueprint asset 연결은 Editor에서 처리하고 C++ constructor hard load로 우회하지 않음</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </article>
+            </div>
+
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+
+      </main>
+
+        <footer class="md-footer">
+
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+
+
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+
+</div>
+
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+
+
+
+
+
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+
+
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+
+
+  </body>
+</html>

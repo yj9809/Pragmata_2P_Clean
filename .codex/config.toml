@@ -1,0 +1,13 @@
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
+[unreelmcp]
+mcp_port = 55570
+runner = "codex"
+
+[mcp_servers.unreelmcp]
+command = "node"
+args = ["Plugins/UnreelMCP/Resources/mcp-bridge/index.js"]
+
+[mcp_servers.unreelmcp.env]
+UNREEL_MCP_URL = "http://localhost:55570"
+UNREEL_MCP_ENABLE_PYTHON = "1"

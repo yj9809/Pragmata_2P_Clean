@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diana Cleanse Cooldown UI 구조</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --ink: #162033;
+      --muted: #5f6f86;
+      --line: #cad5e5;
+      --blue: #1f6feb;
+      --green: #238636;
+      --orange: #b45309;
+      --red: #c2410c;
+      --code-bg: #edf2fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.5 "Segoe UI", "Malgun Gothic", Arial, sans-serif;
+    }
+
+    main {
+      width: min(1040px, calc(100% - 32px));
+      margin: 28px auto 40px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 32px; line-height: 1.15; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 15px; margin-bottom: 6px; }
+    p { color: var(--muted); }
+    code, pre { font-family: "Cascadia Code", Consolas, monospace; color: #0f172a; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .stack { display: grid; gap: 16px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .big-code {
+      display: block;
+      padding: 18px 20px;
+      border: 2px solid var(--blue);
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: #0f172a;
+      font: 700 21px/1.35 "Cascadia Code", Consolas, monospace;
+      overflow-x: auto;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfdff;
+    }
+
+    .yes { border-left: 5px solid var(--green); }
+    .warn { border-left: 5px solid var(--orange); }
+    .no { border-left: 5px solid var(--red); }
+
+    .flow {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .step {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+    }
+
+    .arrow {
+      color: var(--muted);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .cooldown-demo {
+      display: grid;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .bar {
+      height: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #e9eef7;
+    }
+
+    .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #facc15, #fef08a);
+    }
+
+    .fill-zero { width: 0%; }
+    .fill-half { width: 50%; }
+    .fill-full { width: 100%; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th { background: var(--code-bg); font-size: 13px; }
+    tr:last-child td { border-bottom: 0; }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+    }
+
+    .box {
+      fill: #ffffff;
+      stroke: var(--line);
+      stroke-width: 2;
+      rx: 8;
+    }
+
+    .box-blue { stroke: var(--blue); }
+    .box-green { stroke: var(--green); }
+    .box-orange { stroke: var(--orange); }
+    .box-red { stroke: var(--red); }
+
+    .label {
+      fill: var(--ink);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .small {
+      fill: var(--muted);
+      font-size: 13px;
+    }
+
+    .svg-arrow {
+      fill: none;
+      stroke: #617089;
+      stroke-width: 2.5;
+      marker-end: url(#arrow);
+    }
+
+    @media (max-width: 820px) {
+      main { width: min(100% - 20px, 1040px); margin-top: 16px; }
+      .grid, .mini-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 26px; }
+      .big-code { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<main class="stack">
+  <section class="card stack">
+    <div>
+      <h1>Diana Cleanse Cooldown UI 구조</h1>
+      <p>UI는 gameplay component를 직접 읽지 않는다. 정화 스킬 cooldown 상태는 ViewModel FieldNotify 값에 바인딩한다.</p>
+    </div>
+
+    <code class="big-code">UPragmataHUDViewModel -> bCanUseCleanse / CleanseCooldownProgress</code>
+
+    <div class="mini-grid">
+      <div class="fact yes">
+        <h3>Ready</h3>
+        <p><code>bCanUseCleanse=true</code><br><code>CleanseCooldownProgress=1.0</code></p>
+      </div>
+      <div class="fact warn">
+        <h3>Cooldown</h3>
+        <p><code>bCanUseCleanse=false</code><br><code>0.0 -> 1.0</code> 증가</p>
+      </div>
+      <div class="fact no">
+        <h3>금지</h3>
+        <p>Widget에서 <code>UDianaCleanseComponent</code> 직접 polling 금지</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>데이터 흐름</h2>
+      <svg viewBox="0 0 820 300" role="img" aria-label="정화 스킬 cooldown UI 데이터 흐름">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#617089"></path>
+          </marker>
+        </defs>
+
+        <rect class="box box-blue" x="24" y="42" width="170" height="82"></rect>
+        <text class="label" x="44" y="74">정화 실행</text>
+        <text class="small" x="44" y="98">quick 또는 precise</text>
+
+        <rect class="box box-orange" x="236" y="42" width="170" height="82"></rect>
+        <text class="label" x="256" y="74">서버 cooldown</text>
+        <text class="small" x="256" y="98">5초 readiness 복제</text>
+
+        <rect class="box box-green" x="448" y="42" width="170" height="82"></rect>
+        <text class="label" x="468" y="74">HUD ViewModel</text>
+        <text class="small" x="468" y="98">FieldNotify 갱신</text>
+
+        <rect class="box box-red" x="638" y="42" width="160" height="82"></rect>
+        <text class="label" x="658" y="74">WBP</text>
+        <text class="small" x="658" y="98">아이콘/바 표시</text>
+
+        <path class="svg-arrow" d="M194 83 H231"></path>
+        <path class="svg-arrow" d="M406 83 H443"></path>
+        <path class="svg-arrow" d="M618 83 H633"></path>
+
+        <rect class="box" x="24" y="174" width="774" height="76"></rect>
+        <text class="label" x="44" y="205">핵심</text>
+        <text class="small" x="44" y="230">복제는 component가 담당하고, UI는 ViewModel FieldNotify 값만 바인딩한다.</text>
+      </svg>
+    </article>
+
+    <aside class="card stack">
+      <div>
+        <h2>Cooldown bar 방향</h2>
+        <p><code>GetCleanseCooldownProgress()</code>는 elapsed / max. 사용 직후 0, 완료 시 1.</p>
+      </div>
+
+      <div class="cooldown-demo">
+        <div>
+          <h3>사용 직후: 0.0</h3>
+          <div class="bar"><div class="fill fill-zero"></div></div>
+        </div>
+        <div>
+          <h3>2.5초 경과: 0.5</h3>
+          <div class="bar"><div class="fill fill-half"></div></div>
+        </div>
+        <div>
+          <h3>5초 완료: 1.0</h3>
+          <div class="bar"><div class="fill fill-full"></div></div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2>UI 디자이너 계약</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ViewModel 항목</th>
+          <th>타입</th>
+          <th>UI 사용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>bCanUseCleanse</code><br><code>CanUseCleanse()</code></td>
+          <td>bool</td>
+          <td>정화 스킬 icon enabled/disabled, input 가능 표시. cooldown 중 <code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>CleanseCooldownProgress</code><br><code>GetCleanseCooldownProgress()</code></td>
+          <td>float 0..1</td>
+          <td>cooldown progress bar fill. 사용 직후 <code>0.0</code>, 5초 후 <code>1.0</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>실행 후 상태 변화</h2>
+      <div class="flow">
+        <div class="step"><code>IA_Cleanse</code><br>quick press 또는 aim+hold/release로 실행 확정</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>bCanUseCleanse=false</code><br>스킬 아이콘 disabled, cooldown bar 0부터 시작</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>CleanseCooldownProgress</code><br>HUD tick에서 <code>0.0 -> 1.0</code> 증가</div>
+        <div class="arrow">↓</div>
+        <div class="step"><code>bCanUseCleanse=true</code><br>5초 후 다시 사용 가능</div>
+      </div>
+    </article>
+
+    <aside class="card">
+      <h2>표시 규칙</h2>
+      <table>
+        <tbody>
+          <tr>
+            <td>ready</td>
+            <td>progress <code>1.0</code>, icon active</td>
+          </tr>
+          <tr>
+            <td>cooldown</td>
+            <td>progress fill 증가, icon dim/locked</td>
+          </tr>
+          <tr>
+            <td>실행 거부 조건</td>
+            <td>action lock, hack active, aim mode 조건은 서버 검증 영역. 이 UI bool에는 포함하지 않음</td>
+          </tr>
+          <tr>
+            <td>양쪽 player</td>
+            <td>replicated component state -> 각 HUD ViewModel에 같은 값 전달</td>
+          </tr>
+        </tbody>
+      </table>
+    </aside>
+  </section>
+
+  <section class="card">
+    <h2>검증 체크</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>상황</th>
+          <th>기대 결과</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PIE 시작</td>
+          <td><code>bCanUseCleanse=true</code>, <code>CleanseCooldownProgress=1.0</code></td>
+        </tr>
+        <tr>
+          <td>quick cleanse 실행 직후</td>
+          <td>양쪽 HUD에서 <code>bCanUseCleanse=false</code>, progress <code>0.0</code></td>
+        </tr>
+        <tr>
+          <td>precise cleanse 실행 직후</td>
+          <td>quick과 같은 cooldown UI 상태</td>
+        </tr>
+        <tr>
+          <td>cooldown 5초 경과</td>
+          <td>양쪽 HUD에서 <code>bCanUseCleanse=true</code>, progress <code>1.0</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+</body>
+</html>
